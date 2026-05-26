@@ -4,70 +4,70 @@
 
 @layer base {
   :root {
-    --color-bg: 222 47% 11%;
-    --color-card: 223 47% 16%;
+    --color-bg: 210 40% 98%;
+    --color-card: 255 255 255;
     --color-orange: 20 90% 55%;
     --color-blue: 210 100% 50%;
   }
 
   body {
     background-color: hsl(var(--color-bg));
-    color: #e2e8f0;
+    color: hsl(222 47% 15%);
   }
 }
 
-/* --- Premium Aesthetics and Utility Classes --- */
+/* --- Premium Aesthetics and Utility Classes (LIGHT MODE) --- */
 
 /* Glassmorphism Navigation & Header */
 .glass-nav {
-  background: rgba(11, 17, 32, 0.75);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
 }
 
 /* Glassmorphism Cards */
 .glass-card {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.75) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 8px 30px 0 rgba(15, 23, 42, 0.04);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(249, 115, 22, 0.25);
+  border-color: rgba(249, 115, 22, 0.3);
   transform: translateY(-6px);
-  box-shadow: 0 16px 48px 0 rgba(249, 115, 22, 0.08);
+  box-shadow: 0 16px 40px 0 rgba(249, 115, 22, 0.08), 0 4px 12px 0 rgba(15, 23, 42, 0.02);
 }
 
 /* Premium Text Gradients */
 .text-gradient-orange {
-  background: linear-gradient(135deg, #ff8c53 0%, #f97316 50%, #ea580c 100%);
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-blue {
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-mixed {
-  background: linear-gradient(135deg, #ff8c53 0%, #3b82f6 100%);
+  background: linear-gradient(135deg, #f97316 0%, #2563eb 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Glow Effects */
+/* Subtle Shadows & Glow Effects suitable for Light Theme */
 .glow-orange {
-  box-shadow: 0 0 30px rgba(249, 115, 22, 0.25);
+  box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.35);
 }
 
 .glow-blue {
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.35);
 }
 
 /* Animated Interactive Buttons */
@@ -108,11 +108,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(222, 47%, 8%);
+  background: hsl(210, 40%, 94%);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(223, 20%, 25%);
+  background: hsl(215, 20%, 80%);
   border-radius: 5px;
 }
 
