@@ -1,0 +1,78 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalURL?: string;
+  ogImage?: string;
+  schemaType?: 'WebSite' | 'EducationalOrganization' | 'Course';
+}
+
+const {
+  title = "Validación de Bachillerato en 10 Meses | Aulas Univirtuales",
+  description = "Completa tu bachillerato académico de forma 100% virtual en solo 10 meses. Licencia oficial, plataforma 24/7 y ceremonia física de graduación en Medellín.",
+  canonicalURL = Astro.url.href,
+  ogImage = "/images/og-image.jpg",
+  schemaType = "EducationalOrganization"
+} = Astro.props;
+
+// Estructura JSON-LD para Organización Educativa (SEO técnico brutal)
+const jsonLD = {
+  "@context": "https://schema.org",
+  "@type": schemaType,
+  "name": "Aulas Univirtuales",
+  "url": "https://aulasunivirtuales.com",
+  "logo": "https://aulasunivirtuales.com/images/logo.png",
+  "description": description,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Itagüí",
+    "addressRegion": "Antioquia",
+    "addressCountry": "CO"
+  },
+  "sameAs": [
+    "https://www.facebook.com/aulasunivirtuales",
+    "https://www.instagram.com/aulasunivirtuales"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "category": "Bachillerato Académico para Adultos",
+    "duration": "P10M"
+  }
+};
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(ogImage, Astro.url)} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(ogImage, Astro.url)} />
+
+<!-- DNS Prefetch / Preconnect para Optimización Core Web Vitals (FCP/LCP) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- JSON-LD Schema -->
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLD)} />
