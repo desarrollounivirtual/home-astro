@@ -1,33 +1,41 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import Methodology from '../components/Methodology.astro';
+import Benefits from '../components/Benefits.astro';
+import PlatformPromo from '../components/PlatformPromo.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Coverage from '../components/Coverage.astro';
+import PaymentMethods from '../components/PaymentMethods.astro';
+import ContactForms from '../components/ContactForms.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<BaseLayout title="Inicio | Aulas Univirtuales">
-  <div slot="header" class="p-6 border-b border-white/5 bg-slate-900/50">
-    <header class="max-w-7xl mx-auto flex justify-between items-center">
-      <div class="text-2xl font-bold font-display text-gradient-orange">Aulas Univirtuales</div>
-      <nav class="space-x-6 text-sm font-semibold">
-        <a href="#inicio" class="text-white hover:text-accent-orange">Inicio</a>
-        <a href="#financiacion" class="text-gray-400 hover:text-white">Financiación</a>
-        <a href="#soporte" class="text-gray-400 hover:text-white">Soporte</a>
-      </nav>
-    </header>
-  </div>
-
-  <section class="max-w-4xl mx-auto py-20 px-6 text-center">
-    <h1 class="text-5xl md:text-6xl font-extrabold font-display leading-tight mb-6">
-      Validación de bachillerato en <span class="text-gradient-orange">10 meses</span>
-    </h1>
-    <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-      Completa tus estudios académicos de forma 100% virtual con licencia oficial y ceremonia física de graduación en Medellín.
-    </p>
-    <div class="flex justify-center gap-4">
-      <a href="#inscripcion" class="px-8 py-4 bg-accent-orange hover:bg-accent-orange-hover text-white font-bold rounded-lg btn-premium glow-orange transition-all">
-        Inscribirme
-      </a>
-      <a href="#metodologia" class="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-lg border border-white/10 transition-all">
-        Conocer metodología
-      </a>
-    </div>
-  </section>
+<BaseLayout 
+  title="Aulas Univirtuales | Validación de Bachillerato en 10 Meses"
+  description="Completa tu bachillerato académico de forma 100% virtual en solo 10 meses. Licencia oficial de Itagüí, plataforma 24/7 y ceremonia física en Medellín."
+>
+  <!-- Sticky Header Navigation -->
+  <Navigation slot="header" />
+  
+  <!-- Interactive Modular Sections -->
+  <Hero />
+  
+  <Methodology />
+  
+  <Benefits />
+  
+  <PlatformPromo />
+  
+  <Testimonials />
+  
+  <Coverage />
+  
+  <PaymentMethods />
+  
+  <ContactForms />
+  
+  <!-- Premium Footer -->
+  <Footer slot="footer" />
 </BaseLayout>

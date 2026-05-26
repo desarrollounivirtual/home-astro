@@ -1,0 +1,233 @@
+---
+---
+
+<section id="inscripcion" class="py-24 relative overflow-hidden bg-dark-deep/10">
+  
+  <!-- Glowing Background Mesh -->
+  <div class="absolute top-[20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-accent-blue/5 filter blur-[120px] pointer-events-none"></div>
+  <div class="absolute bottom-[20%] right-[-10%] w-[400px] h-[400px] rounded-full bg-accent-orange/5 filter blur-[100px] pointer-events-none"></div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-sm font-extrabold tracking-wider text-accent-orange uppercase">Canales de Atención</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-white mt-3 mb-4">
+        Contáctanos e inicia <span class="text-gradient-blue">tu proceso</span>
+      </h2>
+      <p class="text-gray-400 text-sm sm:text-base">
+        Selecciona la opción de tu preferencia para rellenar el formulario. Nuestro equipo te responderá en tiempo récord.
+      </p>
+    </div>
+
+    <!-- Interactive Custom Tabs -->
+    <div class="flex items-center justify-center p-1.5 bg-dark-card rounded-2xl border border-white/5 mb-8 max-w-md mx-auto">
+      <button type="button" class="w-full py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 bg-accent-orange text-white glow-orange" id="tab-enroll">
+        Inscripción
+      </button>
+      <button type="button" class="w-full py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 text-gray-400 hover:text-white" id="tab-info">
+        Información
+      </button>
+      <button type="button" class="w-full py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 text-gray-400 hover:text-white" id="tab-pqrs">
+        Soporte / PQRS
+      </button>
+    </div>
+
+    <!-- Forms Container (Sleek Glass Cards) -->
+    <div class="glass-card rounded-3xl p-6 sm:p-10 relative overflow-hidden">
+      
+      <!-- FORM 1: Registro/Inscripción -->
+      <form id="form-enroll" class="space-y-6">
+        <h3 class="text-2xl font-bold font-display text-white border-b border-white/5 pb-3">Formulario de Registro Académico</h3>
+        <p class="text-xs text-gray-400">Rellena el formulario con tus datos para separar tu cupo oficial de bachillerato.</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label for="enroll-name" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Nombre Completo</label>
+            <input type="text" id="enroll-name" required placeholder="Ej: Ana María García" class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-accent-orange transition-colors" />
+          </div>
+          <div>
+            <label for="enroll-phone" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Teléfono o WhatsApp</label>
+            <input type="tel" id="enroll-phone" required placeholder="Ej: 3001234567" class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-accent-orange transition-colors" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label for="enroll-email" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Correo Electrónico</label>
+            <input type="email" id="enroll-email" required placeholder="Ej: ana@ejemplo.com" class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-accent-orange transition-colors" />
+          </div>
+          <div>
+            <label for="enroll-grade" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Último Grado Aprobado</label>
+            <select id="enroll-grade" required class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white focus:outline-none focus:border-accent-orange transition-colors">
+              <option value="" disabled selected class="bg-dark-card">Selecciona tu último grado...</option>
+              <option value="5" class="bg-dark-card">5° Primaria</option>
+              <option value="6" class="bg-dark-card">6° Bachillerato</option>
+              <option value="7" class="bg-dark-card">7° Bachillerato</option>
+              <option value="8" class="bg-dark-card">8° Bachillerato</option>
+              <option value="9" class="bg-dark-card">9° Bachillerato</option>
+              <option value="10" class="bg-dark-card">10° Bachillerato</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="enroll-message" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Comentarios Adicionales</label>
+          <textarea id="enroll-message" rows="4" placeholder="Cuéntanos si tienes alguna condición especial u observaciones..." class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-accent-orange transition-colors resize-none"></textarea>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <input type="checkbox" id="enroll-terms" required class="w-5 h-5 accent-accent-orange bg-dark-deep border-white/10 rounded focus:ring-0" />
+          <label for="enroll-terms" class="text-xs text-gray-400">Acepto el tratamiento de mis datos personales según las políticas de UNIVIRTUAL.</label>
+        </div>
+
+        <button type="submit" class="w-full py-4 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold rounded-xl btn-premium glow-orange flex items-center justify-center gap-2">
+          <span>Enviar mi Inscripción</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+        </button>
+      </form>
+
+      <!-- FORM 2: Contacto/Info (Hidden by default) -->
+      <form id="form-info" class="space-y-6 hidden">
+        <h3 class="text-2xl font-bold font-display text-white border-b border-white/5 pb-3">Solicitar Información General</h3>
+        <p class="text-xs text-gray-400">¿Tienes dudas sobre los costos, ciclos, horarios o legalidad? Déjanos tu pregunta.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label for="info-name" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Nombre</label>
+            <input type="text" id="info-name" required placeholder="Tu nombre..." class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-accent-blue transition-colors" />
+          </div>
+          <div>
+            <label for="info-phone" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">WhatsApp de Contacto</label>
+            <input type="tel" id="info-phone" required placeholder="Tu celular..." class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-accent-blue transition-colors" />
+          </div>
+        </div>
+
+        <div>
+          <label for="info-email" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Correo Electrónico</label>
+          <input type="email" id="info-email" required placeholder="ana@ejemplo.com" class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-accent-blue transition-colors" />
+        </div>
+
+        <div>
+          <label for="info-message" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">¿Cuál es tu pregunta?</label>
+          <textarea id="info-message" required rows="5" placeholder="Escribe aquí todas tus inquietudes..." class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-accent-blue transition-colors resize-none"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-4 bg-accent-blue hover:bg-accent-blue-hover text-white font-extrabold rounded-xl btn-premium glow-blue flex items-center justify-center gap-2">
+          <span>Enviar Consulta</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+        </button>
+      </form>
+
+      <!-- FORM 3: Soporte/PQRS (Hidden by default) -->
+      <form id="form-pqrs" class="space-y-6 hidden">
+        <h3 class="text-2xl font-bold font-display text-white border-b border-white/5 pb-3">Portal de Soporte y PQRS</h3>
+        <p class="text-xs text-gray-400">Utiliza este canal para radicar Peticiones, Quejas, Reclamos, Sugerencias o solicitar Soporte Técnico.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label for="pqrs-name" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Nombre Completo</label>
+            <input type="text" id="pqrs-name" required placeholder="Tu nombre..." class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-accent-blue transition-colors" />
+          </div>
+          <div>
+            <label for="pqrs-doc" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Documento de Identidad</label>
+            <input type="text" id="pqrs-doc" required placeholder="Ej: 1022345678" class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-accent-blue transition-colors" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label for="pqrs-email" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Correo Electrónico</label>
+            <input type="email" id="pqrs-email" required placeholder="ana@ejemplo.com" class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-accent-blue transition-colors" />
+          </div>
+          <div>
+            <label for="pqrs-type" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Tipo de Solicitud</label>
+            <select id="pqrs-type" required class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white focus:outline-none focus:border-accent-blue transition-colors">
+              <option value="" disabled selected class="bg-dark-card">Selecciona una opción...</option>
+              <option value="peticion" class="bg-dark-card">Petición</option>
+              <option value="queja" class="bg-dark-card">Queja</option>
+              <option value="reclamo" class="bg-dark-card">Reclamo</option>
+              <option value="sugerencia" class="bg-dark-card">Sugerencia</option>
+              <option value="soporte" class="bg-dark-card">Soporte Técnico de Plataforma</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="pqrs-message" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Detalles de la Solicitud</label>
+          <textarea id="pqrs-message" required rows="5" placeholder="Describe detalladamente los hechos, fechas o soporte que requieres..." class="w-full px-4 py-3.5 bg-dark-deep rounded-xl border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-accent-blue transition-colors resize-none"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-4 bg-accent-blue hover:bg-accent-blue-hover text-white font-extrabold rounded-xl btn-premium glow-blue flex items-center justify-center gap-2">
+          <span>Radicar Solicitud</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+        </button>
+      </form>
+
+      <!-- Alert Notification Success (Hidden by default) -->
+      <div id="form-success" class="hidden absolute inset-0 bg-dark-card/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-20">
+        <div class="w-20 h-20 rounded-full bg-green-500/10 flex items-center justify-center text-green-400 mb-6 glow-blue">
+          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        </div>
+        <h4 class="text-3xl font-extrabold font-display text-white mb-2">¡Formulario Radicado!</h4>
+        <p class="text-gray-400 max-w-md mb-8">Hemos recibido tu solicitud de forma correcta. Un asesor de UNIVIRTUAL se pondrá en contacto contigo en breve.</p>
+        <button type="button" id="btn-success-close" class="px-6 py-2.5 bg-white/5 hover:bg-white/10 text-white font-bold rounded-lg border border-white/10 transition-all">Volver a los formularios</button>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+  // Tabs logic
+  const tabEnroll = document.getElementById('tab-enroll');
+  const tabInfo = document.getElementById('tab-info');
+  const tabPqrs = document.getElementById('tab-pqrs');
+
+  const formEnroll = document.getElementById('form-enroll');
+  const formInfo = document.getElementById('form-info');
+  const formPqrs = document.getElementById('form-pqrs');
+  
+  const successModal = document.getElementById('form-success');
+  const successCloseBtn = document.getElementById('btn-success-close');
+
+  function selectTab(activeTab, activeForm) {
+    // Reset tabs styles
+    [tabEnroll, tabInfo, tabPqrs].forEach(tab => {
+      tab.classList.remove('bg-accent-orange', 'text-white', 'glow-orange', 'bg-accent-blue', 'glow-blue');
+      tab.classList.add('text-gray-400');
+    });
+    // Hide all forms
+    [formEnroll, formInfo, formPqrs].forEach(form => {
+      form.classList.add('hidden');
+    });
+
+    // Style active tab
+    activeTab.classList.remove('text-gray-400');
+    if (activeTab === tabEnroll) {
+      activeTab.classList.add('bg-accent-orange', 'text-white', 'glow-orange');
+    } else {
+      activeTab.classList.add('bg-accent-blue', 'text-white', 'glow-blue');
+    }
+    // Show active form
+    activeForm.classList.remove('hidden');
+  }
+
+  tabEnroll.addEventListener('click', () => selectTab(tabEnroll, formEnroll));
+  tabInfo.addEventListener('click', () => selectTab(tabInfo, formInfo));
+  tabPqrs.addEventListener('click', () => selectTab(tabPqrs, formPqrs));
+
+  // Form submission simulators
+  [formEnroll, formInfo, formPqrs].forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      successModal.classList.remove('hidden');
+      form.reset();
+    });
+  });
+
+  successCloseBtn.addEventListener('click', () => {
+    successModal.classList.add('hidden');
+  });
+</script>

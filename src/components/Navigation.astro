@@ -1,0 +1,132 @@
+---
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === '/' || currentPath === '/index.html';
+---
+
+<header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300" id="main-header">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      
+      <!-- Logo -->
+      <a href={isHome ? "#inicio" : "/"} class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-xl bg-dark-card flex items-center justify-center border border-white/10 group-hover:border-accent-orange/40 transition-all duration-300">
+          <svg class="w-6 h-6 text-accent-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <span class="text-xl font-extrabold font-display tracking-tight text-white group-hover:text-accent-orange transition-colors duration-300">
+          UNIVIRTUAL
+        </span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+        <a href={isHome ? "#inicio" : "/"} class={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${isHome ? 'text-accent-orange bg-accent-orange/5' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}>
+          Inicio
+        </a>
+        <a href="/financiacion" class={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${currentPath.includes('/financiacion') ? 'text-accent-orange bg-accent-orange/5' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}>
+          Financiación
+        </a>
+        <a href="/soporte" class={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${currentPath.includes('/soporte') ? 'text-accent-orange bg-accent-orange/5' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}>
+          Soporte
+        </a>
+        <a href="/pqrs" class={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${currentPath.includes('/pqrs') ? 'text-accent-orange bg-accent-orange/5' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}>
+          PQRS
+        </a>
+
+        <!-- Separator -->
+        <span class="w-[1px] h-5 bg-white/10 mx-2"></span>
+
+        <!-- External Links -->
+        <a href="https://jupiter.aulasunivirtuales.com" target="_blank" rel="noopener noreferrer" class="px-3 py-2 text-gray-300 hover:text-accent-blue text-sm font-semibold flex items-center gap-1 transition-colors duration-200">
+          Ingreso Jupiter
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+        </a>
+        
+        <a href="https://campus.aulasunivirtuales.com" target="_blank" rel="noopener noreferrer" class="px-3 py-2 text-gray-300 hover:text-accent-blue text-sm font-semibold flex items-center gap-1 transition-colors duration-200">
+          Campus Técnicos
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+        </a>
+
+        <a href="https://jupiter.aulasunivirtuales.com/pago" target="_blank" rel="noopener noreferrer" class="ml-4 px-5 py-2.5 bg-accent-orange hover:bg-accent-orange-hover text-white text-sm font-bold rounded-xl btn-premium glow-orange flex items-center gap-2">
+          <span>Realizar un pago</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+        </a>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center">
+        <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-accent-orange" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Abrir menú principal</span>
+          <svg class="block h-6 w-6" id="menu-icon-hamburger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg class="hidden h-6 w-6" id="menu-icon-close" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="hidden md:hidden glass-nav border-t border-white/5" id="mobile-menu">
+    <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3 text-center">
+      <a href={isHome ? "#inicio" : "/"} class="block px-3 py-3 rounded-xl text-base font-semibold text-white hover:bg-white/5">
+        Inicio
+      </a>
+      <a href="/financiacion" class="block px-3 py-3 rounded-xl text-base font-semibold text-gray-300 hover:text-white hover:bg-white/5">
+        Financiación
+      </a>
+      <a href="/soporte" class="block px-3 py-3 rounded-xl text-base font-semibold text-gray-300 hover:text-white hover:bg-white/5">
+        Soporte
+      </a>
+      <a href="/pqrs" class="block px-3 py-3 rounded-xl text-base font-semibold text-gray-300 hover:text-white hover:bg-white/5">
+        PQRS
+      </a>
+      
+      <div class="border-t border-white/5 my-2 pt-2"></div>
+
+      <a href="https://jupiter.aulasunivirtuales.com" target="_blank" rel="noopener noreferrer" class="block px-3 py-3 rounded-xl text-base font-semibold text-accent-blue hover:bg-accent-blue/5">
+        Ingreso Jupiter ↗
+      </a>
+      <a href="https://campus.aulasunivirtuales.com" target="_blank" rel="noopener noreferrer" class="block px-3 py-3 rounded-xl text-base font-semibold text-accent-blue hover:bg-accent-blue/5">
+        Campus Técnicos ↗
+      </a>
+      <a href="https://jupiter.aulasunivirtuales.com/pago" target="_blank" rel="noopener noreferrer" class="block mx-3 mt-4 px-5 py-3.5 bg-accent-orange hover:bg-accent-orange-hover text-white text-base font-bold rounded-xl btn-premium glow-orange">
+        Realizar un pago
+      </a>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  // Mobile menu toggle logic
+  const btn = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+  const hamburgerIcon = document.getElementById('menu-icon-hamburger');
+  const closeIcon = document.getElementById('menu-icon-close');
+
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !expanded);
+      menu.classList.toggle('hidden');
+      hamburgerIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+  }
+
+  // Header scroll dynamic border effect
+  const header = document.getElementById('main-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header.classList.add('shadow-lg', 'bg-dark-deep/95');
+      header.classList.remove('bg-dark-deep/75');
+    } else {
+      header.classList.remove('shadow-lg', 'bg-dark-deep/95');
+      header.classList.add('bg-dark-deep/75');
+    }
+  });
+</script>

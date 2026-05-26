@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import ContactForms from '../components/ContactForms.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout 
+  title="Portal PQRS Oficial | Aulas Univirtuales"
+  description="Radica formalmente tus peticiones, quejas, reclamos o sugerencias en nuestro portal oficial de atención al ciudadano."
+>
+  <Navigation slot="header" />
+
+  <!-- Background Decorative Glows -->
+  <div class="absolute top-[10%] left-[-10%] w-[450px] h-[450px] rounded-full bg-accent-blue/5 filter blur-[100px] pointer-events-none"></div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-24 relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <span class="text-sm font-extrabold tracking-wider text-accent-blue uppercase">Atención Ciudadana</span>
+      <h1 class="text-4xl sm:text-5xl font-extrabold font-display text-white mt-3 mb-6">
+        Radicación de <span class="text-gradient-orange">PQRS y Sugerencias</span>
+      </h1>
+      <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+        De conformidad con las leyes vigentes de la República de Colombia, ponemos a tu disposición este canal oficial para radicar solicitudes con plenas garantías legales.
+      </p>
+    </div>
+
+    <!-- Info Block about PQRS legal terms -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 mb-12 border border-white/10 relative overflow-hidden">
+      <h2 class="text-lg font-bold text-white mb-4">Tiempos de Respuesta Legales</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs text-gray-400">
+        <div class="p-4 rounded-xl bg-white/5">
+          <strong class="text-white block mb-1">Peticiones e Info</strong>
+          <span>Respuesta máxima en **15 días hábiles** de conformidad con la Ley 1755 de 2015.</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/5">
+          <strong class="text-white block mb-1">Quejas y Reclamos</strong>
+          <span>Evaluación e informe de medidas correctivas en un plazo de **15 días hábiles**.</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/5">
+          <strong class="text-white block mb-1">Sugerencias</strong>
+          <span>Analizadas por el área administrativa en un lapso de **10 días hábiles**.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Embed the Forms component focusing on PQRS/Soporte -->
+    <ContactForms />
+
+  </div>
+
+  <Footer slot="footer" />
+</BaseLayout>

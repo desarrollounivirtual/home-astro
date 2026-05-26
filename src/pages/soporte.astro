@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout 
+  title="Soporte Técnico Académico | Aulas Univirtuales"
+  description="Accede al soporte técnico de nuestra plataforma Júpiter, preguntas frecuentes y asistencia para tus clases virtuales."
+>
+  <Navigation slot="header" />
+
+  <!-- Background Decorative Glows -->
+  <div class="absolute top-[10%] right-[-10%] w-[450px] h-[450px] rounded-full bg-accent-blue/5 filter blur-[100px] pointer-events-none"></div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-24 relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <span class="text-sm font-extrabold tracking-wider text-accent-blue uppercase">Asistencia y Tutorías</span>
+      <h1 class="text-4xl sm:text-5xl font-extrabold font-display text-white mt-3 mb-6">
+        Centro de Soporte <span class="text-gradient-blue">Académico y Técnico</span>
+      </h1>
+      <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+        ¿Tienes problemas para ingresar al campus virtual o requieres acompañamiento de tus tutores? Estamos aquí para ayudarte.
+      </p>
+    </div>
+
+    <!-- Support Sections -->
+    <div class="space-y-8">
+      
+      <!-- Box 1: Preguntas Frecuentes -->
+      <div class="glass-card rounded-3xl p-8 sm:p-10">
+        <h2 class="text-2xl font-bold font-display text-white mb-6 border-b border-white/5 pb-4">Preguntas Frecuentes de la Plataforma</h2>
+        
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-base font-bold text-white mb-2">1. ¿Cómo recupero mi contraseña del campus o de Júpiter?</h3>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              En la pantalla de inicio de sesión de Júpiter o del campus académico, haz clic en **"¿Olvidó su contraseña?"**. Escribe tu correo electrónico registrado y te llegará un enlace seguro para reestablecer tus accesos en milisegundos.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white mb-2">2. ¿En qué horarios puedo comunicarme con un docente?</h3>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              La plataforma de estudio virtual está activa 24/7, pero el soporte de tutorías y resolución de dudas de los docentes opera de **lunes a viernes de 8:00 A.M. a 6:00 P.M.** y los **sábados de 8:00 A.M. a 12:00 P.M.**
+            </p>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white mb-2">3. ¿Qué requisitos técnicos mínimos necesita mi dispositivo?</h3>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Nuestra plataforma corre en navegadores modernos (Google Chrome, Safari, Microsoft Edge). Solo necesitas conexión a internet de al menos 2MB de velocidad. No requieres instalar programas pesados, todo se ejecuta 100% online de manera segura.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box 2: Canales de Atención Inmediata -->
+      <div class="glass-card rounded-3xl p-8 sm:p-10 relative overflow-hidden">
+        <div class="absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-accent-blue/5 filter blur-3xl pointer-events-none"></div>
+        <h2 class="text-2xl font-bold font-display text-white mb-6 border-b border-white/5 pb-4">Asistencia Directa</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <!-- WhatsApp Support -->
+          <div class="p-6 rounded-2xl bg-white/5 border border-white/5 text-left flex flex-col justify-between group hover:border-green-500/20 transition-all duration-300">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">WhatsApp Académico</h3>
+              <p class="text-xs text-gray-400 leading-relaxed mb-4">Soporte y gestiones rápidas de matrículas y pagos en tiempo real.</p>
+            </div>
+            <a href="https://wa.me/573001234567" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-green-400 hover:text-green-300 flex items-center gap-1">
+              Chatear ahora ➔
+            </a>
+          </div>
+
+          <!-- Email Support -->
+          <div class="p-6 rounded-2xl bg-white/5 border border-white/5 text-left flex flex-col justify-between group hover:border-accent-blue/20 transition-all duration-300">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-accent-blue/10 flex items-center justify-center text-accent-blue mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Soporte por Correo</h3>
+              <p class="text-xs text-gray-400 leading-relaxed mb-4">Radica tus casos técnicos de forma asincrónica con respuesta formal.</p>
+            </div>
+            <a href="mailto:soporte@aulasunivirtuales.com" class="text-xs font-bold text-accent-blue hover:text-accent-blue-hover flex items-center gap-1">
+              Enviar correo ➔
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Redirect to PQRS Form -->
+    <div class="mt-16 text-center">
+      <h3 class="text-2xl font-bold font-display text-white mb-4">¿Deseas radicar un caso formal en la plataforma?</h3>
+      <p class="text-gray-400 mb-8 max-w-xl mx-auto text-sm sm:text-base">
+        Puedes rellenar el formulario de PQRS y soporte en nuestra página de contacto para que el área respectiva asigne un ticket de atención a tu caso.
+      </p>
+      <a href="/#inscripcion" class="inline-flex items-center gap-2 px-8 py-4 bg-accent-blue hover:bg-accent-blue-hover text-white font-extrabold rounded-xl btn-premium glow-blue">
+        <span>Radicar ticket oficial</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      </a>
+    </div>
+
+  </div>
+
+  <Footer slot="footer" />
+</BaseLayout>
