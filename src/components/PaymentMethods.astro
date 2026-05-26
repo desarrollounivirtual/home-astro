@@ -1,4 +1,18 @@
 ---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  link?: string;
+}
+
+const {
+  title = "Realiza tus pagos de forma fácil y segura",
+  subtitle = "Utiliza nuestro portal centralizado de pagos para realizar tus matrículas y mensualidades al instante desde cualquier lugar de Colombia.",
+  link = "https://jupiter.aulasunivirtuales.com/pagar"
+} = Astro.props;
+
+const hasEasySecure = title.toLowerCase().includes("fácil y segura");
+const parts = hasEasySecure ? title.split(/fácil y segura/i) : [title];
 ---
 
 <section id="pagos" class="py-24 relative overflow-hidden bg-slate-50 border-y border-slate-200/60">
@@ -13,10 +27,16 @@
     <div class="text-center max-w-3xl mx-auto mb-16">
       <span class="text-sm font-extrabold tracking-wider text-accent-blue uppercase">Pasarela de Pagos</span>
       <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-slate-900 mt-3 mb-6">
-        Realiza tus pagos de forma <span class="text-gradient-orange">fácil y segura</span>
+        {hasEasySecure ? (
+          <>
+            {parts[0]} <span class="text-gradient-orange">fácil y segura</span> {parts.slice(1).join("fácil y segura")}
+          </>
+        ) : (
+          title
+        )}
       </h2>
       <p class="text-lg text-slate-600">
-        Utiliza nuestro portal centralizado de pagos para realizar tus matrículas y mensualidades al instante desde cualquier lugar de Colombia.
+        {subtitle}
       </p>
     </div>
 
@@ -70,7 +90,7 @@
           <h4 class="text-base font-bold text-slate-800 text-center mb-1">Transacción Encriptada</h4>
           <p class="text-[11px] text-slate-500 text-center mb-6">Tus datos están protegidos bajo protocolos de alta seguridad SSL.</p>
 
-          <a href="https://jupiter.aulasunivirtuales.com/pagar" target="_blank" rel="noopener noreferrer" class="w-full py-4 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold text-sm rounded-xl btn-premium glow-orange flex items-center justify-center gap-2 shadow-md shadow-accent-orange/15">
+          <a href={link} target="_blank" rel="noopener noreferrer" class="w-full py-4 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold text-sm rounded-xl btn-premium glow-orange flex items-center justify-center gap-2 shadow-md shadow-accent-orange/15">
             <span>Ir a Pagar en Línea</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
           </a>

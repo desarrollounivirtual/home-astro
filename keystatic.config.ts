@@ -9,7 +9,7 @@ export default config({
   singletons: {
     home: singleton({
       label: 'Página de Inicio (Home)',
-      path: 'src/content/home',
+      path: 'src/content/home/index',
       format: { data: 'json' },
       schema: {
         // Pestaña Hero
@@ -63,15 +63,18 @@ export default config({
         title: fields.slug({ name: { label: 'Título de la Página' } }),
         description: fields.text({ label: 'Meta Descripción (Para SEO en Google)', multiline: true }),
         
-        // El Editor Enriquecido con Bloques de Construcción
+        // El Editor Enriquecido con Bloques de Construcción Ultra Robustos
         content: fields.document({
           label: 'Diseño de la Página (Bloques)',
           formatting: true,
           dividers: true,
           links: true,
-          images: true,
+          images: {
+            directory: 'public/images/pages',
+            publicPath: '/images/pages'
+          },
           
-          // AQUÍ CREAMOS LOS BLOQUES DE DISEÑO MÓDULOS (Filas, Columnas, etc.)
+          // AQUÍ CREAMOS LOS BLOQUES DE DISEÑO MÓDULOS (Filas, Columnas, Carruseles, Banners)
           componentBlocks: {
             
             // 1. Bloque: Fila de Texto e Imagen
@@ -125,12 +128,15 @@ export default config({
                     title: fields.text({ label: 'Título de la Columna' }),
                     description: fields.text({ label: 'Descripción de la Columna', multiline: true }),
                     icon: fields.select({
-                      label: 'Icono del Bloque',
+                      label: 'Icono del Bloque (Premium SVG)',
                       options: [
                         { label: 'Estudiante / Gorro', value: 'cap' },
                         { label: 'Check / Aprobado', value: 'check' },
                         { label: 'Estrella / Destacado', value: 'star' },
-                        { label: 'Celular / Dispositivo', value: 'phone' }
+                        { label: 'Celular / Dispositivo', value: 'phone' },
+                        { label: 'Pesos / Dinero', value: 'currency' },
+                        { label: 'Soporte / Ayuda', value: 'support' },
+                        { label: 'Plataforma / Computador', value: 'computer' }
                       ],
                       defaultValue: 'check'
                     })
@@ -138,6 +144,116 @@ export default config({
                   {
                     label: 'Columnas de Información',
                     itemLabel: (item) => item.fields.title.value || 'Columna'
+                  }
+                )
+              }
+            },
+
+            // 4. Bloque: Banner de Imagen Premium de Fondo (imageBanner)
+            imageBanner: {
+              label: 'Bloque: Banner Premium con Imagen de Fondo',
+              schema: {
+                title: fields.text({ label: 'Título del Banner' }),
+                subtitle: fields.text({ label: 'Subtítulo del Banner', multiline: true }),
+                image: fields.image({
+                  label: 'Imagen de Fondo',
+                  directory: 'public/images/banners',
+                  publicPath: '/images/banners'
+                }),
+                ctaText: fields.text({ label: 'Texto del Botón (CTA)' }),
+                ctaLink: fields.text({ label: 'Enlace del Botón' }),
+                overlayOpacity: fields.select({
+                  label: 'Opacidad del Filtro Oscuro (Overlay)',
+                  options: [
+                    { label: 'Sin Filtro (0%)', value: 'none' },
+                    { label: 'Filtro Suave (20%)', value: 'opacity-20' },
+                    { label: 'Filtro Medio (40%)', value: 'opacity-40' },
+                    { label: 'Filtro Oscuro (60%)', value: 'opacity-60' },
+                    { label: 'Filtro Muy Oscuro (80%)', value: 'opacity-80' }
+                  ],
+                  defaultValue: 'opacity-40'
+                }),
+                align: fields.select({
+                  label: 'Alineación del Contenido',
+                  options: [
+                    { label: 'Centrado', value: 'center' },
+                    { label: 'Izquierda', value: 'left' },
+                    { label: 'Derecha', value: 'right' }
+                  ],
+                  defaultValue: 'center'
+                })
+              }
+            },
+
+            // 5. Bloque: Carrusel de Diapositivas Interactivo (imageCarousel)
+            imageCarousel: {
+              label: 'Bloque: Carrusel / Slider de Diapositivas',
+              schema: {
+                title: fields.text({ label: 'Título General del Carrusel (Opcional)' }),
+                slides: fields.array(
+                  fields.object({
+                    title: fields.text({ label: 'Título de la Diapositiva' }),
+                    subtitle: fields.text({ label: 'Descripción Corta', multiline: true }),
+                    image: fields.image({
+                      label: 'Imagen',
+                      directory: 'public/images/carousels',
+                      publicPath: '/images/carousels'
+                    }),
+                    ctaText: fields.text({ label: 'Texto del Botón (Opcional)' }),
+                    ctaLink: fields.text({ label: 'Enlace del Botón (Opcional)' })
+                  }),
+                  {
+                    label: 'Diapositivas (Slides)',
+                    itemLabel: (item) => item.fields.title.value || 'Diapositiva'
+                  }
+                )
+              }
+            },
+
+            // 6. Bloque: Galería de Imágenes en Grid (imageGallery)
+            imageGallery: {
+              label: 'Bloque: Galería de Imágenes en Cuadrícula',
+              schema: {
+                sectionTitle: fields.text({ label: 'Título de la Sección (Opcional)' }),
+                columns: fields.select({
+                  label: 'Número de Columnas',
+                  options: [
+                    { label: '2 Columnas', value: '2' },
+                    { label: '3 Columnas', value: '3' },
+                    { label: '4 Columnas', value: '4' }
+                  ],
+                  defaultValue: '3'
+                }),
+                images: fields.array(
+                  fields.object({
+                    image: fields.image({
+                      label: 'Imagen',
+                      directory: 'public/images/gallery',
+                      publicPath: '/images/gallery'
+                    }),
+                    caption: fields.text({ label: 'Pie de Foto / Título Corto' })
+                  }),
+                  {
+                    label: 'Imágenes de la Galería',
+                    itemLabel: (item) => item.fields.caption.value || 'Imagen de Galería'
+                  }
+                )
+              }
+            },
+
+            // 7. Bloque: Sección de Acordeón / FAQs (accordionSection)
+            accordionSection: {
+              label: 'Bloque: Pestañas de Acordeón (FAQs / Soporte)',
+              schema: {
+                title: fields.text({ label: 'Título del Acordeón', defaultValue: 'Preguntas Frecuentes' }),
+                items: fields.array(
+                  fields.object({
+                    question: fields.text({ label: 'Pregunta / Título del Panel' }),
+                    answer: fields.text({ label: 'Respuesta / Contenido', multiline: true })
+                  }),
+                  {
+                    label: 'Paneles del Acordeón',
+                    itemLabel: (item) => item.fields.question.value || 'Pregunta'
                   }
                 )
               }

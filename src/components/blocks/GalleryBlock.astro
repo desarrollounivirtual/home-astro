@@ -1,0 +1,60 @@
+---
+interface GalleryImage {
+  image?: string | null;
+  caption: string;
+}
+
+interface Props {
+  sectionTitle?: string | null;
+  columns?: '2' | '3' | '4';
+  images: GalleryImage[];
+}
+
+const { sectionTitle, columns = '3', images = [] } = Astro.props;
+
+const columnClasses = {
+  '2': 'grid-cols-1 sm:grid-cols-2',
+  '3': 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+  '4': 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+};
+---
+
+<section class="py-20 relative overflow-hidden bg-white/30 border-b border-slate-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    {sectionTitle && (
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <h2 class="text-3xl font-extrabold font-display text-slate-900">{sectionTitle}</h2>
+      </div>
+    )}
+
+    <div class={`grid gap-6 ${columnClasses[columns]}`}>
+      {images.map((img) => (
+        <div class="relative rounded-3xl overflow-hidden aspect-[4/3] border border-slate-200/60 shadow-md group bg-slate-900">
+          {img.image ? (
+            <img 
+              src={img.image} 
+              alt={img.caption} 
+              class="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-500 ease-out"
+              loading="lazy"
+            />
+          ) : (
+            <div class="w-full h-full bg-slate-100 flex items-center justify-center">
+              <svg class="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+          )}
+
+          <!-- Image Overlay Caption -->
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 z-10 pointer-events-none">
+            <span class="text-white text-sm sm:text-base font-bold drop-shadow-md transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
+              {img.caption}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

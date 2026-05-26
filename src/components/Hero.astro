@@ -1,4 +1,21 @@
 ---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaLink?: string;
+}
+
+const {
+  title = "Validación de bachillerato en 10 meses",
+  subtitle = "Obtén tu título de Bachiller Académico de forma 100% virtual. Estudia a tu propio ritmo 24/7 con plataforma de autogestión y docentes calificados. Ceremonia física de graduación en Medellín con ICFES incluido. ¡Sí es posible avanzar!",
+  ctaText = "Inscribirme ahora",
+  ctaLink = "#inscripcion"
+} = Astro.props;
+
+// Intelligently highlight "10 meses" if present in the title
+const hasTenMonths = title.toLowerCase().includes("10 meses");
+const parts = hasTenMonths ? title.split(/10 meses/i) : [title];
 ---
 
 <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
@@ -28,19 +45,25 @@
 
         <!-- Master H1 Header -->
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-black font-display tracking-tight text-slate-900 leading-[1.1] mb-6">
-          Validación de bachillerato en <br />
-          <span class="text-gradient-orange glow-text">10 meses</span>
+          {hasTenMonths ? (
+            <>
+              {parts[0]} <br />
+              <span class="text-gradient-orange glow-text">10 meses</span> {parts.slice(1).join("10 meses")}
+            </>
+          ) : (
+            title
+          )}
         </h1>
 
         <!-- High-converting subtext (with spelling corrected) -->
         <p class="text-lg sm:text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8">
-          Obtén tu título de <strong class="text-slate-900 font-bold">Bachiller Académico</strong> de forma 100% virtual. Estudia a tu propio ritmo 24/7 con plataforma de autogestión y docentes calificados. Ceremonia física de graduación en Medellín con ICFES incluido. ¡Sí es posible avanzar!
+          {subtitle}
         </p>
 
         <!-- Dynamic Action Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-          <a href="#inscripcion" class="w-full sm:w-auto px-8 py-4 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold text-base rounded-xl btn-premium glow-orange flex items-center justify-center gap-3">
-            <span>Inscribirme ahora</span>
+          <a href={ctaLink} class="w-full sm:w-auto px-8 py-4 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold text-base rounded-xl btn-premium glow-orange flex items-center justify-center gap-3">
+            <span>{ctaText}</span>
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
             </svg>

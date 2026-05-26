@@ -1,0 +1,52 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  buttonText: string;
+  buttonLink: string;
+  accent?: 'orange' | 'blue';
+}
+
+const { title, subtitle, buttonText, buttonLink, accent = 'orange' } = Astro.props;
+
+const isOrange = accent === 'orange';
+const containerBg = isOrange 
+  ? 'bg-gradient-to-br from-accent-orange to-red-600' 
+  : 'bg-gradient-to-br from-accent-blue to-indigo-700';
+const glowClass = isOrange ? 'glow-orange shadow-accent-orange/20' : 'glow-blue shadow-accent-blue/20';
+---
+
+<section class="py-16 relative overflow-hidden bg-slate-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class={`${containerBg} ${glowClass} rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-2xl`}>
+      
+      <!-- Decorative circles -->
+      <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-white/10 filter blur-2xl pointer-events-none"></div>
+      <div class="absolute -left-16 -bottom-16 w-64 h-64 rounded-full bg-black/10 filter blur-2xl pointer-events-none"></div>
+      
+      <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="text-center md:text-left max-w-2xl">
+          <h3 class="text-2xl sm:text-3xl font-extrabold font-display leading-[1.1] mb-3">
+            {title}
+          </h3>
+          <p class="text-white/90 text-sm sm:text-base font-semibold leading-relaxed">
+            {subtitle}
+          </p>
+        </div>
+
+        <div class="shrink-0">
+          <a 
+            href={buttonLink} 
+            class={`px-8 py-4 bg-white hover:bg-slate-50 ${isOrange ? 'text-accent-orange' : 'text-accent-blue'} font-extrabold text-base rounded-xl transition-all duration-300 shadow-md flex items-center gap-3 transform hover:scale-105 active:scale-95`}
+          >
+            <span>{buttonText}</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

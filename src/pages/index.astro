@@ -10,6 +10,12 @@ import Coverage from '../components/Coverage.astro';
 import PaymentMethods from '../components/PaymentMethods.astro';
 import ContactForms from '../components/ContactForms.astro';
 import Footer from '../components/Footer.astro';
+
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const homeData = await reader.singletons.home.read();
 ---
 
 <BaseLayout 
@@ -20,7 +26,12 @@ import Footer from '../components/Footer.astro';
   <Navigation slot="header" />
   
   <!-- Interactive Modular Sections -->
-  <Hero />
+  <Hero 
+    title={homeData?.heroTitle} 
+    subtitle={homeData?.heroSubtitle} 
+    ctaText={homeData?.heroCtaText} 
+    ctaLink={homeData?.heroCtaLink} 
+  />
   
   <Methodology />
   
@@ -28,11 +39,15 @@ import Footer from '../components/Footer.astro';
   
   <PlatformPromo />
   
-  <Testimonials />
+  <Testimonials testimonials={homeData?.testimonials} />
   
   <Coverage />
   
-  <PaymentMethods />
+  <PaymentMethods 
+    title={homeData?.paymentsTitle} 
+    subtitle={homeData?.paymentsSubtitle} 
+    link={homeData?.paymentsLink} 
+  />
   
   <ContactForms />
   
