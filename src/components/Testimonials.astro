@@ -43,10 +43,10 @@ const testimonials = [
     <!-- Section Header -->
     <div class="text-center max-w-3xl mx-auto mb-16">
       <span class="text-sm font-extrabold tracking-wider text-accent-orange uppercase">Testimonios Reales</span>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-white mt-3 mb-6">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-slate-900 mt-3 mb-6">
         Historias de éxito de <span class="text-gradient-orange">nuestros graduados</span>
       </h2>
-      <p class="text-lg text-gray-400">
+      <p class="text-lg text-slate-600">
         Conoce las experiencias de personas reales que transformaron sus vidas y lograron graduarse como Bachilleres Académicos.
       </p>
     </div>
@@ -54,7 +54,7 @@ const testimonials = [
     <!-- Testimonials Grid -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {testimonials.map((t) => (
-        <div class="glass-card rounded-[28px] p-8 flex flex-col justify-between relative group hover:border-accent-blue/30 transition-all duration-300">
+        <div class="bg-white border border-slate-200/60 shadow-lg shadow-slate-200/50 rounded-[28px] p-8 flex flex-col justify-between relative group hover:border-accent-blue/30 transition-all duration-300">
           
           <div>
             <!-- Star Ratings -->
@@ -65,24 +65,24 @@ const testimonials = [
                 </svg>
               ))}
             </div>
-
+            
             <!-- Quote Text -->
-            <blockquote class="text-gray-300 text-sm sm:text-base leading-relaxed italic mb-8 relative">
-              <span class="text-5xl text-white/5 font-serif absolute -top-4 -left-2 pointer-events-none">“</span>
+            <blockquote class="text-slate-600 text-sm sm:text-base leading-relaxed italic mb-8 relative">
+              <span class="text-5xl text-slate-200/40 font-serif absolute -top-4 -left-2 pointer-events-none">“</span>
               "{t.quote}"
             </blockquote>
           </div>
 
           <!-- Student Profile -->
-          <div class="flex items-center gap-4 border-t border-white/5 pt-6 mt-auto">
+          <div class="flex items-center gap-4 border-t border-slate-100 pt-6 mt-auto">
             <!-- Simulated Avatar with Premium Gradients -->
             <div class={`w-12 h-12 rounded-full ${t.avatarColor} flex items-center justify-center text-white font-bold text-sm tracking-wider shadow-inner shrink-0`}>
               {t.initials}
             </div>
             
             <div class="text-left">
-              <cite class="text-base font-bold text-white not-italic block">{t.name}</cite>
-              <span class="text-xs text-gray-500 font-semibold block">{t.role}</span>
+              <cite class="text-base font-bold text-slate-900 not-italic block">{t.name}</cite>
+              <span class="text-xs text-slate-500 font-semibold block">{t.role}</span>
               <span class="text-[10px] text-accent-blue font-bold tracking-wide uppercase mt-0.5 block">{t.location}</span>
             </div>
           </div>
