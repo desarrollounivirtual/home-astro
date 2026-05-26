@@ -6,7 +6,7 @@ import keystatic from '@keystatic/astro';
 const isProd = process.env.NODE_ENV === 'production' || process.argv.includes('build') || process.env.CF_PAGES === '1';
 
 export default defineConfig({
-  output: 'static', // Generación estática pura (SSG)
+  output: isProd ? 'static' : 'hybrid', // Híbrido en desarrollo para Keystatic, estático puro en producción
   site: 'https://aulasunivirtuales.com',
   integrations: [
     tailwind({
