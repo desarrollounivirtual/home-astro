@@ -3,11 +3,14 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 
+import cloudflare from "@astrojs/cloudflare";
+
 const isProd = process.env.NODE_ENV === 'production' || process.argv.includes('build') || process.env.CF_PAGES === '1';
 
 export default defineConfig({
-  output: isProd ? 'static' : 'hybrid', // Híbrido en desarrollo para Keystatic, estático puro en producción
+  output: "hybrid",
   site: 'https://aulasunivirtuales.com',
+
   integrations: [
     tailwind({
       applyBaseStyles: false, // Los estilos base se controlan en global.css
@@ -15,10 +18,14 @@ export default defineConfig({
     react(),
     ...(isProd ? [] : [keystatic()])
   ],
+
   compressHTML: true,
+
   vite: {
     build: {
       cssMinify: true
     }
-  }
+  },
+
+  adapter: cloudflare()
 });
