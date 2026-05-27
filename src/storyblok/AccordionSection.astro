@@ -1,19 +1,20 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
-import AccordionComponent from '../components/blocks/AccordionBlock.astro';
+import AccordionBlock from '../components/blocks/AccordionBlock.astro';
+import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
-const title = blok.title || blok.Title || blok['Title'];
-const rawItems = blok.items || blok.Items || [];
-
-const items = rawItems.map((item: any) => ({
-  question: item.question || item.Question,
-  answer: item.answer || item.Answer
+const title = blok.title || blok.Title || '';
+const items = (blok.items || []).map((item: any) => ({
+  question: item.question || item.Question || '',
+  answer: item.answer || item.Answer || '',
 }));
+
+const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
+const styles = generateComponentStyles(blok, spacingId);
 ---
-<div {...storyblokEditable(blok)}>
-  <AccordionComponent 
-    title={title} 
-    items={items} 
-  />
+{styles && <style is:inline set:html={styles} />}
+
+<div {...storyblokEditable(blok)} class={spacingId}>
+  <AccordionBlock title={title} items={items} />
 </div>

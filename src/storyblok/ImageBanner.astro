@@ -1,6 +1,7 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import ImageBannerComponent from '../components/blocks/ImageBannerBlock.astro';
+import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
 const title = blok.title || blok.Title || blok['Title'];
@@ -10,8 +11,13 @@ const ctaText = blok.ctaText || blok.cta_text || blok.CtaText || blok['Cta Text'
 const ctaLink = blok.ctaLink || blok.cta_link || blok.CtaLink || blok['Cta Link'] || blok['Cta link'];
 const overlayOpacity = blok.overlayOpacity || blok.overlay_opacity || blok.OverlayOpacity || blok['Overlay Opacity'] || 'opacity-40';
 const align = blok.align || blok.Align || 'center';
+
+const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
+const styles = generateComponentStyles(blok, spacingId);
 ---
-<div {...storyblokEditable(blok)}>
+{styles && <style is:inline set:html={styles} />}
+
+<div {...storyblokEditable(blok)} class={spacingId}>
   <ImageBannerComponent 
     title={title} 
     subtitle={subtitle} 

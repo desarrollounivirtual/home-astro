@@ -1,15 +1,19 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import TextImageRowComponent from '../components/blocks/TextImageRowBlock.astro';
+import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
+const title = blok.title || blok.Title || '';
+const body = blok.body || blok.Body || '';
 const imageUrl = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+const align = blok.align || 'right';
+
+const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
+const styles = generateComponentStyles(blok, spacingId);
 ---
-<div {...storyblokEditable(blok)}>
-  <TextImageRowComponent 
-    title={blok.title} 
-    body={blok.body} 
-    image={imageUrl} 
-    align={blok.align} 
-  />
+{styles && <style is:inline set:html={styles} />}
+
+<div {...storyblokEditable(blok)} class={spacingId}>
+  <TextImageRowComponent title={title} body={body} image={imageUrl} align={align} />
 </div>

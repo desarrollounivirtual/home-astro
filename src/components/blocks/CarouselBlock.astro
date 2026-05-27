@@ -10,9 +10,23 @@ interface Slide {
 interface Props {
   title?: string | null;
   slides: Slide[];
+  autoplaySpeed?: number | string | null;
+  showDots?: boolean | string | null;
+  showArrows?: boolean | string | null;
 }
 
-const { title, slides = [] } = Astro.props;
+const { 
+  title, 
+  slides = [], 
+  autoplaySpeed = 6000, 
+  showDots = true, 
+  showArrows = true 
+} = Astro.props;
+
+// Safe conversions for CMS input flexibility (accepts true, "true", "yes", etc.)
+const speed = autoplaySpeed !== undefined && autoplaySpeed !== null ? Number(autoplaySpeed) : 6000;
+const displayDots = showDots === true || showDots === 'true' || showDots === 'yes' || showDots === undefined || showDots === null;
+const displayArrows = showArrows === true || showArrows === 'true' || showArrows === 'yes' || showArrows === undefined || showArrows === null;
 
 // Generate a unique ID to avoid collision if there are multiple carousels
 const carouselId = `carousel-${Math.random().toString(36).substring(2, 9)}`;
@@ -77,7 +91,7 @@ const carouselId = `carousel-${Math.random().toString(36).substring(2, 9)}`;
       </div>
 
       <!-- Navigation Arrows -->
-      {slides.length > 1 && (
+      {slides.length > 1 && displayArrows && (
         <>
           <button 
             type="button" 
@@ -102,7 +116,7 @@ const carouselId = `carousel-${Math.random().toString(36).substring(2, 9)}`;
       )}
 
       <!-- Dot Indicators -->
-      {slides.length > 1 && (
+      {slides.length > 1 && displayDots && (
         <div class="absolute bottom-6 left-1/2 -translate-y-0 -translate-x-1/2 z-30 flex items-center gap-2.5">
           {slides.map((_, index) => (
             <button 
@@ -119,7 +133,7 @@ const carouselId = `carousel-${Math.random().toString(36).substring(2, 9)}`;
   </div>
 </section>
 
-<script is:inline define:vars={{ carouselId, slideCount: slides.length }}>
+<script is:inline define:vars={{ carouselId, slideCount: slides.length, speed, displayDots, displayArrows }}>
   (function() {
     if (slideCount <= 1) return;
     
@@ -150,15 +164,17 @@ const carouselId = `carousel-${Math.random().toString(36).substring(2, 9)}`;
         }
       });
       
-      dots.forEach((dot, idx) => {
-        if (idx === currentIndex) {
-          dot.classList.add('bg-accent-orange', 'border-accent-orange', 'w-6');
-          dot.classList.remove('bg-white/40');
-        } else {
-          dot.classList.remove('bg-accent-orange', 'border-accent-orange', 'w-6');
-          dot.classList.add('bg-white/40');
-        }
-      });
+      if (displayDots && dots.length > 0) {
+        dots.forEach((dot, idx) => {
+          if (idx === currentIndex) {
+            dot.classList.add('bg-accent-orange', 'border-accent-orange', 'w-6');
+            dot.classList.remove('bg-white/40');
+          } else {
+            dot.classList.remove('bg-accent-orange', 'border-accent-orange', 'w-6');
+            dot.classList.add('bg-white/40');
+          }
+        });
+      }
     }
     
     function nextSlide() {
@@ -171,7 +187,9 @@ const carouselId = `carousel-${Math.random().toString(36).substring(2, 9)}`;
     
     function startAutoplay() {
       stopAutoplay();
-      autoplayInterval = setInterval(nextSlide, 6000);
+      if (speed > 0) {
+        autoplayInterval = setInterval(nextSlide, speed);
+      }
     }
     
     function stopAutoplay() {
@@ -181,18 +199,20 @@ const carouselId = `carousel-${Math.random().toString(36).substring(2, 9)}`;
     if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); startAutoplay(); });
     if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); startAutoplay(); });
     
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => {
-        showSlide(idx);
-        startAutoplay();
+    if (displayDots) {
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+          showSlide(idx);
+          startAutoplay();
+        });
       });
-    });
+    }
     
-    wrapper.addEventListener('mouseenter', stopAutoplay);
-    wrapper.addEventListener('mouseleave', startAutoplay);
-    
-    // Start initial autoplay
-    startAutoplay();
+    if (speed > 0) {
+      wrapper.addEventListener('mouseenter', stopAutoplay);
+      wrapper.addEventListener('mouseleave', startAutoplay);
+      startAutoplay();
+    }
   })();
 </script>
 

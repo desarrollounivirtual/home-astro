@@ -1,21 +1,21 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
-import GalleryComponent from '../components/blocks/GalleryBlock.astro';
+import GalleryBlock from '../components/blocks/GalleryBlock.astro';
+import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
-const sectionTitle = blok.sectionTitle || blok.SectionTitle || blok['Section Title'] || blok.section_title;
-const columns = blok.columns || blok.Columns || '3';
-const rawImages = blok.images || blok.Images || [];
-
-const images = rawImages.map((img: any) => ({
+const sectionTitle = blok.sectionTitle || blok.section_title || '';
+const columns = Number(blok.columns) || 3;
+const images = (blok.images || []).map((img: any) => ({
   image: typeof img.image === 'string' ? img.image : (img.image?.filename || null),
-  caption: img.caption || img.Caption || ''
+  caption: img.caption || img.Caption || '',
 }));
+
+const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
+const styles = generateComponentStyles(blok, spacingId);
 ---
-<div {...storyblokEditable(blok)}>
-  <GalleryComponent 
-    sectionTitle={sectionTitle} 
-    columns={columns as any} 
-    images={images} 
-  />
+{styles && <style is:inline set:html={styles} />}
+
+<div {...storyblokEditable(blok)} class={spacingId}>
+  <GalleryBlock sectionTitle={sectionTitle} columns={columns} images={images} />
 </div>

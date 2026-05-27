@@ -1,16 +1,17 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import PaymentMethodsComponent from '../components/PaymentMethods.astro';
+import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
-const title = blok.title || blok.Title || blok['Title'];
-const subtitle = blok.subtitle || blok.Subtitle || blok['Subtitle'];
-const link = blok.link || blok.Link || blok['Link'];
+const title = blok.title || blok.Title || null;
+const subtitle = blok.subtitle || blok.Subtitle || null;
+
+const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
+const styles = generateComponentStyles(blok, spacingId);
 ---
-<div {...storyblokEditable(blok)}>
-  <PaymentMethodsComponent 
-    title={title} 
-    subtitle={subtitle} 
-    link={link} 
-  />
+{styles && <style is:inline set:html={styles} />}
+
+<div {...storyblokEditable(blok)} class={spacingId}>
+  <PaymentMethodsComponent title={title} subtitle={subtitle} />
 </div>

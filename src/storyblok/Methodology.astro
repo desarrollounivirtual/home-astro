@@ -1,8 +1,14 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import MethodologyComponent from '../components/Methodology.astro';
+import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
+
+const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
+const styles = generateComponentStyles(blok, spacingId);
 ---
-<div {...storyblokEditable(blok)}>
+{styles && <style is:inline set:html={styles} />}
+
+<div {...storyblokEditable(blok)} class={spacingId}>
   <MethodologyComponent />
 </div>

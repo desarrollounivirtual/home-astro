@@ -1,20 +1,21 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
-import FeaturesGridComponent from '../components/blocks/FeaturesGridBlock.astro';
+import FeaturesGridBlock from '../components/blocks/FeaturesGridBlock.astro';
+import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
-const sectionTitle = blok.sectionTitle || blok.SectionTitle || blok['Section Title'] || blok.section_title;
-const rawColumns = blok.columns || blok.Columns || [];
-
-const columns = rawColumns.map((col: any) => ({
-  title: col.title || col.Title,
-  description: col.description || col.Description,
-  icon: col.icon || col.Icon || 'check'
+const sectionTitle = blok.sectionTitle || blok.section_title || '';
+const columns = (blok.columns || []).map((col: any) => ({
+  title: col.title || col.Title || '',
+  description: col.description || col.Description || '',
+  icon: col.icon || 'star',
 }));
+
+const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
+const styles = generateComponentStyles(blok, spacingId);
 ---
-<div {...storyblokEditable(blok)}>
-  <FeaturesGridComponent 
-    sectionTitle={sectionTitle} 
-    columns={columns} 
-  />
+{styles && <style is:inline set:html={styles} />}
+
+<div {...storyblokEditable(blok)} class={spacingId}>
+  <FeaturesGridBlock sectionTitle={sectionTitle} columns={columns} />
 </div>

@@ -1,14 +1,26 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
-import CtaBannerComponent from '../components/blocks/CtaBannerBlock.astro';
+import CtaBannerBlock from '../components/blocks/CtaBannerBlock.astro';
+import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
+
+const title = blok.title || blok.Title || '';
+const subtitle = blok.subtitle || blok.Subtitle || '';
+const buttonText = blok.buttonText || blok.button_text || '';
+const buttonLink = blok.buttonLink || blok.button_link || '';
+const accent = blok.accent || 'orange';
+
+const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
+const styles = generateComponentStyles(blok, spacingId);
 ---
-<div {...storyblokEditable(blok)}>
-  <CtaBannerComponent 
-    title={blok.title} 
-    subtitle={blok.subtitle} 
-    buttonText={blok.buttonText} 
-    buttonLink={blok.buttonLink} 
-    accent={blok.accent} 
+{styles && <style is:inline set:html={styles} />}
+
+<div {...storyblokEditable(blok)} class={spacingId}>
+  <CtaBannerBlock 
+    title={title} 
+    subtitle={subtitle} 
+    buttonText={buttonText} 
+    buttonLink={buttonLink} 
+    accent={accent}
   />
 </div>
