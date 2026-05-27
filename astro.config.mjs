@@ -19,6 +19,7 @@ export default defineConfig({
       accessToken: env.STORYBLOK_TOKEN || '3eqaktHo70jcrqzTOFVpRAtt',
       enableFallbackComponent: true, // Evita que la web rompa si un bloque no está definido localmente
       components: {
+        // Mapeamos los componentes con sus nombres técnicos reales en minúscula procedentes de la API de Storyblok
         page: 'storyblok/Page',
         hero: 'storyblok/Hero',
         methodology: 'storyblok/Methodology',
