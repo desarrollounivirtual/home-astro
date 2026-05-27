@@ -1,0 +1,305 @@
+[
+  {
+    "name": "page",
+    "display_name": "Página",
+    "is_root": true,
+    "is_nestable": false,
+    "schema": {
+      "body": {
+        "type": "bloks",
+        "display_name": "Bloques de la Página",
+        "restrict_components": true,
+        "component_whitelist": [
+          "hero",
+          "accordionSection",
+          "imageBanner",
+          "ctaBanner",
+          "imageCarousel",
+          "featuresGrid",
+          "imageGallery",
+          "contactForms",
+          "paymentMethods",
+          "testimonials",
+          "textImageRow",
+          "benefits",
+          "methodology",
+          "coverage",
+          "platformPromo"
+        ]
+      }
+    }
+  },
+  {
+    "name": "hero",
+    "display_name": "Hero Banner",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "title": { "type": "text", "display_name": "Título" },
+      "subtitle": { "type": "text", "display_name": "Subtítulo" },
+      "ctaText": { "type": "text", "display_name": "Texto de Botón CTA" },
+      "ctaLink": { "type": "text", "display_name": "Enlace del Botón" },
+      "cardTitle": { "type": "text", "display_name": "Título de Tarjeta Rebotante" },
+      "cardDescription": { "type": "text", "display_name": "Descripción de Tarjeta" },
+      "cardImage": { "type": "asset", "filetypes": ["images"], "display_name": "Icono/Imagen de Tarjeta" },
+      "spacingUnit": { "type": "option", "display_name": "Unidad de Medida", "options": [{ "name": "Píxeles (px)", "value": "px" }, { "name": "Rem (rem)", "value": "rem" }, { "name": "Em (em)", "value": "em" }, { "name": "Porcentaje (%)", "value": "%" }], "default_value": "px" },
+      "paddingTopMobile": { "type": "text", "display_name": "Padding Superior (Móvil)" },
+      "paddingBottomMobile": { "type": "text", "display_name": "Padding Inferior (Móvil)" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" },
+      "titleColor": { "type": "text", "display_name": "Color del Título (Hex/CSS)" },
+      "titleSizeDesktop": { "type": "text", "display_name": "Tamaño de Título (PC)" },
+      "bodyColor": { "type": "text", "display_name": "Color de Texto de Cuerpo" },
+      "bodySizeDesktop": { "type": "text", "display_name": "Tamaño de Texto (PC)" }
+    }
+  },
+  {
+    "name": "accordionSection",
+    "display_name": "Acordeón FAQs",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "title": { "type": "text", "display_name": "Título de la Sección" },
+      "items": { "type": "bloks", "display_name": "Elementos del Acordeón", "component_whitelist": ["accordionItem"] },
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "accordionItem",
+    "display_name": "Pregunta de Acordeón",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "question": { "type": "text", "display_name": "Pregunta" },
+      "answer": { "type": "textarea", "display_name": "Respuesta" }
+    }
+  },
+  {
+    "name": "imageBanner",
+    "display_name": "Banner de Imagen",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "title": { "type": "text", "display_name": "Título" },
+      "subtitle": { "type": "text", "display_name": "Subtítulo" },
+      "image": { "type": "asset", "filetypes": ["images"], "display_name": "Imagen de Fondo" },
+      "ctaText": { "type": "text", "display_name": "Texto del Botón" },
+      "ctaLink": { "type": "text", "display_name": "Enlace del Botón" },
+      "overlayOpacity": { "type": "option", "display_name": "Opacidad del Fondo", "options": [{ "name": "Sin opacidad", "value": "opacity-0" }, { "name": "20%", "value": "opacity-20" }, { "name": "40%", "value": "opacity-40" }, { "name": "60%", "value": "opacity-60" }, { "name": "80%", "value": "opacity-80" }], "default_value": "opacity-40" },
+      "align": { "type": "option", "display_name": "Alineación del Texto", "options": [{ "name": "Centro", "value": "center" }, { "name": "Izquierda", "value": "left" }, { "name": "Derecha", "value": "right" }], "default_value": "center" },
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "ctaBanner",
+    "display_name": "Banner CTA Rápido",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "title": { "type": "text", "display_name": "Título" },
+      "subtitle": { "type": "text", "display_name": "Subtítulo" },
+      "buttonText": { "type": "text", "display_name": "Texto del Botón" },
+      "buttonLink": { "type": "text", "display_name": "Enlace del Botón" },
+      "accent": { "type": "option", "display_name": "Color de Acento", "options": [{ "name": "Naranja", "value": "orange" }, { "name": "Azul", "value": "blue" }], "default_value": "orange" },
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "imageCarousel",
+    "display_name": "Carrusel de Imágenes",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "title": { "type": "text", "display_name": "Título Superior" },
+      "slides": { "type": "bloks", "display_name": "Diapositivas", "component_whitelist": ["slide"] },
+      "autoplaySpeed": { "type": "number", "display_name": "Autoplay Speed (ms) - Ej: 5000, o 0 para Apagar", "default_value": "6000" },
+      "showDots": { "type": "option", "display_name": "Mostrar Puntos Indicadores", "options": [{ "name": "Sí", "value": "true" }, { "name": "No", "value": "false" }], "default_value": "true" },
+      "showArrows": { "type": "option", "display_name": "Mostrar Flechas de Navegación", "options": [{ "name": "Sí", "value": "true" }, { "name": "No", "value": "false" }], "default_value": "true" },
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "slide",
+    "display_name": "Diapositiva de Carrusel",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "title": { "type": "text", "display_name": "Título" },
+      "subtitle": { "type": "text", "display_name": "Subtítulo" },
+      "image": { "type": "asset", "filetypes": ["images"], "display_name": "Imagen de Diapositiva" },
+      "ctaText": { "type": "text", "display_name": "Texto del Botón" },
+      "ctaLink": { "type": "text", "display_name": "Enlace del Botón" }
+    }
+  },
+  {
+    "name": "featuresGrid",
+    "display_name": "Grilla de Características",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "sectionTitle": { "type": "text", "display_name": "Título de Sección" },
+      "columns": { "type": "bloks", "display_name": "Columnas de Características", "component_whitelist": ["featureColumn"] },
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "featureColumn",
+    "display_name": "Columna de Característica",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "title": { "type": "text", "display_name": "Título de Columna" },
+      "description": { "type": "textarea", "display_name": "Descripción de Columna" },
+      "icon": { "type": "option", "display_name": "Icono Ilustrativo", "options": [{ "name": "Estudiante (cap)", "value": "cap" }, { "name": "Aprobado (check)", "value": "check" }, { "name": "Estrella (star)", "value": "star" }, { "name": "Teléfono (phone)", "value": "phone" }, { "name": "Dinero (currency)", "value": "currency" }, { "name": "Soporte (support)", "value": "support" }, { "name": "Computadora (computer)", "value": "computer" }], "default_value": "star" }
+    }
+  },
+  {
+    "name": "imageGallery",
+    "display_name": "Galería de Imágenes",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "sectionTitle": { "type": "text", "display_name": "Título de Sección" },
+      "columns": { "type": "option", "display_name": "Columnas de la Grilla", "options": [{ "name": "2 Columnas", "value": "2" }, { "name": "3 Columnas", "value": "3" }, { "name": "4 Columnas", "value": "4" }], "default_value": "3" },
+      "images": { "type": "bloks", "display_name": "Imágenes de Galería", "component_whitelist": ["galleryImage"] },
+      "imageBorderRadius": { "type": "text", "display_name": "Borde Redondeado de Fotos (Ej: 24)" },
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "galleryImage",
+    "display_name": "Foto de Galería",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "image": { "type": "asset", "filetypes": ["images"], "display_name": "Imagen" },
+      "caption": { "type": "text", "display_name": "Leyenda Opcional" }
+    }
+  },
+  {
+    "name": "contactForms",
+    "display_name": "Formularios de Contacto",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "paymentMethods",
+    "display_name": "Pasarela de Pagos Júpiter",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "title": { "type": "text", "display_name": "Título" },
+      "subtitle": { "type": "text", "display_name": "Subtítulo" },
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "testimonials",
+    "display_name": "Testimonios Egresados",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "title": { "type": "text", "display_name": "Título de Sección" },
+      "subtitle": { "type": "text", "display_name": "Subtítulo de Sección" },
+      "testimonials": { "type": "bloks", "display_name": "Lista de Testimonios", "component_whitelist": ["testimonialItem"] },
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "testimonialItem",
+    "display_name": "Testimonio Singular",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "name": { "type": "text", "display_name": "Nombre de Egresado" },
+      "role": { "type": "text", "display_name": "Rol / Cargo" },
+      "location": { "type": "text", "display_name": "Ubicación (Ej: Cali)" },
+      "rating": { "type": "option", "display_name": "Calificación (Estrellas)", "options": [{ "name": "5 Estrellas", "value": "5" }, { "name": "4 Estrellas", "value": "4" }, { "name": "3 Estrellas", "value": "3" }], "default_value": "5" },
+      "quote": { "type": "textarea", "display_name": "Testimonio/Cita" }
+    }
+  },
+  {
+    "name": "textImageRow",
+    "display_name": "Fila Texto e Imagen",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "title": { "type": "text", "display_name": "Título de Fila" },
+      "body": { "type": "textarea", "display_name": "Cuerpo de Texto" },
+      "image": { "type": "asset", "filetypes": ["images"], "display_name": "Imagen" },
+      "align": { "type": "option", "display_name": "Alineación de Foto", "options": [{ "name": "Derecha", "value": "right" }, { "name": "Izquierda", "value": "left" }], "default_value": "right" },
+      "imageWidth": { "type": "text", "display_name": "Ancho Máximo Imagen (Ej: 400px)" },
+      "imageHeight": { "type": "text", "display_name": "Alto de Imagen (Ej: 300px)" },
+      "imageBorderRadius": { "type": "text", "display_name": "Bordes Redondeados (Ej: 24)" },
+      "imageObjectFit": { "type": "option", "display_name": "Ajuste de Imagen (Object Fit)", "options": [{ "name": "Cubrir (cover)", "value": "cover" }, { "name": "Contener (contain)", "value": "contain" }, { "name": "Rellenar (fill)", "value": "fill" }], "default_value": "cover" },
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "benefits",
+    "display_name": "Sección Beneficios",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "methodology",
+    "display_name": "Sección Metodología",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "coverage",
+    "display_name": "Sección Cobertura",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  },
+  {
+    "name": "platformPromo",
+    "display_name": "Sección Promoción Júpiter",
+    "is_root": false,
+    "is_nestable": true,
+    "schema": {
+      "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
+      "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
+      "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+    }
+  }
+]
