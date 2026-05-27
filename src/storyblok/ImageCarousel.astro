@@ -1,6 +1,5 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
-import CarouselBlock from '../components/blocks/CarouselBlock.astro';
 import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
@@ -19,15 +18,214 @@ const showArrows = blok.showArrows !== undefined ? blok.showArrows : (blok.show_
 
 const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
 const styles = generateComponentStyles(blok, spacingId);
+interface Slide {
+  title: string;
+  subtitle?: string | null;
+  image?: string | null;
+  ctaText?: string | null;
+  ctaLink?: string | null;
+}
+
+
 ---
 {styles && <style is:inline set:html={styles} />}
 
 <div {...storyblokEditable(blok)} class={spacingId}>
-  <CarouselBlock 
-    title={title} 
-    slides={slides} 
-    autoplaySpeed={autoplaySpeed}
-    showDots={showDots}
-    showArrows={showArrows}
-  />
+
+<section class="py-16 relative overflow-hidden bg-slate-50 border-b border-slate-200/50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+    
+    {title && (
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold font-display text-slate-900">{title}</h2>
+      </div>
+    )}
+
+    <!-- Main Carousel Outer Wrapper -->
+    <div id={carouselId} class="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-[32px] overflow-hidden shadow-2xl border border-slate-200/60 group bg-slate-950">
+      
+      <!-- Slides Container -->
+      <div class="relative w-full h-full">
+        {slides.map((slide, index) => (
+          <div 
+            class={`carousel-slide absolute inset-0 z-10 flex items-center justify-center transition-all duration-700 ease-in-out ${index === 0 ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none scale-95'}`}
+            data-slide-index={index}
+          >
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0 select-none">
+              {slide.image ? (
+                <img src={slide.image} alt={slide.title} class="w-full h-full object-cover" />
+              ) : (
+                <div class="w-full h-full bg-gradient-to-br from-slate-900 to-indigo-950"></div>
+              )}
+              <!-- Gradient Dark Overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30 z-10"></div>
+            </div>
+
+            <!-- Slide Content -->
+            <div class="relative z-20 w-full max-w-4xl px-8 sm:px-16 text-center text-white flex flex-col items-center">
+              <h3 class="text-2xl sm:text-4xl md:text-5xl font-black font-display tracking-tight leading-[1.1] mb-4 transform translate-y-4 transition-transform duration-700 slide-element">
+                {slide.title}
+              </h3>
+              
+              {slide.subtitle && (
+                <p class="text-sm sm:text-base md:text-lg text-white/80 font-medium max-w-2xl mb-6 transform translate-y-4 transition-transform duration-700 slide-element delay-100">
+                  {slide.subtitle}
+                </p>
+              )}
+
+              {slide.ctaText && slide.ctaLink && (
+                <a 
+                  href={slide.ctaLink} 
+                  class="px-6 py-3 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold text-sm rounded-xl btn-premium glow-orange flex items-center justify-center gap-2 transform translate-y-4 transition-transform duration-700 slide-element delay-200"
+                >
+                  <span>{slide.ctaText}</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Navigation Arrows -->
+      {slides.length > 1 && displayArrows && (
+        <>
+          <button 
+            type="button" 
+            class="carousel-prev absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0"
+            aria-label="Previous slide"
+          >
+            <svg class="w-6 h-6 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <button 
+            type="button" 
+            class="carousel-next absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0"
+            aria-label="Next slide"
+          >
+            <svg class="w-6 h-6 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </>
+      )}
+
+      <!-- Dot Indicators -->
+      {slides.length > 1 && displayDots && (
+        <div class="absolute bottom-6 left-1/2 -translate-y-0 -translate-x-1/2 z-30 flex items-center gap-2.5">
+          {slides.map((_, index) => (
+            <button 
+              type="button" 
+              class={`carousel-dot w-2.5 h-2.5 rounded-full transition-all duration-300 border border-white/40 ${index === 0 ? 'bg-accent-orange border-accent-orange w-6' : 'bg-white/40'}`}
+              data-dot-index={index}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
+
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ carouselId, slideCount: slides.length, speed, displayDots, displayArrows }}>
+  (function() {
+    if (slideCount <= 1) return;
+    
+    const wrapper = document.getElementById(carouselId);
+    if (!wrapper) return;
+    
+    const slides = wrapper.querySelectorAll('.carousel-slide');
+    const dots = wrapper.querySelectorAll('.carousel-dot');
+    const prevBtn = wrapper.querySelector('.carousel-prev');
+    const nextBtn = wrapper.querySelector('.carousel-next');
+    
+    let currentIndex = 0;
+    let autoplayInterval;
+    
+    function showSlide(index) {
+      if (index < 0) index = slideCount - 1;
+      if (index >= slideCount) index = 0;
+      
+      currentIndex = index;
+      
+      slides.forEach((slide, idx) => {
+        if (idx === currentIndex) {
+          slide.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+          slide.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
+        } else {
+          slide.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+          slide.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+        }
+      });
+      
+      if (displayDots && dots.length > 0) {
+        dots.forEach((dot, idx) => {
+          if (idx === currentIndex) {
+            dot.classList.add('bg-accent-orange', 'border-accent-orange', 'w-6');
+            dot.classList.remove('bg-white/40');
+          } else {
+            dot.classList.remove('bg-accent-orange', 'border-accent-orange', 'w-6');
+            dot.classList.add('bg-white/40');
+          }
+        });
+      }
+    }
+    
+    function nextSlide() {
+      showSlide(currentIndex + 1);
+    }
+    
+    function prevSlide() {
+      showSlide(currentIndex - 1);
+    }
+    
+    function startAutoplay() {
+      stopAutoplay();
+      if (speed > 0) {
+        autoplayInterval = setInterval(nextSlide, speed);
+      }
+    }
+    
+    function stopAutoplay() {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+    }
+    
+    if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); startAutoplay(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); startAutoplay(); });
+    
+    if (displayDots) {
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+          showSlide(idx);
+          startAutoplay();
+        });
+      });
+    }
+    
+    if (speed > 0) {
+      wrapper.addEventListener('mouseenter', stopAutoplay);
+      wrapper.addEventListener('mouseleave', startAutoplay);
+      startAutoplay();
+    }
+  })();
+</script>
+
+<style>
+  /* Premium Micro-animations inside active slides */
+  .carousel-slide[class*="opacity-100"] .slide-element {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .carousel-slide[class*="opacity-0"] .slide-element {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+</style>
+
 </div>

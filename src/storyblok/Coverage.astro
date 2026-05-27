@@ -1,6 +1,5 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
-import CoverageComponent from '../components/Coverage.astro';
 import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
@@ -10,5 +9,103 @@ const styles = generateComponentStyles(blok, spacingId);
 {styles && <style is:inline set:html={styles} />}
 
 <div {...storyblokEditable(blok)} class={spacingId}>
-  <CoverageComponent />
+
+<section id="cobertura" class="py-24 relative overflow-hidden bg-slate-50 border-y border-slate-200/60">
+  
+  <!-- Glowing Background Mesh -->
+  <div class="absolute bottom-[30%] left-[-10%] w-[450px] h-[450px] rounded-full bg-accent-blue/5 filter blur-[100px] pointer-events-none"></div>
+  <div class="absolute top-[10%] right-[-10%] w-[350px] h-[350px] rounded-full bg-accent-orange/5 filter blur-[90px] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-sm font-extrabold tracking-wider text-accent-blue uppercase">Alcance Nacional</span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-slate-900 mt-3 mb-6">
+        Estudia desde cualquier rincón <span class="text-gradient-orange">de Colombia</span>
+      </h2>
+      <p class="text-lg text-slate-600">
+        Nuestra cobertura es 100% virtual, permitiéndote estudiar sin importar las distancias físicas, y con eventos presenciales inolvidables.
+      </p>
+    </div>
+
+    <!-- Coverage Pillars Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Pillar 1: Cobertura Nacional -->
+      <div class="bg-white border border-slate-200/60 shadow-lg shadow-slate-200/50 rounded-[24px] p-8 flex flex-col justify-between group overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-accent-blue/5 filter blur-2xl group-hover:bg-accent-blue/10 transition-colors duration-500"></div>
+        
+        <div>
+          <!-- Icon -->
+          <div class="w-14 h-14 rounded-2xl bg-accent-blue/8 border border-accent-blue/15 flex items-center justify-center text-accent-blue mb-6 group-hover:scale-115 transition-transform duration-300">
+            <!-- Map/Globe Icon -->
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          
+          <h3 class="text-2xl font-bold font-display text-slate-900 mb-4">100% Virtual Nacional</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Puedes matricularte y estudiar sin importar si estás en Bogotá, Cali, Barranquilla, Leticia, una vereda de Antioquia o cualquier municipio de Colombia. Solo necesitas un dispositivo con conexión a internet para acceder a toda tu formación.
+          </p>
+        </div>
+
+        <div class="border-t border-slate-100 pt-4 mt-8">
+          <span class="text-xs font-bold text-accent-blue uppercase tracking-wider">Estudia desde donde estés</span>
+        </div>
+      </div>
+
+      <!-- Pillar 2: Ceremonia Presencial -->
+      <div class="bg-white border border-slate-200/60 shadow-lg shadow-slate-200/50 rounded-[24px] p-8 flex flex-col justify-between group overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-accent-orange/5 filter blur-2xl group-hover:bg-accent-orange/10 transition-colors duration-500"></div>
+        
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-accent-orange/8 border border-accent-orange/15 flex items-center justify-center text-accent-orange mb-6 group-hover:scale-115 transition-transform duration-300">
+            <!-- Academic/Award Icon -->
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+          </div>
+          
+          <h3 class="text-2xl font-bold font-display text-slate-900 mb-4">Graduación Presencial</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Aunque estudies de forma virtual, celebramos tu gran logro de forma real. Organizamos una hermosa <strong class="text-slate-900 font-bold">ceremonia de graduación física en la ciudad de Medellín</strong>, con toga, birrete, entrega de diploma en físico y espacio para que asistas con tus familiares.
+          </p>
+        </div>
+
+        <div class="border-t border-slate-100 pt-4 mt-8">
+          <span class="text-xs font-bold text-accent-orange uppercase tracking-wider">Ceremonia en Medellín</span>
+        </div>
+      </div>
+
+      <!-- Pillar 3: ICFES Incluido -->
+      <div class="bg-white border border-slate-200/60 shadow-lg shadow-slate-200/50 rounded-[24px] p-8 flex flex-col justify-between group overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-accent-blue/5 filter blur-2xl group-hover:bg-accent-blue/10 transition-colors duration-500"></div>
+        
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-accent-blue/8 border border-accent-blue/15 flex items-center justify-center text-accent-blue mb-6 group-hover:scale-115 transition-transform duration-300">
+            <!-- Clipboard Icon -->
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+          </div>
+          
+          <h3 class="text-2xl font-bold font-display text-slate-900 mb-4">Preparación ICFES</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Queremos que continúes con tu formación en la universidad. Por eso, nuestro programa incluye módulos específicos de <strong class="text-slate-900 font-bold">preparación y simulacros para la prueba obligatoria de estado ICFES (Saber 11)</strong>, dándote las herramientas necesarias para un gran puntaje.
+          </p>
+        </div>
+
+        <div class="border-t border-slate-100 pt-4 mt-8">
+          <span class="text-xs font-bold text-accent-blue uppercase tracking-wider">Examen de Estado</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
 </div>

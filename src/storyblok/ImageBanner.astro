@@ -1,6 +1,5 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
-import ImageBannerComponent from '../components/blocks/ImageBannerBlock.astro';
 import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
@@ -14,17 +13,58 @@ const align = blok.align || blok.Align || 'center';
 
 const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
 const styles = generateComponentStyles(blok, spacingId);
+
 ---
 {styles && <style is:inline set:html={styles} />}
 
 <div {...storyblokEditable(blok)} class={spacingId}>
-  <ImageBannerComponent 
-    title={title} 
-    subtitle={subtitle} 
-    image={imageUrl} 
-    ctaText={ctaText} 
-    ctaLink={ctaLink} 
-    overlayOpacity={overlayOpacity} 
-    align={align} 
-  />
+
+<section class="relative min-h-[500px] flex items-center justify-center py-20 overflow-hidden">
+  
+  <!-- Background Image with Zoom hover effect -->
+  <div class="absolute inset-0 z-0 select-none">
+    {image ? (
+      <img 
+        src={image} 
+        alt={title} 
+        class="w-full h-full object-cover transform scale-100 transition-transform duration-[10000ms] ease-out hover:scale-105" 
+      />
+    ) : (
+      <div class="w-full h-full bg-slate-900 bg-gradient-to-br from-slate-900 to-slate-850"></div>
+    )}
+    <!-- Overlay for legibility -->
+    <div class={`absolute inset-0 z-10 transition-colors duration-500 ${overlayOpacityClasses[overlayOpacity]}`}></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
+    <div class={`flex flex-col ${alignClasses[align]} text-white`}>
+      
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight leading-[1.1] mb-6 drop-shadow-md">
+        {title}
+      </h2>
+
+      {subtitle && (
+        <p class="text-lg sm:text-xl text-white/90 font-medium leading-relaxed mb-8 max-w-2xl drop-shadow-sm whitespace-pre-line">
+          {subtitle}
+        </p>
+      )}
+
+      {ctaText && ctaLink && (
+        <div class="flex">
+          <a 
+            href={ctaLink} 
+            class="px-8 py-4 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold text-base rounded-xl btn-premium glow-orange flex items-center justify-center gap-3 transform hover:scale-105 active:scale-95 duration-300"
+          >
+            <span>{ctaText}</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      )}
+
+    </div>
+  </div>
+</section>
+
 </div>
