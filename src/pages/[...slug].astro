@@ -16,14 +16,10 @@ export async function getStaticPaths() {
     
     const links = data.links;
     return Object.keys(links)
-      .filter((key) => {
-        // Ignorar la página de inicio ('home') que se procesa en index.astro
-        return links[key].slug !== 'home' && links[key].real_path !== '/';
-      })
       .map((key) => {
         const slug = links[key].slug;
         return {
-          params: { slug: slug === 'home' ? undefined : slug },
+          params: { slug: slug === 'home' ? 'home' : slug },
           props: { slug }
         };
       });
