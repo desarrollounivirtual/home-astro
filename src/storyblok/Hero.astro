@@ -1,19 +1,31 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import HeroComponent from '../components/Hero.astro';
+import { generateSpacingStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
-// Resolución defensiva para llaves de Storyblok (mayúsculas, minúsculas, guiones bajos o espacios)
 const title = blok.title || blok.Title || blok['Title'];
 const subtitle = blok.subtitle || blok.Subtitle || blok['Subtitle'];
 const ctaText = blok.ctaText || blok.cta_text || blok.CtaText || blok['Cta Text'] || blok['ctaText'] || blok['Cta_Text'] || blok['cta_text'] || blok['Cta text'];
 const ctaLink = blok.ctaLink || blok.cta_link || blok.CtaLink || blok['Cta Link'] || blok['ctaLink'] || blok['Cta_Link'] || blok['cta_link'] || blok['Cta link'];
+
+const cardTitle = blok.cardTitle || blok.card_title || blok.CardTitle || blok['Card Title'] || blok['cardTitle'] || blok['card-title'];
+const cardDescription = blok.cardDescription || blok.card_description || blok.CardDescription || blok['Card Description'] || blok['cardDescription'] || blok['card-description'];
+const cardImage = typeof blok.cardImage === 'string' ? blok.cardImage : (blok.cardImage?.filename || blok.card_image?.filename || null);
+
+const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
+const spacingStyles = generateSpacingStyles(blok, spacingId);
 ---
-<div {...storyblokEditable(blok)}>
+{spacingStyles && <style is:inline set:html={spacingStyles} />}
+
+<div {...storyblokEditable(blok)} class={spacingId}>
   <HeroComponent 
     title={title} 
     subtitle={subtitle} 
     ctaText={ctaText} 
     ctaLink={ctaLink} 
+    cardTitle={cardTitle}
+    cardDescription={cardDescription}
+    cardImage={cardImage}
   />
 </div>

@@ -4,19 +4,26 @@ interface Props {
   subtitle?: string;
   ctaText?: string;
   ctaLink?: string;
+  cardTitle?: string;
+  cardDescription?: string;
+  cardImage?: string | null;
 }
 
 const {
   title = "Validación de bachillerato en 10 meses",
   subtitle = "Obtén tu título de Bachiller Académico de forma 100% virtual. Estudia a tu propio ritmo 24/7 con plataforma de autogestión y docentes calificados. Ceremonia física de graduación en Medellín con ICFES incluido. ¡Sí es posible avanzar!",
   ctaText = "Inscribirme ahora",
-  ctaLink = "#inscripcion"
+  ctaLink = "#inscripcion",
+  cardTitle = "Tu título te está esperando",
+  cardDescription = "Matricúlate hoy y comienza a construir tu futuro profesional de inmediato.",
+  cardImage = null
 } = Astro.props;
 
 // Safe fallbacks for null/empty values
 const displayTitle = title || "Validación de bachillerato en 10 meses";
 const displaySubtitle = subtitle || "Obtén tu título de Bachiller Académico de forma 100% virtual...";
-
+const displayCardTitle = cardTitle || "Tu título te está esperando";
+const displayCardDescription = cardDescription || "Matricúlate hoy y comienza a construir tu futuro profesional de inmediato.";
 // Intelligently highlight "10 meses" if present in the title
 const hasTenMonths = displayTitle.toLowerCase().includes("10 meses");
 const parts = hasTenMonths ? displayTitle.split(/10 meses/i) : [displayTitle];
@@ -118,14 +125,18 @@ const parts = hasTenMonths ? displayTitle.split(/10 meses/i) : [displayTitle];
           <!-- Mockup Main Graphic (Simulation of a Graduation Hat) -->
           <div class="flex flex-col items-center justify-center py-6 z-10">
             <!-- Icon box rounded with ultra-soft background -->
-            <div class="w-32 h-32 rounded-3xl bg-accent-orange/8 border border-accent-orange/15 flex items-center justify-center mb-6 shadow-sm animate-bounce" style="animation-duration: 6s;">
-              <!-- Graduation Cap SVG -->
-              <svg class="w-16 h-16 text-accent-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0-6L3.9 9M12 14l7.6-4.2M6 18.8V19a2 2 0 002 2h8a2 2 0 002-2v-.2" />
-              </svg>
+            <div class="w-32 h-32 rounded-3xl bg-accent-orange/8 border border-accent-orange/15 flex items-center justify-center mb-6 shadow-sm animate-bounce overflow-hidden" style="animation-duration: 6s;">
+              {cardImage ? (
+                <img src={cardImage} alt={displayCardTitle} class="w-full h-full object-cover" />
+              ) : (
+                <!-- Graduation Cap SVG -->
+                <svg class="w-16 h-16 text-accent-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0-6L3.9 9M12 14l7.6-4.2M6 18.8V19a2 2 0 002 2h8a2 2 0 002-2v-.2" />
+                </svg>
+              )}
             </div>
-            <h3 class="text-xl font-bold font-display text-slate-900 text-center">Tu título te está esperando</h3>
-            <p class="text-sm text-slate-600 text-center mt-2 max-w-xs">Matricúlate hoy y comienza a construir tu futuro profesional de inmediato.</p>
+            <h3 class="text-xl font-bold font-display text-slate-900 text-center">{displayCardTitle}</h3>
+            <p class="text-sm text-slate-600 text-center mt-2 max-w-xs">{displayCardDescription}</p>
           </div>
 
           <!-- Premium badge on mockup -->
