@@ -119,7 +119,7 @@
       "schema": {
         "title": { "type": "text", "display_name": "Título Superior" },
         "slides": { "type": "bloks", "display_name": "Diapositivas", "component_whitelist": ["slide"] },
-        "autoplaySpeed": { "type": "number", "display_name": "Autoplay Speed (ms) - Ej: 5000, o 0 para Apagar", "default_value": "6000" },
+        "autoplaySpeed": { "type": "text", "display_name": "Autoplay Speed (ms) - Ej: 5000, o 0 para Apagar", "default_value": "6000" },
         "showDots": { "type": "option", "display_name": "Mostrar Puntos Indicadores", "options": [{ "name": "Sí", "value": "true" }, { "name": "No", "value": "false" }], "default_value": "true" },
         "showArrows": { "type": "option", "display_name": "Mostrar Flechas de Navegación", "options": [{ "name": "Sí", "value": "true" }, { "name": "No", "value": "false" }], "default_value": "true" },
         "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
