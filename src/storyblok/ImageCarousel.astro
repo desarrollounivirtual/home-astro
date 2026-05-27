@@ -1,0 +1,19 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import CarouselComponent from '../components/blocks/CarouselBlock.astro';
+const { blok } = Astro.props;
+
+const slides = blok.slides?.map((s: any) => ({
+  title: s.title,
+  subtitle: s.subtitle,
+  image: typeof s.image === 'string' ? s.image : (s.image?.filename || null),
+  ctaText: s.ctaText,
+  ctaLink: s.ctaLink
+})) || [];
+---
+<div {...storyblokEditable(blok)}>
+  <CarouselComponent 
+    title={blok.title} 
+    slides={slides} 
+  />
+</div>

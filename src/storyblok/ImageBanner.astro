@@ -1,0 +1,18 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import ImageBannerComponent from '../components/blocks/ImageBannerBlock.astro';
+const { blok } = Astro.props;
+
+const imageUrl = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+---
+<div {...storyblokEditable(blok)}>
+  <ImageBannerComponent 
+    title={blok.title} 
+    subtitle={blok.subtitle} 
+    image={imageUrl} 
+    ctaText={blok.ctaText} 
+    ctaLink={blok.ctaLink} 
+    overlayOpacity={blok.overlayOpacity} 
+    align={blok.align} 
+  />
+</div>

@@ -1,0 +1,13 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import HeroComponent from '../components/Hero.astro';
+const { blok } = Astro.props;
+---
+<div {...storyblokEditable(blok)}>
+  <HeroComponent 
+    title={blok.title} 
+    subtitle={blok.subtitle} 
+    ctaText={blok.ctaText} 
+    ctaLink={blok.ctaLink} 
+  />
+</div>

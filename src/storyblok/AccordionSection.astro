@@ -1,0 +1,16 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import AccordionComponent from '../components/blocks/AccordionBlock.astro';
+const { blok } = Astro.props;
+
+const items = blok.items?.map((item: any) => ({
+  question: item.question,
+  answer: item.answer
+})) || [];
+---
+<div {...storyblokEditable(blok)}>
+  <AccordionComponent 
+    title={blok.title} 
+    items={items} 
+  />
+</div>

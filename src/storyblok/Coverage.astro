@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import CoverageComponent from '../components/Coverage.astro';
+const { blok } = Astro.props;
+---
+<div {...storyblokEditable(blok)}>
+  <CoverageComponent />
+</div>

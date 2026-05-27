@@ -1,0 +1,14 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import CtaBannerComponent from '../components/blocks/CtaBannerBlock.astro';
+const { blok } = Astro.props;
+---
+<div {...storyblokEditable(blok)}>
+  <CtaBannerComponent 
+    title={blok.title} 
+    subtitle={blok.subtitle} 
+    buttonText={blok.buttonText} 
+    buttonLink={blok.buttonLink} 
+    accent={blok.accent} 
+  />
+</div>

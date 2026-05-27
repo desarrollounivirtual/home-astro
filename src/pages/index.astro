@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+// Fallback components (Static blocks in case Storyblok space is empty or offline)
 import Hero from '../components/Hero.astro';
 import Methodology from '../components/Methodology.astro';
 import Benefits from '../components/Benefits.astro';
@@ -9,13 +12,22 @@ import Testimonials from '../components/Testimonials.astro';
 import Coverage from '../components/Coverage.astro';
 import PaymentMethods from '../components/PaymentMethods.astro';
 import ContactForms from '../components/ContactForms.astro';
-import Footer from '../components/Footer.astro';
 
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../keystatic.config';
+import { useStoryblokApi } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
 
-const reader = createReader(process.cwd(), keystaticConfig);
-const homeData = await reader.singletons.home.read();
+const storyblokApi = useStoryblokApi();
+
+let story = null;
+try {
+  // En desarrollo carga la versión 'draft' para previsualización instantánea. En producción usa 'published'.
+  const version = import.meta.env.DEV ? 'draft' : 'published';
+  const { data } = await storyblokApi.get('cdn/stories/home', { version });
+  story = data.story;
+} catch (error) {
+  // Capturar error defensivo de API (por ejemplo, si no se ha creado la historia "home" aún)
+  console.log("Aviso: No se pudo cargar 'home' desde Storyblok. Mostrando estructura de respaldo.");
+}
 ---
 
 <BaseLayout 
@@ -25,31 +37,29 @@ const homeData = await reader.singletons.home.read();
   <!-- Sticky Header Navigation -->
   <Navigation slot="header" />
   
-  <!-- Interactive Modular Sections -->
-  <Hero 
-    title={homeData?.heroTitle} 
-    subtitle={homeData?.heroSubtitle} 
-    ctaText={homeData?.heroCtaText} 
-    ctaLink={homeData?.heroCtaLink} 
-  />
-  
-  <Methodology />
-  
-  <Benefits />
-  
-  <PlatformPromo />
-  
-  <Testimonials testimonials={homeData?.testimonials} />
-  
-  <Coverage />
-  
-  <PaymentMethods 
-    title={homeData?.paymentsTitle} 
-    subtitle={homeData?.paymentsSubtitle} 
-    link={homeData?.paymentsLink} 
-  />
-  
-  <ContactForms />
+  {story ? (
+    <StoryblokComponent blok={story.content} />
+  ) : (
+    <!-- Estructura de respaldo premium 100% operativa -->
+    <div class="relative">
+      
+      <!-- Banner de Aviso para Administradores de Storyblok -->
+      {import.meta.env.DEV && (
+        <div class="bg-amber-500 text-white text-xs font-bold text-center py-2 relative z-50 shadow-sm animate-pulse">
+          ⚠️ Modo Respaldo: No se detectó la historia "home" en tu Storyblok. Mostrando contenido de seguridad local. ¡Crea una historia "home" en tu panel para ver tu constructor visual en vivo!
+        </div>
+      )}
+      
+      <Hero />
+      <Methodology />
+      <Benefits />
+      <PlatformPromo />
+      <Testimonials />
+      <Coverage />
+      <PaymentMethods />
+      <ContactForms />
+    </div>
+  )}
   
   <!-- Premium Footer -->
   <Footer slot="footer" />

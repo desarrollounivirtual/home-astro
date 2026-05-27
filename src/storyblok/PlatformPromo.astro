@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import PlatformPromoComponent from '../components/PlatformPromo.astro';
+const { blok } = Astro.props;
+---
+<div {...storyblokEditable(blok)}>
+  <PlatformPromoComponent />
+</div>

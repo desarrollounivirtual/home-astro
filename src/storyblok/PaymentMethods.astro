@@ -1,0 +1,12 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import PaymentMethodsComponent from '../components/PaymentMethods.astro';
+const { blok } = Astro.props;
+---
+<div {...storyblokEditable(blok)}>
+  <PaymentMethodsComponent 
+    title={blok.title} 
+    subtitle={blok.subtitle} 
+    link={blok.link} 
+  />
+</div>

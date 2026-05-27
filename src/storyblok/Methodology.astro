@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import MethodologyComponent from '../components/Methodology.astro';
+const { blok } = Astro.props;
+---
+<div {...storyblokEditable(blok)}>
+  <MethodologyComponent />
+</div>

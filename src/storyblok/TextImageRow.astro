@@ -1,0 +1,15 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import TextImageRowComponent from '../components/blocks/TextImageRowBlock.astro';
+const { blok } = Astro.props;
+
+const imageUrl = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+---
+<div {...storyblokEditable(blok)}>
+  <TextImageRowComponent 
+    title={blok.title} 
+    body={blok.body} 
+    image={imageUrl} 
+    align={blok.align} 
+  />
+</div>

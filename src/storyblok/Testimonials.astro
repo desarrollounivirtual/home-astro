@@ -1,0 +1,17 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import TestimonialsComponent from '../components/Testimonials.astro';
+const { blok } = Astro.props;
+
+// Map Storyblok array structure to Testimonials format
+const mappedTestimonials = blok.testimonials?.map((t: any) => ({
+  name: t.name,
+  role: t.role,
+  location: t.location,
+  rating: t.rating,
+  quote: t.quote
+}));
+---
+<div {...storyblokEditable(blok)}>
+  <TestimonialsComponent testimonials={mappedTestimonials} />
+</div>

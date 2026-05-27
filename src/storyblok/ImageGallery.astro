@@ -1,0 +1,17 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import GalleryComponent from '../components/blocks/GalleryBlock.astro';
+const { blok } = Astro.props;
+
+const images = blok.images?.map((img: any) => ({
+  image: typeof img.image === 'string' ? img.image : (img.image?.filename || null),
+  caption: img.caption
+})) || [];
+---
+<div {...storyblokEditable(blok)}>
+  <GalleryComponent 
+    sectionTitle={blok.sectionTitle} 
+    columns={blok.columns} 
+    images={images} 
+  />
+</div>

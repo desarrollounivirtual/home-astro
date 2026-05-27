@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import BenefitsComponent from '../components/Benefits.astro';
+const { blok } = Astro.props;
+---
+<div {...storyblokEditable(blok)}>
+  <BenefitsComponent />
+</div>

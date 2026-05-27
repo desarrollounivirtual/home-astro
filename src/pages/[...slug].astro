@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+import { useStoryblokApi } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+export async function getStaticPaths() {
+  const storyblokApi = useStoryblokApi();
+  
+  try {
+    const { data } = await storyblokApi.get('cdn/links', {
+      version: import.meta.env.DEV ? 'draft' : 'published'
+    });
+    
+    const links = data.links;
+    return Object.keys(links)
+      .filter((key) => {
+        // Ignorar la página de inicio ('home') que se procesa en index.astro
+        return links[key].slug !== 'home' && links[key].real_path !== '/';
+      })
+      .map((key) => {
+        const slug = links[key].slug;
+        return {
+          params: { slug: slug === 'home' ? undefined : slug },
+          props: { slug }
+        };
+      });
+  } catch (error) {
+    console.log("Aviso: No se pudieron precargar rutas dinámicas desde Storyblok. Configura historias en tu panel.");
+    return [];
+  }
+}
+
+const { slug } = Astro.props;
+const storyblokApi = useStoryblokApi();
+
+let story = null;
+if (slug) {
+  try {
+    const { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
+      version: import.meta.env.DEV ? 'draft' : 'published'
+    });
+    story = data.story;
+  } catch (error) {
+    console.error(`Error al cargar historia '${slug}' desde Storyblok:`, error);
+  }
+}
+---
+
+<BaseLayout 
+  title={story ? `${story.name} | Aulas Univirtuales` : "Página no encontrada"}
+  description={story?.content?.description || "Aulas Univirtuales - Bachillerato académico 100% virtual."}
+>
+  <!-- Sticky Header Navigation -->
+  <Navigation slot="header" />
+  
+  <div class="pt-28 pb-12 min-h-screen">
+    {story ? (
+      <StoryblokComponent blok={story.content} />
+    ) : (
+      <div class="max-w-4xl mx-auto px-4 py-20 text-center bg-white border border-slate-200/60 rounded-[32px] shadow-sm my-10">
+        <div class="w-16 h-16 rounded-2xl bg-accent-orange/8 border border-accent-orange/15 flex items-center justify-center text-accent-orange mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+        <h1 class="text-2xl font-bold font-display text-slate-900 mb-2">Contenido no configurado</h1>
+        <p class="text-slate-500 max-w-md mx-auto text-sm sm:text-base">
+          Esta página no contiene bloques o aún no ha sido creada en tu panel de control de Storyblok.
+        </p>
+      </div>
+    )}
+  </div>
+  
+  <!-- Premium Footer -->
+  <Footer slot="footer" />
+</BaseLayout>

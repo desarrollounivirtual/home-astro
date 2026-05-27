@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import ContactFormsComponent from '../components/ContactForms.astro';
+const { blok } = Astro.props;
+---
+<div {...storyblokEditable(blok)}>
+  <ContactFormsComponent />
+</div>
