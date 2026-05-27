@@ -3,11 +3,14 @@ import { storyblokEditable } from '@storyblok/astro';
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
 
 const { blok } = Astro.props;
+
+// Soporte extremadamente robusto para llaves en minúscula 'body' o mayúscula 'Body'
+const bodyBlocks = blok.body || blok.Body || [];
 ---
 
 <div {...storyblokEditable(blok)}>
   {
-    blok.body?.map((nestedBlok) => {
+    bodyBlocks.map((nestedBlok: any) => {
       return <StoryblokComponent blok={nestedBlok} />;
     })
   }

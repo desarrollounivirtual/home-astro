@@ -13,9 +13,13 @@ const {
   ctaLink = "#inscripcion"
 } = Astro.props;
 
+// Safe fallbacks for null/empty values
+const displayTitle = title || "Validación de bachillerato en 10 meses";
+const displaySubtitle = subtitle || "Obtén tu título de Bachiller Académico de forma 100% virtual...";
+
 // Intelligently highlight "10 meses" if present in the title
-const hasTenMonths = title.toLowerCase().includes("10 meses");
-const parts = hasTenMonths ? title.split(/10 meses/i) : [title];
+const hasTenMonths = displayTitle.toLowerCase().includes("10 meses");
+const parts = hasTenMonths ? displayTitle.split(/10 meses/i) : [displayTitle];
 ---
 
 <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
@@ -51,13 +55,13 @@ const parts = hasTenMonths ? title.split(/10 meses/i) : [title];
               <span class="text-gradient-orange glow-text">10 meses</span> {parts.slice(1).join("10 meses")}
             </>
           ) : (
-            title
+            displayTitle
           )}
         </h1>
 
         <!-- High-converting subtext (with spelling corrected) -->
         <p class="text-lg sm:text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8">
-          {subtitle}
+          {displaySubtitle}
         </p>
 
         <!-- Dynamic Action Buttons -->

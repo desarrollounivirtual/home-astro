@@ -3,17 +3,20 @@ import { storyblokEditable } from '@storyblok/astro';
 import CarouselComponent from '../components/blocks/CarouselBlock.astro';
 const { blok } = Astro.props;
 
-const slides = blok.slides?.map((s: any) => ({
-  title: s.title,
-  subtitle: s.subtitle,
+const title = blok.title || blok.Title || blok['Title'];
+const rawSlides = blok.slides || blok.Slides || [];
+
+const slides = rawSlides.map((s: any) => ({
+  title: s.title || s.Title,
+  subtitle: s.subtitle || s.Subtitle,
   image: typeof s.image === 'string' ? s.image : (s.image?.filename || null),
-  ctaText: s.ctaText,
-  ctaLink: s.ctaLink
-})) || [];
+  ctaText: s.ctaText || s.cta_text || s.CtaText || s['Cta Text'] || s['Cta text'],
+  ctaLink: s.ctaLink || s.cta_link || s.CtaLink || s['Cta Link'] || s['Cta link']
+}));
 ---
 <div {...storyblokEditable(blok)}>
   <CarouselComponent 
-    title={blok.title} 
+    title={title} 
     slides={slides} 
   />
 </div>

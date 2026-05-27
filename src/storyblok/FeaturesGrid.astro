@@ -3,15 +3,18 @@ import { storyblokEditable } from '@storyblok/astro';
 import FeaturesGridComponent from '../components/blocks/FeaturesGridBlock.astro';
 const { blok } = Astro.props;
 
-const columns = blok.columns?.map((col: any) => ({
-  title: col.title,
-  description: col.description,
-  icon: col.icon
-})) || [];
+const sectionTitle = blok.sectionTitle || blok.SectionTitle || blok['Section Title'] || blok.section_title;
+const rawColumns = blok.columns || blok.Columns || [];
+
+const columns = rawColumns.map((col: any) => ({
+  title: col.title || col.Title,
+  description: col.description || col.Description,
+  icon: col.icon || col.Icon || 'check'
+}));
 ---
 <div {...storyblokEditable(blok)}>
   <FeaturesGridComponent 
-    sectionTitle={blok.sectionTitle} 
+    sectionTitle={sectionTitle} 
     columns={columns} 
   />
 </div>

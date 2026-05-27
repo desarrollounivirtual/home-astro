@@ -3,13 +3,16 @@ import { storyblokEditable } from '@storyblok/astro';
 import TestimonialsComponent from '../components/Testimonials.astro';
 const { blok } = Astro.props;
 
-// Map Storyblok array structure to Testimonials format
-const mappedTestimonials = blok.testimonials?.map((t: any) => ({
-  name: t.name,
-  role: t.role,
-  location: t.location,
-  rating: t.rating,
-  quote: t.quote
+// Obtener testimonios con soporte defensivo de mayúsculas
+const rawTestimonials = blok.testimonials || blok.Testimonials || [];
+
+// Mapear los campos asegurando soporte para mayúsculas y minúsculas
+const mappedTestimonials = rawTestimonials.map((t: any) => ({
+  name: t.name || t.Name,
+  role: t.role || t.Role,
+  location: t.location || t.Location,
+  rating: t.rating || t.Rating || 5,
+  quote: t.quote || t.Quote
 }));
 ---
 <div {...storyblokEditable(blok)}>

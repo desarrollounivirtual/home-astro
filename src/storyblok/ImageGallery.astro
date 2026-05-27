@@ -3,15 +3,19 @@ import { storyblokEditable } from '@storyblok/astro';
 import GalleryComponent from '../components/blocks/GalleryBlock.astro';
 const { blok } = Astro.props;
 
-const images = blok.images?.map((img: any) => ({
+const sectionTitle = blok.sectionTitle || blok.SectionTitle || blok['Section Title'] || blok.section_title;
+const columns = blok.columns || blok.Columns || '3';
+const rawImages = blok.images || blok.Images || [];
+
+const images = rawImages.map((img: any) => ({
   image: typeof img.image === 'string' ? img.image : (img.image?.filename || null),
-  caption: img.caption
-})) || [];
+  caption: img.caption || img.Caption || ''
+}));
 ---
 <div {...storyblokEditable(blok)}>
   <GalleryComponent 
-    sectionTitle={blok.sectionTitle} 
-    columns={blok.columns} 
+    sectionTitle={sectionTitle} 
+    columns={columns as any} 
     images={images} 
   />
 </div>
