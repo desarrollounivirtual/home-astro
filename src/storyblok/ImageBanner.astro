@@ -14,6 +14,34 @@ const align = blok.align || blok.Align || 'center';
 const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
 const styles = generateComponentStyles(blok, spacingId);
 
+// Definición de mapeos de clases para alineación y opacidad del overlay
+const alignClasses = {
+  left: 'items-start text-left',
+  center: 'items-center text-center',
+  right: 'items-end text-right'
+};
+
+const overlayOpacityClasses = {
+  'opacity-10': 'bg-slate-950/10',
+  'opacity-20': 'bg-slate-950/20',
+  'opacity-30': 'bg-slate-950/30',
+  'opacity-40': 'bg-slate-950/40',
+  'opacity-50': 'bg-slate-950/50',
+  'opacity-60': 'bg-slate-950/60',
+  'opacity-70': 'bg-slate-950/70',
+  'opacity-80': 'bg-slate-950/80',
+  'opacity-90': 'bg-slate-950/90',
+  // Soportar también cadenas numéricas directas
+  '10': 'bg-slate-950/10',
+  '20': 'bg-slate-950/20',
+  '30': 'bg-slate-950/30',
+  '40': 'bg-slate-950/40',
+  '50': 'bg-slate-950/50',
+  '60': 'bg-slate-950/60',
+  '70': 'bg-slate-950/70',
+  '80': 'bg-slate-950/80',
+  '90': 'bg-slate-950/90',
+};
 ---
 {styles && <style is:inline set:html={styles} />}
 
@@ -23,9 +51,9 @@ const styles = generateComponentStyles(blok, spacingId);
   
   <!-- Background Image with Zoom hover effect -->
   <div class="absolute inset-0 z-0 select-none">
-    {image ? (
+    {imageUrl ? (
       <img 
-        src={image} 
+        src={imageUrl} 
         alt={title} 
         class="w-full h-full object-cover transform scale-100 transition-transform duration-[10000ms] ease-out hover:scale-105" 
       />
@@ -33,11 +61,11 @@ const styles = generateComponentStyles(blok, spacingId);
       <div class="w-full h-full bg-slate-900 bg-gradient-to-br from-slate-900 to-slate-850"></div>
     )}
     <!-- Overlay for legibility -->
-    <div class={`absolute inset-0 z-10 transition-colors duration-500 ${overlayOpacityClasses[overlayOpacity]}`}></div>
+    <div class={`absolute inset-0 z-10 transition-colors duration-500 ${overlayOpacityClasses[overlayOpacity] || 'bg-slate-950/40'}`}></div>
   </div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
-    <div class={`flex flex-col ${alignClasses[align]} text-white`}>
+    <div class={`flex flex-col ${alignClasses[align] || alignClasses.center} text-white`}>
       
       <h2 class="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight leading-[1.1] mb-6 drop-shadow-md">
         {title}

@@ -18,6 +18,13 @@ const showArrows = blok.showArrows !== undefined ? blok.showArrows : (blok.show_
 
 const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
 const styles = generateComponentStyles(blok, spacingId);
+
+// Definición de variables necesarias para el carrusel
+const carouselId = `carousel-${Math.random().toString(36).substring(2, 9)}`;
+const speed = typeof autoplaySpeed === 'number' ? autoplaySpeed : (autoplaySpeed ? parseInt(autoplaySpeed, 10) : 5000);
+const displayDots = showDots !== undefined ? showDots : true;
+const displayArrows = showArrows !== undefined ? showArrows : true;
+
 interface Slide {
   title: string;
   subtitle?: string | null;

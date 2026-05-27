@@ -104,11 +104,11 @@ const parts = hasTenMonths ? displayTitle.split(/10 meses/i) : [displayTitle];
       </div>
 
       <!-- Graphical / Visual Block -->
-      <div class="lg:col-span-5 relative mt-8 lg:mt-0 flex justify-center">
+      <div class="lg:col-span-5 relative mt-0 lg:mt-0 flex justify-center">
         <!-- Main Mockup Container with Light Premium styling -->
         <div class="relative w-full max-w-md aspect-square bg-white/95 border border-slate-200/60 backdrop-blur-xl shadow-2xl shadow-slate-200/50 rounded-[32px] p-8 flex flex-col justify-between overflow-hidden group">
           <!-- Mesh overlay on visual -->
-          <div class="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-accent-blue/10 filter blur-3xl group-hover:bg-accent-blue/15 transition-colors duration-500"></div>
+          <div class="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-accent-blue/30 filter blur-3xl group-hover:bg-accent-blue/40 transition-colors duration-500"></div>
           
           <!-- Mockup Header -->
           <div class="flex items-center justify-between z-10">
@@ -123,7 +123,7 @@ const parts = hasTenMonths ? displayTitle.split(/10 meses/i) : [displayTitle];
           <!-- Mockup Main Graphic (Simulation of a Graduation Hat) -->
           <div class="flex flex-col items-center justify-center py-6 z-10">
             <!-- Icon box rounded with ultra-soft background -->
-            <div class="w-32 h-32 rounded-3xl bg-accent-orange/8 border border-accent-orange/15 flex items-center justify-center mb-6 shadow-sm animate-bounce overflow-hidden" style="animation-duration: 6s;">
+            <div class="w-60 h-40 rounded-3xl bg-accent-orange/8 border border-accent-orange/15 flex items-center justify-center mb-4 shadow-sm  overflow-hidden" style="animation-duration: 3s;">
               {cardImage ? (
                 <img src={cardImage} alt={displayCardTitle} class="w-full h-full object-cover" />
               ) : (
@@ -134,18 +134,21 @@ const parts = hasTenMonths ? displayTitle.split(/10 meses/i) : [displayTitle];
               )}
             </div>
             <h3 class="text-xl font-bold font-display text-slate-900 text-center">{displayCardTitle}</h3>
-            <p class="text-sm text-slate-600 text-center mt-2 max-w-xs">{displayCardDescription}</p>
+            <p class="text-sm text-slate-600 text-center mt-0 max-w-xs">{displayCardDescription}</p>
           </div>
 
           <!-- Premium badge on mockup -->
-          <div class="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 z-10">
+          <div class="flex items-center gap-3 p-1.5 rounded-2xl bg-slate-50 border border-slate-200/80 z-10">
             <div class="w-8 h-8 rounded-lg bg-accent-blue/8 flex items-center justify-center text-accent-blue">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             </div>
             <div class="text-left">
-              <div class="text-xs font-bold text-slate-900">Resolución Oficial N° 202250005704</div>
+              <div class="text-xs font-bold text-slate-900">Resolución 91378/2016 – Técnicos Académicos y Laborales
+Bachillerato Académico: Res. 68982/2016
+Costos Educativos: Res. 514029/2025
+Autorización 0769 del 24 de febrero de 2006</div>
               <div class="text-[10px] text-slate-600 font-semibold mt-0.5">Licencia del Municipio de Itagüí, Antioquia</div>
             </div>
           </div>

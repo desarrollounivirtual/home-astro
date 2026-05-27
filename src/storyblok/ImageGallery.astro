@@ -38,7 +38,7 @@ const columnClasses = {
       </div>
     )}
 
-    <div class={`grid gap-6 ${columnClasses[columns]}`}>
+    <div class={`grid gap-6 ${columnClasses[columns] || columnClasses['3']}`}>
       {images.map((img) => (
         <div class="relative rounded-3xl overflow-hidden aspect-[4/3] border border-slate-200/60 shadow-md group bg-slate-900">
           {img.image ? (
