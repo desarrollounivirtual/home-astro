@@ -3,6 +3,10 @@ import { storyblokEditable } from '@storyblok/astro';
 import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
+const tagline = blok.tagline || blok.Tagline || 'Canales de Atención';
+const title = blok.title || blok.Title || 'Contáctanos e inicia <span class="text-gradient-blue">tu proceso</span>';
+const description = blok.description || blok.Description || 'Selecciona la opción de tu preferencia para rellenar el formulario. Nuestro equipo te responderá en tiempo récord.';
+
 const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
 const styles = generateComponentStyles(blok, spacingId);
 ---
@@ -13,19 +17,17 @@ const styles = generateComponentStyles(blok, spacingId);
 <section id="inscripcion" class="py-24 relative overflow-hidden bg-slate-50 border-y border-slate-200/60">
   
   <!-- Glowing Background Mesh -->
-  <div class="absolute top-[20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-accent-blue/5 filter blur-[120px] pointer-events-none"></div>
-  <div class="absolute bottom-[20%] right-[-10%] w-[400px] h-[400px] rounded-full bg-accent-orange/5 filter blur-[100px] pointer-events-none"></div>
+  <div class="absolute top-[20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-accent-blue/5 filter blur-[120px] pointer-events-none select-none"></div>
+  <div class="absolute bottom-[20%] right-[-10%] w-[400px] h-[400px] rounded-full bg-accent-orange/5 filter blur-[100px] pointer-events-none select-none"></div>
 
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
     
     <!-- Section Header -->
     <div class="text-center max-w-2xl mx-auto mb-12">
-      <span class="text-sm font-extrabold tracking-wider text-accent-orange uppercase">Canales de Atención</span>
-      <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-slate-900 mt-3 mb-4">
-        Contáctanos e inicia <span class="text-gradient-blue">tu proceso</span>
-      </h2>
+      <span class="text-sm font-extrabold tracking-wider text-accent-orange uppercase">{tagline}</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-slate-900 mt-3 mb-4" set:html={title} />
       <p class="text-slate-600 text-sm sm:text-base">
-        Selecciona la opción de tu preferencia para rellenar el formulario. Nuestro equipo te responderá en tiempo récord.
+        {description}
       </p>
     </div>
 

@@ -3,6 +3,50 @@ import { storyblokEditable } from '@storyblok/astro';
 import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
+// Configuración de textos y metadatos editables desde Storyblok
+const tagline = blok.tagline || blok.Tagline || 'Ecosistema Júpiter Univirtual';
+const title = blok.title || blok.Title || 'Toma el control absoluto de tu <span class="text-gradient-orange">progreso en tiempo real</span>';
+const description = blok.description || blok.Description || 'Olvídate de la burocracia, las filas y las llamadas para saber tus calificaciones o pagos. Con nuestro exclusivo sistema de autogestión Júpiter, tienes una oficina virtual disponible a un solo clic de distancia.';
+
+// Mapear características dinámicas
+const features = (blok.features || []).map((col: any) => ({
+  title: col.title || col.Title || '',
+  description: col.description || col.Description || '',
+}));
+
+const defaultFeatures = [
+  {
+    title: 'Sistema de autogestión de calificaciones:',
+    description: 'Revisa tus notas, aprobaciones de materias y progresos por ciclo de forma inmediata una vez el docente las califica.',
+  },
+  {
+    title: 'Control financiero automatizado:',
+    description: 'Consulta tu historial de matrículas, mensualidades, estados de cuenta y descarga tu certificado de paz y salvo sin demoras.',
+  },
+  {
+    title: 'Descarga inmediata de certificados:',
+    description: 'Genera constancias de estudio oficiales y recibos de pago en PDF de forma autónoma a cualquier hora.',
+  }
+];
+
+const displayFeatures = features.length > 0 ? features : defaultFeatures;
+
+// Campos editables del dashboard interactivo
+const dashTitle = blok.dashTitle || 'Júpiter Univirtual';
+const dashSubtitle = blok.dashSubtitle || 'Sistema de Autogestión';
+const dashStatus = blok.dashStatus || 'Activo 24/7';
+
+const dashCard1Title = blok.dashCard1Title || 'Progreso Académico';
+const dashCard1Value = blok.dashCard1Value || '4.8 / 5.0';
+const dashCard1Desc = blok.dashCard1Desc || 'Calificación promedio actual';
+
+const dashCard2Title = blok.dashCard2Title || 'Control Financiero';
+const dashCard2Value = blok.dashCard2Value || 'Paz y Salvo';
+const dashCard2Desc = blok.dashCard2Desc || 'Ciclo matriculado vigente';
+
+const dashGraphTitle = blok.dashGraphTitle || 'Horas de Estudio por Ciclo';
+const dashGraphSubtitle = blok.dashGraphSubtitle || 'Últimas 4 semanas';
+
 const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
 const styles = generateComponentStyles(blok, spacingId);
 ---
@@ -28,14 +72,16 @@ const styles = generateComponentStyles(blok, spacingId);
             <!-- Dashboard Top bar -->
             <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
               <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-accent-blue flex items-center justify-center text-white font-extrabold text-sm shadow-md shadow-accent-blue/30">J</div>
+                <div class="w-8 h-8 rounded-lg bg-accent-blue flex items-center justify-center text-white font-extrabold text-sm shadow-md shadow-accent-blue/30">
+                  {dashTitle.charAt(0).toUpperCase()}
+                </div>
                 <div class="text-left">
-                  <div class="text-sm font-bold text-slate-900 leading-none">Júpiter Univirtual</div>
-                  <span class="text-[10px] text-slate-600 font-semibold uppercase tracking-wider">Sistema de Autogestión</span>
+                  <div class="text-sm font-bold text-slate-900 leading-none">{dashTitle}</div>
+                  <span class="text-[10px] text-slate-600 font-semibold uppercase tracking-wider">{dashSubtitle}</span>
                 </div>
               </div>
               <div class="flex gap-2">
-                <span class="px-2.5 py-1 rounded-full bg-green-500/8 border border-green-500/15 text-green-700 text-[10px] font-extrabold tracking-wide uppercase">Activo 24/7</span>
+                <span class="px-2.5 py-1 rounded-full bg-green-500/8 border border-green-500/15 text-green-700 text-[10px] font-extrabold tracking-wide uppercase">{dashStatus}</span>
               </div>
             </div>
 
@@ -44,29 +90,29 @@ const styles = generateComponentStyles(blok, spacingId);
               <!-- Card 1: Notas -->
               <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/60 flex flex-col justify-between">
                 <div class="flex items-center justify-between mb-3">
-                  <span class="text-xs font-semibold text-slate-600">Progreso Académico</span>
+                  <span class="text-xs font-semibold text-slate-600">{dashCard1Title}</span>
                   <span class="text-accent-blue text-xs font-bold">100%</span>
                 </div>
-                <div class="text-2xl font-bold font-display text-slate-900">4.8 / 5.0</div>
-                <div class="text-[10px] text-slate-600 mt-1">Calificación promedio actual</div>
+                <div class="text-2xl font-bold font-display text-slate-900">{dashCard1Value}</div>
+                <div class="text-[10px] text-slate-600 mt-1">{dashCard1Desc}</div>
               </div>
 
               <!-- Card 2: Control Financiero -->
               <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/60 flex flex-col justify-between">
                 <div class="flex items-center justify-between mb-3">
-                  <span class="text-xs font-semibold text-slate-600">Control Financiero</span>
+                  <span class="text-xs font-semibold text-slate-600">{dashCard2Title}</span>
                   <span class="px-1.5 py-0.5 rounded bg-accent-orange/8 border border-accent-orange/15 text-accent-orange text-[9px] font-bold">Al Día</span>
                 </div>
-                <div class="text-2xl font-bold font-display text-slate-900">Paz y Salvo</div>
-                <div class="text-[10px] text-slate-600 mt-1">Ciclo matriculado vigente</div>
+                <div class="text-2xl font-bold font-display text-slate-900">{dashCard2Value}</div>
+                <div class="text-[10px] text-slate-600 mt-1">{dashCard2Desc}</div>
               </div>
             </div>
 
             <!-- Detailed Graph Simulator -->
             <div class="mt-4 p-4 rounded-xl bg-slate-50 border border-slate-200/60">
               <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-semibold text-slate-700">Horas de Estudio por Ciclo</span>
-                <span class="text-xs text-slate-600">Últimas 4 semanas</span>
+                <span class="text-xs font-semibold text-slate-700">{dashGraphTitle}</span>
+                <span class="text-xs text-slate-600">{dashGraphSubtitle}</span>
               </div>
               <!-- Simulated bar chart -->
               <div class="flex items-end justify-between gap-4 h-24 pt-2">
@@ -91,44 +137,26 @@ const styles = generateComponentStyles(blok, spacingId);
 
       <!-- Description / Text Block -->
       <div class="lg:col-span-6 text-center lg:text-left">
-        <span class="text-sm font-extrabold tracking-wider text-accent-blue uppercase">Ecosistema Júpiter Univirtual</span>
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-slate-900 mt-3 mb-6">
-          Toma el control absoluto de tu <span class="text-gradient-orange">progreso en tiempo real</span>
-        </h2>
+        <span class="text-sm font-extrabold tracking-wider text-accent-blue uppercase">{tagline}</span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-slate-900 mt-3 mb-6" set:html={title} />
         
         <p class="text-lg text-slate-600 leading-relaxed mb-8">
-          Olvídate de la burocracia, las filas y las llamadas para saber tus calificaciones o pagos. Con nuestro exclusivo sistema de autogestión <strong class="text-slate-900 font-bold">Júpiter</strong>, tienes una oficina virtual disponible a un solo clic de distancia.
+          {description}
         </p>
 
         <!-- Feature List -->
         <ul class="space-y-4 text-left max-w-lg mx-auto lg:mx-0">
-          <li class="flex items-start gap-3">
-            <div class="w-6 h-6 rounded-md bg-accent-blue/8 border border-accent-blue/15 flex items-center justify-center text-accent-blue shrink-0 mt-0.5">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
-            </div>
-            <div>
-              <strong class="text-slate-900 font-bold block">Sistema de autogestión de calificaciones:</strong>
-              <span class="text-sm text-slate-600 block mt-0.5">Revisa tus notas, aprobaciones de materias y progresos por ciclo de forma inmediata una vez el docente las califica.</span>
-            </div>
-          </li>
-          <li class="flex items-start gap-3">
-            <div class="w-6 h-6 rounded-md bg-accent-blue/8 border border-accent-blue/15 flex items-center justify-center text-accent-blue shrink-0 mt-0.5">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
-            </div>
-            <div>
-              <strong class="text-slate-900 font-bold block">Control financiero automatizado:</strong>
-              <span class="text-sm text-slate-600 block mt-0.5">Consulta tu historial de matrículas, mensualidades, estados de cuenta y descarga tu certificado de paz y salvo sin demoras.</span>
-            </div>
-          </li>
-          <li class="flex items-start gap-3">
-            <div class="w-6 h-6 rounded-md bg-accent-blue/8 border border-accent-blue/15 flex items-center justify-center text-accent-blue shrink-0 mt-0.5">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
-            </div>
-            <div>
-              <strong class="text-slate-900 font-bold block">Descarga inmediata de certificados:</strong>
-              <span class="text-sm text-slate-600 block mt-0.5">Genera constancias de estudio oficiales y recibos de pago en PDF de forma autónoma a cualquier hora.</span>
-            </div>
-          </li>
+          {displayFeatures.map((item) => (
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-accent-blue/8 border border-accent-blue/15 flex items-center justify-center text-accent-blue shrink-0 mt-0.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <div>
+                <strong class="text-slate-900 font-bold block">{item.title}</strong>
+                <span class="text-sm text-slate-600 block mt-0.5">{item.description}</span>
+              </div>
+            </li>
+          ))}
         </ul>
 
       </div>

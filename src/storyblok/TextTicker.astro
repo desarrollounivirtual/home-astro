@@ -1,0 +1,84 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import { generateComponentStyles } from '../utils/spacing';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const { blok } = Astro.props;
+
+const items = blok.items || [];
+const backgroundColor = blok.backgroundColor || 'bg-accent-orange';
+const textColor = blok.textColor || 'text-white';
+const separator = blok.separator || 'star';
+const speed = blok.speed || 'normal';
+
+const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
+const styles = generateComponentStyles(blok, spacingId);
+
+// Definición de separadores
+const separatorSymbols = {
+  star: '✦',
+  dot: '•',
+  bolt: '⚡'
+};
+const symbol = separatorSymbols[separator] || '✦';
+
+// Velocidades de animación (duración)
+const speedDurations = {
+  slow: 'animation-duration: 35s;',
+  normal: 'animation-duration: 22s;',
+  fast: 'animation-duration: 12s;'
+};
+const speedStyle = speedDurations[speed] || speedDurations.normal;
+---
+{styles && <style is:inline set:html={styles} />}
+
+<div {...storyblokEditable(blok)} class={`${spacingId} overflow-hidden ${backgroundColor} ${textColor} py-4 border-y border-slate-200/10 shadow-sm relative flex items-center justify-center`} style="max-height: 150px;">
+  <!-- Premium Glassmorphism highlights -->
+  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none select-none z-10"></div>
+  
+  <div class="relative w-full flex items-center overflow-x-hidden">
+    <!-- Marquee Track Wrapper -->
+    <div class="marquee-wrapper flex w-full">
+      
+      <!-- Track 1 -->
+      <div class="marquee-track flex whitespace-nowrap items-center gap-8 py-2 shrink-0 min-w-full pr-8" style={speedStyle}>
+        {items.map((item: any) => (
+          <div class="flex items-center gap-8 shrink-0">
+            <StoryblokComponent blok={item} />
+            <span class="text-lg opacity-60 font-bold shrink-0">{symbol}</span>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Track 2 (Duplicate for seamless loop) -->
+      <div class="marquee-track flex whitespace-nowrap items-center gap-8 py-2 shrink-0 min-w-full pr-8" style={speedStyle} aria-hidden="true">
+        {items.map((item: any) => (
+          <div class="flex items-center gap-8 shrink-0">
+            <StoryblokComponent blok={item} />
+            <span class="text-lg opacity-60 font-bold shrink-0">{symbol}</span>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .marquee-track {
+    animation: marquee linear infinite;
+  }
+  
+  .marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+</style>

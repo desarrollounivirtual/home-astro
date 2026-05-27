@@ -1,0 +1,49 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import { generateComponentStyles } from '../utils/spacing';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const { blok } = Astro.props;
+
+const title = blok.title || blok.Title || 'Nuestro Equipo de Docentes';
+const subtitle = blok.subtitle || blok.Subtitle || 'Aprende de los mejores profesionales y expertos en cada área de formación.';
+const teachers = blok.teachers || [];
+
+const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
+const styles = generateComponentStyles(blok, spacingId);
+---
+
+{styles && <style is:inline set:html={styles} />}
+
+<div {...storyblokEditable(blok)} class={spacingId}>
+  <section class="py-20 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+    <!-- Visual background blobs for premium feel -->
+    <div class="absolute inset-0 pointer-events-none select-none z-0">
+      <div class="absolute top-[30%] left-[-10%] w-[350px] h-[350px] rounded-full bg-accent-blue/3 filter blur-[80px]"></div>
+      <div class="absolute bottom-[20%] right-[-10%] w-[400px] h-[400px] rounded-full bg-accent-orange/3 filter blur-[90px]"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+      <!-- Section Header -->
+      {title && (
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-slate-900 tracking-tight leading-tight mb-4">
+            {title}
+          </h2>
+          {subtitle && (
+            <p class="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
+              {subtitle}
+            </p>
+          )}
+        </div>
+      )}
+
+      <!-- Teachers Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {teachers.map((teacher: any) => (
+          <StoryblokComponent blok={teacher} />
+        ))}
+      </div>
+    </div>
+  </section>
+</div>

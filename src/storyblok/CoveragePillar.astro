@@ -1,0 +1,100 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+const { blok } = Astro.props;
+
+const title = blok.title || '';
+const description = blok.description || '';
+const icon = blok.icon || 'map';
+const image = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+const label = blok.label || '';
+const accent = blok.accent || 'blue';
+
+// Mapeos de colores de acento para la tarjeta
+const accentColors = {
+  orange: {
+    bg: 'bg-accent-orange/8 border-accent-orange/15 text-accent-orange',
+    hoverGlow: 'bg-accent-orange/5 group-hover:bg-accent-orange/10',
+    hoverScale: 'group-hover:border-accent-orange/35'
+  },
+  blue: {
+    bg: 'bg-accent-blue/8 border-accent-blue/15 text-accent-blue',
+    hoverGlow: 'bg-accent-blue/5 group-hover:bg-accent-blue/10',
+    hoverScale: 'group-hover:border-accent-blue/35'
+  }
+};
+
+const colors = accentColors[accent] || accentColors.blue;
+---
+
+<div {...storyblokEditable(blok)} class={`bg-white border border-slate-200/60 shadow-lg shadow-slate-200/50 rounded-[24px] p-8 flex flex-col justify-between group overflow-hidden ${colors.hoverScale} transition-all duration-300`}>
+  <div class={`absolute -right-6 -bottom-6 w-32 h-32 rounded-full filter blur-2xl transition-colors duration-500 z-0 select-none pointer-events-none ${colors.hoverGlow}`}></div>
+  
+  <div class="relative z-10 text-left">
+    <!-- Icon or Custom Image Container -->
+    <div class={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-115 transition-transform duration-300 overflow-hidden ${colors.bg}`}>
+      {image ? (
+        <img 
+          src={image} 
+          alt={title} 
+          class="w-full h-full object-cover" 
+          loading="lazy"
+        />
+      ) : (
+        <!-- SVG Icons based on selection -->
+        <>
+          {icon === 'map' && (
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          )}
+          {icon === 'medal' && (
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+          )}
+          {icon === 'clipboard' && (
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+          )}
+          {icon === 'star' && (
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.907c.969 0 1.371 1.24.588 1.81l-3.97 2.883a1 1 0 00-.364 1.118l1.52 4.674c.3.921-.755 1.688-1.54 1.118l-3.97-2.883a1 1 0 00-1.175 0l-3.97 2.883c-.784.57-1.838-.197-1.539-1.118l1.52-4.674a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h4.906a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+          )}
+          {icon === 'check' && (
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+          )}
+          {icon === 'cap' && (
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0-6L3.9 9M12 14l7.6-4.2M6 18.8V19a2 2 0 002 2h8a2 2 0 002-2v-.2" />
+            </svg>
+          )}
+          {icon === 'computer' && (
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          )}
+          {icon === 'rocket' && (
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          )}
+        </>
+      )}
+    </div>
+    
+    <h3 class="text-2xl font-bold font-display text-slate-900 mb-4">{title}</h3>
+    <p class="text-sm text-slate-655 leading-relaxed whitespace-pre-line">{description}</p>
+  </div>
+
+  {label && (
+    <div class="border-t border-slate-100 pt-4 mt-8 text-left relative z-10 w-full">
+      <span class={`text-xs font-bold uppercase tracking-wider ${colors.bg.includes('text-accent-orange') ? 'text-accent-orange' : 'text-accent-blue'}`}>{label}</span>
+    </div>
+  )}
+</div>

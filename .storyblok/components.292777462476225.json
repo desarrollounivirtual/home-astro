@@ -25,7 +25,9 @@
             "benefits",
             "methodology",
             "coverage",
-            "platformPromo"
+            "platformPromo",
+            "textTicker",
+            "teachersSection"
           ]
         }
       }
@@ -36,22 +38,92 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "title": { "type": "text", "display_name": "Título" },
-        "subtitle": { "type": "text", "display_name": "Subtítulo" },
-        "ctaText": { "type": "text", "display_name": "Texto de Botón CTA" },
-        "ctaLink": { "type": "text", "display_name": "Enlace del Botón" },
-        "cardTitle": { "type": "text", "display_name": "Título de Tarjeta Rebotante" },
-        "cardDescription": { "type": "text", "display_name": "Descripción de Tarjeta" },
-        "cardImage": { "type": "asset", "filetypes": ["images"], "display_name": "Icono/Imagen de Tarjeta" },
-        "spacingUnit": { "type": "option", "display_name": "Unidad de Medida", "options": [{ "name": "Píxeles (px)", "value": "px" }, { "name": "Rem (rem)", "value": "rem" }, { "name": "Em (em)", "value": "em" }, { "name": "Porcentaje (%)", "value": "%" }], "default_value": "px" },
-        "paddingTopMobile": { "type": "text", "display_name": "Padding Superior (Móvil)" },
-        "paddingBottomMobile": { "type": "text", "display_name": "Padding Inferior (Móvil)" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" },
-        "titleColor": { "type": "text", "display_name": "Color del Título (Hex/CSS)" },
-        "titleSizeDesktop": { "type": "text", "display_name": "Tamaño de Título (PC)" },
-        "bodyColor": { "type": "text", "display_name": "Color de Texto de Cuerpo" },
-        "bodySizeDesktop": { "type": "text", "display_name": "Tamaño de Texto (PC)" }
+        "title": {
+          "type": "text",
+          "display_name": "Título"
+        },
+        "subtitle": {
+          "type": "text",
+          "display_name": "Subtítulo"
+        },
+        "ctaText": {
+          "type": "text",
+          "display_name": "Texto de Botón CTA"
+        },
+        "ctaLink": {
+          "type": "text",
+          "display_name": "Enlace del Botón"
+        },
+        "cardTitle": {
+          "type": "text",
+          "display_name": "Título de Tarjeta Rebotante"
+        },
+        "cardDescription": {
+          "type": "text",
+          "display_name": "Descripción de Tarjeta"
+        },
+        "cardImage": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "display_name": "Icono/Imagen de Tarjeta"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "display_name": "Unidad de Medida",
+          "options": [
+            {
+              "name": "Píxeles (px)",
+              "value": "px"
+            },
+            {
+              "name": "Rem (rem)",
+              "value": "rem"
+            },
+            {
+              "name": "Em (em)",
+              "value": "em"
+            },
+            {
+              "name": "Porcentaje (%)",
+              "value": "%"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopMobile": {
+          "type": "text",
+          "display_name": "Padding Superior (Móvil)"
+        },
+        "paddingBottomMobile": {
+          "type": "text",
+          "display_name": "Padding Inferior (Móvil)"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        },
+        "titleColor": {
+          "type": "text",
+          "display_name": "Color del Título (Hex/CSS)"
+        },
+        "titleSizeDesktop": {
+          "type": "text",
+          "display_name": "Tamaño de Título (PC)"
+        },
+        "bodyColor": {
+          "type": "text",
+          "display_name": "Color de Texto de Cuerpo"
+        },
+        "bodySizeDesktop": {
+          "type": "text",
+          "display_name": "Tamaño de Texto (PC)"
+        }
       }
     },
     {
@@ -60,11 +132,39 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "title": { "type": "text", "display_name": "Título de la Sección" },
-        "items": { "type": "bloks", "display_name": "Elementos del Acordeón", "component_whitelist": ["accordionItem"] },
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "title": {
+          "type": "text",
+          "display_name": "Título de la Sección"
+        },
+        "items": {
+          "type": "bloks",
+          "display_name": "Elementos del Acordeón",
+          "component_whitelist": [
+            "accordionItem"
+          ]
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -73,8 +173,14 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "question": { "type": "text", "display_name": "Pregunta" },
-        "answer": { "type": "textarea", "display_name": "Respuesta" }
+        "question": {
+          "type": "text",
+          "display_name": "Pregunta"
+        },
+        "answer": {
+          "type": "textarea",
+          "display_name": "Respuesta"
+        }
       }
     },
     {
@@ -83,16 +189,97 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "title": { "type": "text", "display_name": "Título" },
-        "subtitle": { "type": "text", "display_name": "Subtítulo" },
-        "image": { "type": "asset", "filetypes": ["images"], "display_name": "Imagen de Fondo" },
-        "ctaText": { "type": "text", "display_name": "Texto del Botón" },
-        "ctaLink": { "type": "text", "display_name": "Enlace del Botón" },
-        "overlayOpacity": { "type": "option", "display_name": "Opacidad del Fondo", "options": [{ "name": "Sin opacidad", "value": "opacity-0" }, { "name": "20%", "value": "opacity-20" }, { "name": "40%", "value": "opacity-40" }, { "name": "60%", "value": "opacity-60" }, { "name": "80%", "value": "opacity-80" }], "default_value": "opacity-40" },
-        "align": { "type": "option", "display_name": "Alineación del Texto", "options": [{ "name": "Centro", "value": "center" }, { "name": "Izquierda", "value": "left" }, { "name": "Derecha", "value": "right" }], "default_value": "center" },
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "title": {
+          "type": "text",
+          "display_name": "Título"
+        },
+        "subtitle": {
+          "type": "text",
+          "display_name": "Subtítulo"
+        },
+        "image": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "display_name": "Imagen de Fondo"
+        },
+        "ctaText": {
+          "type": "text",
+          "display_name": "Texto del Botón"
+        },
+        "ctaLink": {
+          "type": "text",
+          "display_name": "Enlace del Botón"
+        },
+        "overlayOpacity": {
+          "type": "option",
+          "display_name": "Opacidad del Fondo",
+          "options": [
+            {
+              "name": "Sin opacidad",
+              "value": "opacity-0"
+            },
+            {
+              "name": "20%",
+              "value": "opacity-20"
+            },
+            {
+              "name": "40%",
+              "value": "opacity-40"
+            },
+            {
+              "name": "60%",
+              "value": "opacity-60"
+            },
+            {
+              "name": "80%",
+              "value": "opacity-80"
+            }
+          ],
+          "default_value": "opacity-40"
+        },
+        "align": {
+          "type": "option",
+          "display_name": "Alineación del Texto",
+          "options": [
+            {
+              "name": "Centro",
+              "value": "center"
+            },
+            {
+              "name": "Izquierda",
+              "value": "left"
+            },
+            {
+              "name": "Derecha",
+              "value": "right"
+            }
+          ],
+          "default_value": "center"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -101,14 +288,59 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "title": { "type": "text", "display_name": "Título" },
-        "subtitle": { "type": "text", "display_name": "Subtítulo" },
-        "buttonText": { "type": "text", "display_name": "Texto del Botón" },
-        "buttonLink": { "type": "text", "display_name": "Enlace del Botón" },
-        "accent": { "type": "option", "display_name": "Color de Acento", "options": [{ "name": "Naranja", "value": "orange" }, { "name": "Azul", "value": "blue" }], "default_value": "orange" },
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "title": {
+          "type": "text",
+          "display_name": "Título"
+        },
+        "subtitle": {
+          "type": "text",
+          "display_name": "Subtítulo"
+        },
+        "buttonText": {
+          "type": "text",
+          "display_name": "Texto del Botón"
+        },
+        "buttonLink": {
+          "type": "text",
+          "display_name": "Enlace del Botón"
+        },
+        "accent": {
+          "type": "option",
+          "display_name": "Color de Acento",
+          "options": [
+            {
+              "name": "Naranja",
+              "value": "orange"
+            },
+            {
+              "name": "Azul",
+              "value": "blue"
+            }
+          ],
+          "default_value": "orange"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -117,14 +349,74 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "title": { "type": "text", "display_name": "Título Superior" },
-        "slides": { "type": "bloks", "display_name": "Diapositivas", "component_whitelist": ["slide"] },
-        "autoplaySpeed": { "type": "number", "display_name": "Autoplay Speed (ms) - Ej: 5000, o 0 para Apagar", "default_value": "6000" },
-        "showDots": { "type": "option", "display_name": "Mostrar Puntos Indicadores", "options": [{ "name": "Sí", "value": "true" }, { "name": "No", "value": "false" }], "default_value": "true" },
-        "showArrows": { "type": "option", "display_name": "Mostrar Flechas de Navegación", "options": [{ "name": "Sí", "value": "true" }, { "name": "No", "value": "false" }], "default_value": "true" },
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "title": {
+          "type": "text",
+          "display_name": "Título Superior"
+        },
+        "slides": {
+          "type": "bloks",
+          "display_name": "Diapositivas",
+          "component_whitelist": [
+            "slide"
+          ]
+        },
+        "autoplaySpeed": {
+          "type": "number",
+          "display_name": "Autoplay Speed (ms) - Ej: 5000, o 0 para Apagar",
+          "default_value": "6000"
+        },
+        "showDots": {
+          "type": "option",
+          "display_name": "Mostrar Puntos Indicadores",
+          "options": [
+            {
+              "name": "Sí",
+              "value": "true"
+            },
+            {
+              "name": "No",
+              "value": "false"
+            }
+          ],
+          "default_value": "true"
+        },
+        "showArrows": {
+          "type": "option",
+          "display_name": "Mostrar Flechas de Navegación",
+          "options": [
+            {
+              "name": "Sí",
+              "value": "true"
+            },
+            {
+              "name": "No",
+              "value": "false"
+            }
+          ],
+          "default_value": "true"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -133,11 +425,29 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "title": { "type": "text", "display_name": "Título" },
-        "subtitle": { "type": "text", "display_name": "Subtítulo" },
-        "image": { "type": "asset", "filetypes": ["images"], "display_name": "Imagen de Diapositiva" },
-        "ctaText": { "type": "text", "display_name": "Texto del Botón" },
-        "ctaLink": { "type": "text", "display_name": "Enlace del Botón" }
+        "title": {
+          "type": "text",
+          "display_name": "Título"
+        },
+        "subtitle": {
+          "type": "text",
+          "display_name": "Subtítulo"
+        },
+        "image": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "display_name": "Imagen de Diapositiva"
+        },
+        "ctaText": {
+          "type": "text",
+          "display_name": "Texto del Botón"
+        },
+        "ctaLink": {
+          "type": "text",
+          "display_name": "Enlace del Botón"
+        }
       }
     },
     {
@@ -146,11 +456,39 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "sectionTitle": { "type": "text", "display_name": "Título de Sección" },
-        "columns": { "type": "bloks", "display_name": "Columnas de Características", "component_whitelist": ["featureColumn"] },
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "sectionTitle": {
+          "type": "text",
+          "display_name": "Título de Sección"
+        },
+        "columns": {
+          "type": "bloks",
+          "display_name": "Columnas de Características",
+          "component_whitelist": [
+            "featureColumn"
+          ]
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -159,9 +497,49 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "title": { "type": "text", "display_name": "Título de Columna" },
-        "description": { "type": "textarea", "display_name": "Descripción de Columna" },
-        "icon": { "type": "option", "display_name": "Icono Ilustrativo", "options": [{ "name": "Estudiante (cap)", "value": "cap" }, { "name": "Aprobado (check)", "value": "check" }, { "name": "Estrella (star)", "value": "star" }, { "name": "Teléfono (phone)", "value": "phone" }, { "name": "Dinero (currency)", "value": "currency" }, { "name": "Soporte (support)", "value": "support" }, { "name": "Computadora (computer)", "value": "computer" }], "default_value": "star" }
+        "title": {
+          "type": "text",
+          "display_name": "Título de Columna"
+        },
+        "description": {
+          "type": "textarea",
+          "display_name": "Descripción de Columna"
+        },
+        "icon": {
+          "type": "option",
+          "display_name": "Icono Ilustrativo",
+          "options": [
+            {
+              "name": "Estudiante (cap)",
+              "value": "cap"
+            },
+            {
+              "name": "Aprobado (check)",
+              "value": "check"
+            },
+            {
+              "name": "Estrella (star)",
+              "value": "star"
+            },
+            {
+              "name": "Teléfono (phone)",
+              "value": "phone"
+            },
+            {
+              "name": "Dinero (currency)",
+              "value": "currency"
+            },
+            {
+              "name": "Soporte (support)",
+              "value": "support"
+            },
+            {
+              "name": "Computadora (computer)",
+              "value": "computer"
+            }
+          ],
+          "default_value": "star"
+        }
       }
     },
     {
@@ -170,13 +548,62 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "sectionTitle": { "type": "text", "display_name": "Título de Sección" },
-        "columns": { "type": "option", "display_name": "Columnas de la Grilla", "options": [{ "name": "2 Columnas", "value": "2" }, { "name": "3 Columnas", "value": "3" }, { "name": "4 Columnas", "value": "4" }], "default_value": "3" },
-        "images": { "type": "bloks", "display_name": "Imágenes de Galería", "component_whitelist": ["galleryImage"] },
-        "imageBorderRadius": { "type": "text", "display_name": "Borde Redondeado de Fotos (Ej: 24)" },
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "sectionTitle": {
+          "type": "text",
+          "display_name": "Título de Sección"
+        },
+        "columns": {
+          "type": "option",
+          "display_name": "Columnas de la Grilla",
+          "options": [
+            {
+              "name": "2 Columnas",
+              "value": "2"
+            },
+            {
+              "name": "3 Columnas",
+              "value": "3"
+            },
+            {
+              "name": "4 Columnas",
+              "value": "4"
+            }
+          ],
+          "default_value": "3"
+        },
+        "images": {
+          "type": "bloks",
+          "display_name": "Imágenes de Galería",
+          "component_whitelist": [
+            "galleryImage"
+          ]
+        },
+        "imageBorderRadius": {
+          "type": "text",
+          "display_name": "Borde Redondeado de Fotos (Ej: 24)"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -185,8 +612,17 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "image": { "type": "asset", "filetypes": ["images"], "display_name": "Imagen" },
-        "caption": { "type": "text", "display_name": "Leyenda Opcional" }
+        "image": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "display_name": "Imagen"
+        },
+        "caption": {
+          "type": "text",
+          "display_name": "Leyenda Opcional"
+        }
       }
     },
     {
@@ -195,9 +631,40 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "tagline": {
+          "type": "text",
+          "display_name": "Tagline / Subtítulo Superior"
+        },
+        "title": {
+          "type": "text",
+          "display_name": "Título Principal (Soporta <span class=\"text-gradient-blue\">)"
+        },
+        "description": {
+          "type": "textarea",
+          "display_name": "Descripción de Párrafo"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -206,11 +673,72 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "title": { "type": "text", "display_name": "Título" },
-        "subtitle": { "type": "text", "display_name": "Subtítulo" },
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "title": {
+          "type": "text",
+          "display_name": "Título de Sección"
+        },
+        "subtitle": {
+          "type": "text",
+          "display_name": "Subtítulo de Sección"
+        },
+        "link": {
+          "type": "text",
+          "display_name": "Enlace del Botón \"Ir a Pagar\""
+        },
+        "cardTitle": {
+          "type": "text",
+          "display_name": "Título de Tarjeta"
+        },
+        "cardDescription": {
+          "type": "textarea",
+          "display_name": "Descripción de Tarjeta"
+        },
+        "bullet1": {
+          "type": "text",
+          "display_name": "Viñeta 1 (PSE)"
+        },
+        "bullet2": {
+          "type": "text",
+          "display_name": "Viñeta 2 (Tarjetas)"
+        },
+        "bullet3": {
+          "type": "text",
+          "display_name": "Viñeta 3 (Nequi/Daviplata)"
+        },
+        "calloutTitle": {
+          "type": "text",
+          "display_name": "Recuadro: Título Encriptado"
+        },
+        "calloutDesc": {
+          "type": "text",
+          "display_name": "Recuadro: Descripción"
+        },
+        "calloutBtnText": {
+          "type": "text",
+          "display_name": "Texto del Botón de Pago"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -219,12 +747,43 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "title": { "type": "text", "display_name": "Título de Sección" },
-        "subtitle": { "type": "text", "display_name": "Subtítulo de Sección" },
-        "testimonials": { "type": "bloks", "display_name": "Lista de Testimonios", "component_whitelist": ["testimonialItem"] },
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "title": {
+          "type": "text",
+          "display_name": "Título de Sección"
+        },
+        "subtitle": {
+          "type": "text",
+          "display_name": "Subtítulo de Sección"
+        },
+        "testimonials": {
+          "type": "bloks",
+          "display_name": "Lista de Testimonios",
+          "component_whitelist": [
+            "testimonialItem"
+          ]
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -233,11 +792,41 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "name": { "type": "text", "display_name": "Nombre de Egresado" },
-        "role": { "type": "text", "display_name": "Rol / Cargo" },
-        "location": { "type": "text", "display_name": "Ubicación (Ej: Cali)" },
-        "rating": { "type": "option", "display_name": "Calificación (Estrellas)", "options": [{ "name": "5 Estrellas", "value": "5" }, { "name": "4 Estrellas", "value": "4" }, { "name": "3 Estrellas", "value": "3" }], "default_value": "5" },
-        "quote": { "type": "textarea", "display_name": "Testimonio/Cita" }
+        "name": {
+          "type": "text",
+          "display_name": "Nombre de Egresado"
+        },
+        "role": {
+          "type": "text",
+          "display_name": "Rol / Cargo"
+        },
+        "location": {
+          "type": "text",
+          "display_name": "Ubicación (Ej: Cali)"
+        },
+        "rating": {
+          "type": "option",
+          "display_name": "Calificación (Estrellas)",
+          "options": [
+            {
+              "name": "5 Estrellas",
+              "value": "5"
+            },
+            {
+              "name": "4 Estrellas",
+              "value": "4"
+            },
+            {
+              "name": "3 Estrellas",
+              "value": "3"
+            }
+          ],
+          "default_value": "5"
+        },
+        "quote": {
+          "type": "textarea",
+          "display_name": "Testimonio/Cita"
+        }
       }
     },
     {
@@ -246,17 +835,89 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "title": { "type": "text", "display_name": "Título de Fila" },
-        "body": { "type": "textarea", "display_name": "Cuerpo de Texto" },
-        "image": { "type": "asset", "filetypes": ["images"], "display_name": "Imagen" },
-        "align": { "type": "option", "display_name": "Alineación de Foto", "options": [{ "name": "Derecha", "value": "right" }, { "name": "Izquierda", "value": "left" }], "default_value": "right" },
-        "imageWidth": { "type": "text", "display_name": "Ancho Máximo Imagen (Ej: 400px)" },
-        "imageHeight": { "type": "text", "display_name": "Alto de Imagen (Ej: 300px)" },
-        "imageBorderRadius": { "type": "text", "display_name": "Bordes Redondeados (Ej: 24)" },
-        "imageObjectFit": { "type": "option", "display_name": "Ajuste de Imagen (Object Fit)", "options": [{ "name": "Cubrir (cover)", "value": "cover" }, { "name": "Contener (contain)", "value": "contain" }, { "name": "Rellenar (fill)", "value": "fill" }], "default_value": "cover" },
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "title": {
+          "type": "text",
+          "display_name": "Título de Fila"
+        },
+        "body": {
+          "type": "textarea",
+          "display_name": "Cuerpo de Texto"
+        },
+        "image": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "display_name": "Imagen"
+        },
+        "align": {
+          "type": "option",
+          "display_name": "Alineación de Foto",
+          "options": [
+            {
+              "name": "Derecha",
+              "value": "right"
+            },
+            {
+              "name": "Izquierda",
+              "value": "left"
+            }
+          ],
+          "default_value": "right"
+        },
+        "imageWidth": {
+          "type": "text",
+          "display_name": "Ancho Máximo Imagen (Ej: 400px)"
+        },
+        "imageHeight": {
+          "type": "text",
+          "display_name": "Alto de Imagen (Ej: 300px)"
+        },
+        "imageBorderRadius": {
+          "type": "text",
+          "display_name": "Bordes Redondeados (Ej: 24)"
+        },
+        "imageObjectFit": {
+          "type": "option",
+          "display_name": "Ajuste de Imagen (Object Fit)",
+          "options": [
+            {
+              "name": "Cubrir (cover)",
+              "value": "cover"
+            },
+            {
+              "name": "Contener (contain)",
+              "value": "contain"
+            },
+            {
+              "name": "Rellenar (fill)",
+              "value": "fill"
+            }
+          ],
+          "default_value": "cover"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -265,9 +926,47 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "tagline": {
+          "type": "text",
+          "display_name": "Tagline / Subtítulo Superior"
+        },
+        "title": {
+          "type": "text",
+          "display_name": "Título Principal (Soporta <span class=\"text-gradient-blue\">)"
+        },
+        "description": {
+          "type": "textarea",
+          "display_name": "Descripción de Párrafo"
+        },
+        "items": {
+          "type": "bloks",
+          "display_name": "Elementos de Beneficios",
+          "component_whitelist": [
+            "benefitCard"
+          ]
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -276,9 +975,63 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "tagline": {
+          "type": "text",
+          "display_name": "Tagline / Subtítulo Superior"
+        },
+        "title": {
+          "type": "text",
+          "display_name": "Título Principal (Soporta <span class=\"text-gradient-orange\">)"
+        },
+        "description": {
+          "type": "textarea",
+          "display_name": "Descripción de Párrafo"
+        },
+        "steps": {
+          "type": "bloks",
+          "display_name": "Pasos Metodológicos",
+          "component_whitelist": [
+            "methodologyStep"
+          ]
+        },
+        "calloutTitle": {
+          "type": "text",
+          "display_name": "Banner: Título de Licencia"
+        },
+        "calloutDescription": {
+          "type": "textarea",
+          "display_name": "Banner: Texto del Aval"
+        },
+        "calloutBtnText": {
+          "type": "text",
+          "display_name": "Banner: Texto del Botón"
+        },
+        "calloutBtnLink": {
+          "type": "text",
+          "display_name": "Banner: Enlace de Matrícula"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -287,9 +1040,47 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "tagline": {
+          "type": "text",
+          "display_name": "Tagline / Subtítulo Superior"
+        },
+        "title": {
+          "type": "text",
+          "display_name": "Título Principal (Soporta <span class=\"text-gradient-orange\">)"
+        },
+        "description": {
+          "type": "textarea",
+          "display_name": "Descripción de Párrafo"
+        },
+        "pillars": {
+          "type": "bloks",
+          "display_name": "Pilares de Cobertura",
+          "component_whitelist": [
+            "coveragePillar"
+          ]
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
       }
     },
     {
@@ -298,9 +1089,555 @@
       "is_root": false,
       "is_nestable": true,
       "schema": {
-        "spacingUnit": { "type": "option", "options": [{ "name": "px", "value": "px" }, { "name": "rem", "value": "rem" }], "default_value": "px" },
-        "paddingTopDesktop": { "type": "text", "display_name": "Padding Superior (PC)" },
-        "paddingBottomDesktop": { "type": "text", "display_name": "Padding Inferior (PC)" }
+        "tagline": {
+          "type": "text",
+          "display_name": "Tagline / Subtítulo Superior"
+        },
+        "title": {
+          "type": "text",
+          "display_name": "Título Principal (Soporta <span class=\"text-gradient-orange\">)"
+        },
+        "description": {
+          "type": "textarea",
+          "display_name": "Descripción de Párrafo"
+        },
+        "features": {
+          "type": "bloks",
+          "display_name": "Lista de Características",
+          "component_whitelist": [
+            "featureColumn"
+          ]
+        },
+        "dashTitle": {
+          "type": "text",
+          "display_name": "Título de Panel / Dashboard"
+        },
+        "dashSubtitle": {
+          "type": "text",
+          "display_name": "Subtítulo de Panel"
+        },
+        "dashStatus": {
+          "type": "text",
+          "display_name": "Estado de Panel (Ej: Activo 24/7)"
+        },
+        "dashCard1Title": {
+          "type": "text",
+          "display_name": "Tarjeta 1: Título"
+        },
+        "dashCard1Value": {
+          "type": "text",
+          "display_name": "Tarjeta 1: Valor"
+        },
+        "dashCard1Desc": {
+          "type": "text",
+          "display_name": "Tarjeta 1: Descripción Corta"
+        },
+        "dashCard2Title": {
+          "type": "text",
+          "display_name": "Tarjeta 2: Título"
+        },
+        "dashCard2Value": {
+          "type": "text",
+          "display_name": "Tarjeta 2: Valor"
+        },
+        "dashCard2Desc": {
+          "type": "text",
+          "display_name": "Tarjeta 2: Descripción Corta"
+        },
+        "dashGraphTitle": {
+          "type": "text",
+          "display_name": "Gráfico: Título"
+        },
+        "dashGraphSubtitle": {
+          "type": "text",
+          "display_name": "Gráfico: Subtítulo"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
+      }
+    },
+    {
+      "name": "textTicker",
+      "display_name": "Carrusel de Texto Infinito",
+      "is_root": false,
+      "is_nestable": true,
+      "schema": {
+        "items": {
+          "type": "bloks",
+          "display_name": "Elementos de Texto",
+          "component_whitelist": [
+            "tickerItem"
+          ]
+        },
+        "backgroundColor": {
+          "type": "option",
+          "display_name": "Color de Fondo",
+          "options": [
+            {
+              "name": "Blanco",
+              "value": "bg-white"
+            },
+            {
+              "name": "Gris Claro",
+              "value": "bg-slate-50"
+            },
+            {
+              "name": "Naranja Premium (Glow)",
+              "value": "bg-accent-orange"
+            },
+            {
+              "name": "Azul Premium",
+              "value": "bg-accent-blue"
+            },
+            {
+              "name": "Oscuro Elegante",
+              "value": "bg-slate-900"
+            }
+          ],
+          "default_value": "bg-accent-orange"
+        },
+        "textColor": {
+          "type": "option",
+          "display_name": "Color del Texto",
+          "options": [
+            {
+              "name": "Blanco",
+              "value": "text-white"
+            },
+            {
+              "name": "Slate Oscuro",
+              "value": "text-slate-900"
+            },
+            {
+              "name": "Gris Medio",
+              "value": "text-slate-600"
+            }
+          ],
+          "default_value": "text-white"
+        },
+        "separator": {
+          "type": "option",
+          "display_name": "Separador de Items",
+          "options": [
+            {
+              "name": "Estrella (✦)",
+              "value": "star"
+            },
+            {
+              "name": "Punto (•)",
+              "value": "dot"
+            },
+            {
+              "name": "Rayo (⚡)",
+              "value": "bolt"
+            }
+          ],
+          "default_value": "star"
+        },
+        "speed": {
+          "type": "option",
+          "display_name": "Velocidad de Desplazamiento",
+          "options": [
+            {
+              "name": "Lento",
+              "value": "slow"
+            },
+            {
+              "name": "Normal",
+              "value": "normal"
+            },
+            {
+              "name": "Rápido",
+              "value": "fast"
+            }
+          ],
+          "default_value": "normal"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
+      }
+    },
+    {
+      "name": "tickerItem",
+      "display_name": "Frase de Carrusel",
+      "is_root": false,
+      "is_nestable": true,
+      "schema": {
+        "text": {
+          "type": "text",
+          "display_name": "Texto / Frase (Ej: Educación 100% Virtual)"
+        }
+      }
+    },
+    {
+      "name": "teachersSection",
+      "display_name": "Sección Docentes",
+      "is_root": false,
+      "is_nestable": true,
+      "schema": {
+        "title": {
+          "type": "text",
+          "display_name": "Título de Sección"
+        },
+        "subtitle": {
+          "type": "text",
+          "display_name": "Subtítulo Descriptivo"
+        },
+        "teachers": {
+          "type": "bloks",
+          "display_name": "Docentes",
+          "component_whitelist": [
+            "teacherCard"
+          ]
+        },
+        "spacingUnit": {
+          "type": "option",
+          "options": [
+            {
+              "name": "px",
+              "value": "px"
+            },
+            {
+              "name": "rem",
+              "value": "rem"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        }
+      }
+    },
+    {
+      "name": "teacherCard",
+      "display_name": "Tarjeta de Docente",
+      "is_root": false,
+      "is_nestable": true,
+      "schema": {
+        "name": {
+          "type": "text",
+          "display_name": "Nombre de Docente"
+        },
+        "role": {
+          "type": "text",
+          "display_name": "Especialidad / Rol"
+        },
+        "description": {
+          "type": "textarea",
+          "display_name": "Descripción Súper Corta"
+        },
+        "image": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "display_name": "Foto de Perfil"
+        },
+        "socialLink": {
+          "type": "text",
+          "display_name": "Enlace a Perfil (Opcional)"
+        }
+      }
+    },
+    {
+      "name": "benefitCard",
+      "display_name": "Tarjeta de Beneficio",
+      "is_root": false,
+      "is_nestable": true,
+      "schema": {
+        "title": {
+          "type": "text",
+          "display_name": "Título del Beneficio"
+        },
+        "description": {
+          "type": "textarea",
+          "display_name": "Descripción del Beneficio"
+        },
+        "icon": {
+          "type": "option",
+          "display_name": "Icono del Beneficio",
+          "options": [
+            {
+              "name": "Cohete (rocket)",
+              "value": "rocket"
+            },
+            {
+              "name": "Birrete (cap)",
+              "value": "cap"
+            },
+            {
+              "name": "Reloj / Calendario (clock)",
+              "value": "clock"
+            },
+            {
+              "name": "Computadora (computer)",
+              "value": "computer"
+            },
+            {
+              "name": "Estrella (star)",
+              "value": "star"
+            },
+            {
+              "name": "Aprobado (check)",
+              "value": "check"
+            },
+            {
+              "name": "Dinero (currency)",
+              "value": "currency"
+            },
+            {
+              "name": "Soporte (support)",
+              "value": "support"
+            },
+            {
+              "name": "Libro (book)",
+              "value": "book"
+            },
+            {
+              "name": "Medalla (medal)",
+              "value": "medal"
+            }
+          ],
+          "default_value": "rocket"
+        },
+        "image": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "display_name": "Imagen Opcional (Anula el icono si se sube)"
+        },
+        "accent": {
+          "type": "option",
+          "display_name": "Color de Acento",
+          "options": [
+            {
+              "name": "Naranja",
+              "value": "orange"
+            },
+            {
+              "name": "Azul",
+              "value": "blue"
+            }
+          ],
+          "default_value": "orange"
+        }
+      }
+    },
+    {
+      "name": "methodologyStep",
+      "display_name": "Paso Metodológico",
+      "is_root": false,
+      "is_nestable": true,
+      "schema": {
+        "number": {
+          "type": "text",
+          "display_name": "Número de Paso (Ej: 01)"
+        },
+        "title": {
+          "type": "text",
+          "display_name": "Título del Paso"
+        },
+        "description": {
+          "type": "textarea",
+          "display_name": "Descripción del Paso"
+        },
+        "icon": {
+          "type": "option",
+          "display_name": "Icono de Paso",
+          "options": [
+            {
+              "name": "Documento / Matrícula (document)",
+              "value": "document"
+            },
+            {
+              "name": "Computadora / Plataforma (computer)",
+              "value": "computer"
+            },
+            {
+              "name": "Birrete / Profesores (cap)",
+              "value": "cap"
+            },
+            {
+              "name": "Estrella / Certificado (star)",
+              "value": "star"
+            },
+            {
+              "name": "Cohete (rocket)",
+              "value": "rocket"
+            },
+            {
+              "name": "Reloj (clock)",
+              "value": "clock"
+            },
+            {
+              "name": "Libro (book)",
+              "value": "book"
+            },
+            {
+              "name": "Medalla (medal)",
+              "value": "medal"
+            },
+            {
+              "name": "Aprobado (check)",
+              "value": "check"
+            }
+          ],
+          "default_value": "document"
+        },
+        "image": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "display_name": "Imagen Opcional (Anula el icono)"
+        },
+        "label": {
+          "type": "text",
+          "display_name": "Etiqueta Inferior (Ej: Paso Inicial)"
+        },
+        "accent": {
+          "type": "option",
+          "display_name": "Color de Acento",
+          "options": [
+            {
+              "name": "Naranja",
+              "value": "orange"
+            },
+            {
+              "name": "Azul",
+              "value": "blue"
+            }
+          ],
+          "default_value": "orange"
+        }
+      }
+    },
+    {
+      "name": "coveragePillar",
+      "display_name": "Pilar de Cobertura",
+      "is_root": false,
+      "is_nestable": true,
+      "schema": {
+        "title": {
+          "type": "text",
+          "display_name": "Título de Pilar"
+        },
+        "description": {
+          "type": "textarea",
+          "display_name": "Descripción de Pilar"
+        },
+        "icon": {
+          "type": "option",
+          "display_name": "Icono del Pilar",
+          "options": [
+            {
+              "name": "Mapa / Ubicación (map)",
+              "value": "map"
+            },
+            {
+              "name": "Medalla / Graduación (medal)",
+              "value": "medal"
+            },
+            {
+              "name": "Portapapeles / ICFES (clipboard)",
+              "value": "clipboard"
+            },
+            {
+              "name": "Estrella (star)",
+              "value": "star"
+            },
+            {
+              "name": "Aprobado (check)",
+              "value": "check"
+            },
+            {
+              "name": "Birrete (cap)",
+              "value": "cap"
+            },
+            {
+              "name": "Computadora (computer)",
+              "value": "computer"
+            },
+            {
+              "name": "Cohete (rocket)",
+              "value": "rocket"
+            }
+          ],
+          "default_value": "map"
+        },
+        "image": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "display_name": "Imagen Opcional (Anula el icono)"
+        },
+        "label": {
+          "type": "text",
+          "display_name": "Etiqueta Inferior (Ej: Estudia desde donde estés)"
+        },
+        "accent": {
+          "type": "option",
+          "display_name": "Color de Acento",
+          "options": [
+            {
+              "name": "Azul",
+              "value": "blue"
+            },
+            {
+              "name": "Naranja",
+              "value": "orange"
+            }
+          ],
+          "default_value": "blue"
+        }
       }
     }
   ]

@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+const { blok } = Astro.props;
+const text = blok.text || blok.Text || '';
+---
+<span {...storyblokEditable(blok)} class="text-base sm:text-lg font-black font-display tracking-wide uppercase select-none">
+  {text}
+</span>

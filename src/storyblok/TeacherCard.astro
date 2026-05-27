@@ -1,0 +1,63 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+const { blok } = Astro.props;
+
+const name = blok.name || blok.Name || 'Nombre del Docente';
+const role = blok.role || blok.Role || 'Área de Enseñanza';
+const description = blok.description || blok.Description || '';
+const image = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+const socialLink = blok.socialLink || blok.social_link || '';
+---
+
+<div {...storyblokEditable(blok)} class="group relative bg-white border border-slate-200/60 rounded-3xl p-6 shadow-md hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col items-center text-center overflow-hidden">
+  <!-- Glowing subtle highlight background on hover -->
+  <div class="absolute inset-0 bg-gradient-to-b from-accent-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none select-none z-0"></div>
+
+  <!-- Teacher Image with modern frame -->
+  <div class="relative w-32 h-32 rounded-2xl overflow-hidden mb-6 border-2 border-slate-100 shadow-inner group-hover:border-accent-orange/20 transition-colors duration-300 z-10 select-none">
+    {image ? (
+      <img 
+        src={image} 
+        alt={name} 
+        class="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-500 ease-out" 
+      />
+    ) : (
+      <div class="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-slate-400">
+        <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      </div>
+    )}
+  </div>
+
+  <!-- Name & Role -->
+  <div class="z-10">
+    <h3 class="text-lg font-extrabold text-slate-900 font-display tracking-tight transition-colors duration-300 group-hover:text-accent-orange">
+      {name}
+    </h3>
+    <span class="inline-block text-xs font-bold uppercase tracking-wider text-accent-blue bg-accent-blue/5 border border-accent-blue/10 rounded-full px-3 py-1 mt-2">
+      {role}
+    </span>
+  </div>
+
+  <!-- Short Description -->
+  {description && (
+    <p class="text-sm text-slate-500 font-medium leading-relaxed mt-4 max-w-[220px] line-clamp-3 z-10">
+      {description}
+    </p>
+  )}
+
+  <!-- Contact/Social Button -->
+  {socialLink && (
+    <a 
+      href={socialLink} 
+      class="mt-6 flex items-center gap-1.5 text-xs font-extrabold text-slate-700 hover:text-accent-orange transition-colors duration-300 z-10"
+    >
+      <span>Ver Perfil</span>
+      <svg class="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  )}
+</div>

@@ -36,6 +36,13 @@ export default defineConfig({
         imageCarousel: 'storyblok/ImageCarousel',
         imageGallery: 'storyblok/ImageGallery',
         accordionSection: 'storyblok/AccordionSection',
+        textTicker: 'storyblok/TextTicker',
+        tickerItem: 'storyblok/TickerItem',
+        teachersSection: 'storyblok/TeachersSection',
+        teacherCard: 'storyblok/TeacherCard',
+        benefitCard: 'storyblok/BenefitCard',
+        methodologyStep: 'storyblok/MethodologyStep',
+        coveragePillar: 'storyblok/CoveragePillar',
       }
     })
   ],
