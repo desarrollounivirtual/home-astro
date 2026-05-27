@@ -3,6 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import { storyblok } from '@storyblok/astro';
 import { loadEnv } from 'vite';
+import basicSsl from '@vitejs/plugin-basic-ssl';
 
 const env = loadEnv('', process.cwd(), 'STORYBLOK');
 
@@ -39,6 +40,10 @@ export default defineConfig({
   ],
   compressHTML: true,
   vite: {
+    plugins: [basicSsl()],
+    server: {
+      https: true
+    },
     build: {
       cssMinify: true
     }
