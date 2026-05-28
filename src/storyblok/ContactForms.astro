@@ -35,266 +35,389 @@ const JUPITER_API_URL = import.meta.env.PUBLIC_JUPITER_API_URL || 'http://127.0.
 
     <div class="max-w-4xl mx-auto w-full">
       <!-- Interactive Custom Tabs -->
-    <div class="flex items-center justify-center p-1.5 bg-slate-100 rounded-2xl border border-slate-200 mb-8 max-w-md mx-auto">
-      <button type="button" class="w-full py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 bg-accent-orange text-white glow-orange" id="tab-enroll">
-        Inscripción
-      </button>
-      <button type="button" class="w-full py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 text-slate-600 hover:text-slate-900" id="tab-info">
-        Información
-      </button>
-      <button type="button" class="w-full py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 text-slate-600 hover:text-slate-900" id="tab-pqrs">
-        Soporte / PQRS
-      </button>
-    </div>
+      <div class="flex items-center justify-center p-1.5 bg-slate-100 rounded-2xl border border-slate-200 mb-8 max-w-md mx-auto">
+        <button type="button" class="w-full py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 bg-accent-orange text-white glow-orange" id="tab-enroll" data-tipo="inscripcion">
+          Inscripción
+        </button>
+        <button type="button" class="w-full py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 text-slate-600 hover:text-slate-900" id="tab-info" data-tipo="informacion">
+          Información
+        </button>
+        <button type="button" class="w-full py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 text-slate-600 hover:text-slate-900" id="tab-pqrs" data-tipo="pqrs">
+          Soporte / PQRS
+        </button>
+      </div>
 
-    <!-- Forms Container (Sleek White Cards) -->
-    <div class="bg-white border border-slate-200/60 shadow-2xl shadow-slate-200/50 rounded-3xl p-6 sm:p-10 relative overflow-hidden">
-      
-      <!-- FORM 1: Registro/Inscripción -->
-      <form id="form-enroll" class="space-y-6">
-        <h3 class="text-2xl font-bold font-display text-slate-900 border-b border-slate-100 pb-3">Formulario de Registro Académico</h3>
-        <p class="text-xs text-slate-500">Rellena el formulario con tus datos para separar tu cupo oficial de bachillerato.</p>
+      <!-- Forms Container (Sleek White Dynamic Card) -->
+      <div class="bg-white border border-slate-200/60 shadow-2xl shadow-slate-200/50 rounded-3xl p-6 sm:p-10 relative overflow-hidden">
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label for="enroll-name" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Nombre Completo</label>
-            <input type="text" id="enroll-name" required placeholder="Ej: Ana María García" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors" />
+        <!-- SINGLE DYNAMIC FORM -->
+        <form id="dynamic-crm-form" class="space-y-6">
+          <div id="form-header-area">
+            <h3 id="form-title" class="text-2xl font-bold font-display text-slate-900 border-b border-slate-100 pb-3">Cargando formulario...</h3>
+            <p id="form-description" class="text-xs text-slate-500 mt-2"></p>
           </div>
-          <div>
-            <label for="enroll-phone" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Teléfono o WhatsApp</label>
-            <input type="tel" id="enroll-phone" required placeholder="Ej: 3001234567" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors" />
+          
+          <!-- SKELETON LOADER (Visual Premium effect) -->
+          <div id="form-skeleton" class="space-y-5 py-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <div class="h-3.5 bg-slate-200 rounded w-1/3 mb-2.5 animate-pulse"></div>
+                <div class="h-12 bg-slate-100/80 rounded-xl w-full animate-pulse"></div>
+              </div>
+              <div>
+                <div class="h-3.5 bg-slate-200 rounded w-1/3 mb-2.5 animate-pulse"></div>
+                <div class="h-12 bg-slate-100/80 rounded-xl w-full animate-pulse"></div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <div class="h-3.5 bg-slate-200 rounded w-1/4 mb-2.5 animate-pulse"></div>
+                <div class="h-12 bg-slate-100/80 rounded-xl w-full animate-pulse"></div>
+              </div>
+              <div>
+                <div class="h-3.5 bg-slate-200 rounded w-1/4 mb-2.5 animate-pulse"></div>
+                <div class="h-12 bg-slate-100/80 rounded-xl w-full animate-pulse"></div>
+              </div>
+            </div>
+            <div>
+              <div class="h-3.5 bg-slate-200 rounded w-1/5 mb-2.5 animate-pulse"></div>
+              <div class="h-32 bg-slate-100/80 rounded-xl w-full animate-pulse"></div>
+            </div>
           </div>
-        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label for="enroll-email" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Correo Electrónico</label>
-            <input type="email" id="enroll-email" required placeholder="Ej: ana@ejemplo.com" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors" />
+          <!-- DYNAMIC FIELDS DESTINATION -->
+          <div id="dynamic-fields" class="grid grid-cols-1 sm:grid-cols-2 gap-6 hidden">
+            <!-- Rendered dynamically via JavaScript -->
           </div>
-          <div>
-            <label for="enroll-grade" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Último Grado Aprobado</label>
-            <select id="enroll-grade" required class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors">
-              <option value="" disabled selected class="bg-white text-slate-500">Selecciona tu último grado...</option>
-              <option value="5" class="bg-white text-slate-900">5° Primaria</option>
-              <option value="6" class="bg-white text-slate-900">6° Bachillerato</option>
-              <option value="7" class="bg-white text-slate-900">7° Bachillerato</option>
-              <option value="8" class="bg-white text-slate-900">8° Bachillerato</option>
-              <option value="9" class="bg-white text-slate-900">9° Bachillerato</option>
-              <option value="10" class="bg-white text-slate-900">10° Bachillerato</option>
-            </select>
+
+          <!-- Terms Checkbox (Required for dynamic compliance) -->
+          <div id="terms-container" class="flex items-center gap-3 hidden">
+            <input type="checkbox" id="crm-terms" required class="w-5 h-5 accent-accent-orange bg-slate-50 border-slate-200 rounded focus:ring-0" />
+            <label for="crm-terms" class="text-xs text-slate-600">Acepto el tratamiento de mis datos personales según las políticas de UNIVIRTUAL.</label>
           </div>
-        </div>
 
-        <!-- Campo Condicional: Especialidad Técnica (EAV dinámica) -->
-        <div id="div-technical-interest" class="hidden transition-all duration-300 transform scale-95 opacity-0">
-          <label for="enroll-technical-interest" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">¿Te interesa cursar media técnica con nosotros?</label>
-          <select id="enroll-technical-interest" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors">
-            <option value="" disabled selected class="bg-white text-slate-500">Selecciona una opción...</option>
-            <option value="Sí" class="bg-white text-slate-900">Sí, me interesa</option>
-            <option value="No" class="bg-white text-slate-900">No, prefiero bachillerato académico clásico</option>
-          </select>
-        </div>
+          <!-- Submit Button -->
+          <button type="submit" id="btn-submit" class="w-full py-4 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold rounded-xl btn-premium glow-orange flex items-center justify-center gap-2 hidden">
+            <span id="btn-submit-text">Enviar Solicitud</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+          </button>
+        </form>
 
-        <div>
-          <label for="enroll-message" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Comentarios Adicionales</label>
-          <textarea id="enroll-message" rows="4" placeholder="Cuéntanos si tienes alguna condición especial u observaciones..." class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors resize-none"></textarea>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <input type="checkbox" id="enroll-terms" required class="w-5 h-5 accent-accent-orange bg-slate-50 border-slate-200 rounded focus:ring-0" />
-          <label for="enroll-terms" class="text-xs text-slate-600">Acepto el tratamiento de mis datos personales según las políticas de UNIVIRTUAL.</label>
-        </div>
-
-        <button type="submit" class="w-full py-4 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold rounded-xl btn-premium glow-orange flex items-center justify-center gap-2">
-          <span>Enviar mi Inscripción</span>
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-        </button>
-      </form>
-
-      <!-- FORM 2: Contacto/Info (Hidden by default) -->
-      <form id="form-info" class="space-y-6 hidden">
-        <h3 class="text-2xl font-bold font-display text-slate-900 border-b border-slate-100 pb-3">Solicitar Información General</h3>
-        <p class="text-xs text-slate-500">¿Tienes dudas sobre los costos, ciclos, horarios o legalidad? Déjanos tu pregunta.</p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label for="info-name" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Nombre</label>
-            <input type="text" id="info-name" required placeholder="Tu nombre..." class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-blue transition-colors" />
+        <!-- Alert Notification Success (Hidden by default) -->
+        <div id="form-success" class="hidden absolute inset-0 bg-white/98 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-20 animate-fade-in">
+          <div class="w-20 h-20 rounded-full bg-green-500/8 border border-green-500/15 flex items-center justify-center text-green-600 mb-6 shadow-sm">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
           </div>
-          <div>
-            <label for="info-phone" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">WhatsApp de Contacto</label>
-            <input type="tel" id="info-phone" required placeholder="Tu celular..." class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-blue transition-colors" />
-          </div>
+          <h4 class="text-3xl font-extrabold font-display text-slate-900 mb-2">¡Formulario Radicado!</h4>
+          <p class="text-slate-600 max-w-md mb-8">Hemos recibido tu solicitud de forma correcta. Un asesor de UNIVIRTUAL se pondrá en contacto contigo en breve.</p>
+          <button type="button" id="btn-success-close" class="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-lg border border-slate-200 transition-all">Volver a los formularios</button>
         </div>
 
-        <div>
-          <label for="info-email" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Correo Electrónico</label>
-          <input type="email" id="info-email" required placeholder="ana@ejemplo.com" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-blue transition-colors" />
-        </div>
-
-        <div>
-          <label for="info-message" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">¿Cuál es tu pregunta?</label>
-          <textarea id="info-message" required rows="5" placeholder="Escribe aquí todas tus inquietudes..." class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-blue transition-colors resize-none"></textarea>
-        </div>
-
-        <button type="submit" class="w-full py-4 bg-accent-blue hover:bg-accent-blue-hover text-white font-extrabold rounded-xl btn-premium glow-blue flex items-center justify-center gap-2">
-          <span>Enviar Consulta</span>
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-        </button>
-      </form>
-
-      <!-- FORM 3: Soporte/PQRS (Hidden by default) -->
-      <form id="form-pqrs" class="space-y-6 hidden">
-        <h3 class="text-2xl font-bold font-display text-slate-900 border-b border-slate-100 pb-3">Portal de Soporte y PQRS</h3>
-        <p class="text-xs text-slate-500">Utiliza este canal para radicar Peticiones, Quejas, Reclamos, Sugerencias o solicitar Soporte Técnico.</p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label for="pqrs-name" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Nombre Completo</label>
-            <input type="text" id="pqrs-name" required placeholder="Tu nombre..." class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-blue transition-colors" />
-          </div>
-          <div>
-            <label for="pqrs-doc" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Documento de Identidad</label>
-            <input type="text" id="pqrs-doc" required placeholder="Ej: 1022345678" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-blue transition-colors" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label for="pqrs-email" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Correo Electrónico</label>
-            <input type="email" id="pqrs-email" required placeholder="ana@ejemplo.com" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-blue transition-colors" />
-          </div>
-          <div>
-            <label for="pqrs-type" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Tipo de Solicitud</label>
-            <select id="pqrs-type" required class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 focus:outline-none focus:bg-white focus:border-accent-blue transition-colors">
-              <option value="" disabled selected class="bg-white text-slate-500">Selecciona una opción...</option>
-              <option value="peticion" class="bg-white text-slate-900">Petición</option>
-              <option value="queja" class="bg-white text-slate-900">Queja</option>
-              <option value="reclamo" class="bg-white text-slate-900">Reclamo</option>
-              <option value="sugerencia" class="bg-white text-slate-900">Sugerencia</option>
-              <option value="soporte" class="bg-white text-slate-900">Soporte Técnico de Plataforma</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label for="pqrs-message" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Detalles de la Solicitud</label>
-          <textarea id="pqrs-message" required rows="5" placeholder="Describe detalladamente los hechos, fechas o soporte que requieres..." class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-blue transition-colors resize-none"></textarea>
-        </div>
-
-        <button type="submit" class="w-full py-4 bg-accent-blue hover:bg-accent-blue-hover text-white font-extrabold rounded-xl btn-premium glow-blue flex items-center justify-center gap-2">
-          <span>Radicar Solicitud</span>
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-        </button>
-      </form>
-
-      <!-- Alert Notification Success (Hidden by default) -->
-      <div id="form-success" class="hidden absolute inset-0 bg-white/98 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-20 animate-fade-in">
-        <div class="w-20 h-20 rounded-full bg-green-500/8 border border-green-500/15 flex items-center justify-center text-green-600 mb-6 shadow-sm">
-          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        </div>
-        <h4 class="text-3xl font-extrabold font-display text-slate-900 mb-2">¡Formulario Radicado!</h4>
-        <p class="text-slate-600 max-w-md mb-8">Hemos recibido tu solicitud de forma correcta. Un asesor de UNIVIRTUAL se pondrá en contacto contigo en breve.</p>
-        <button type="button" id="btn-success-close" class="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-lg border border-slate-200 transition-all">Volver a los formularios</button>
       </div>
 
     </div>
-
-  </div>
   </div>
 </section>
 
 <script is:inline>
-  // Tabs logic
+  // DOM References
   const tabEnroll = document.getElementById('tab-enroll');
   const tabInfo = document.getElementById('tab-info');
   const tabPqrs = document.getElementById('tab-pqrs');
 
-  const formEnroll = document.getElementById('form-enroll');
-  const formInfo = document.getElementById('form-info');
-  const formPqrs = document.getElementById('form-pqrs');
+  const dynamicCrmForm = document.getElementById('dynamic-crm-form');
+  const formTitle = document.getElementById('form-title');
+  const formDescription = document.getElementById('form-description');
+  const formSkeleton = document.getElementById('form-skeleton');
+  const dynamicFieldsContainer = document.getElementById('dynamic-fields');
+  const termsContainer = document.getElementById('terms-container');
+  const btnSubmit = document.getElementById('btn-submit');
+  const btnSubmitText = document.getElementById('btn-submit-text');
   
   const successModal = document.getElementById('form-success');
   const successCloseBtn = document.getElementById('btn-success-close');
 
-  function selectTab(activeTab, activeForm) {
-    // Reset tabs styles
+  let currentTipo = 'inscripcion';
+  let loadedFormFields = [];
+
+  // --- Determinar URL de API de forma segura y a prueba de fallos de entorno ---
+  function getApiBaseUrl() {
+    const container = document.getElementById('contact-forms-container');
+    let url = container ? (container.dataset.jupiterUrl || 'http://127.0.0.1:8000') : 'http://127.0.0.1:8000';
+    if (typeof window !== 'undefined' && window.location.hostname.includes('aulasunivirtuales.com')) {
+      url = 'https://jupiter.aulasunivirtuales.com';
+    }
+    return url.replace(/\/$/, '');
+  }
+
+  // --- Renderizador dinámico de Inputs EAV ---
+  function renderFormSchema(schema) {
+    if (!schema || !schema.fields) return;
+    
+    // Configurar metadatos del formulario
+    formTitle.textContent = schema.title || 'Formulario';
+    formDescription.textContent = schema.description || '';
+    loadedFormFields = schema.fields;
+
+    // Limpiar contenedor
+    dynamicFieldsContainer.innerHTML = '';
+
+    // Mapear y crear inputs dinámicos en base al tipo de campo
+    schema.fields.forEach(field => {
+      const fieldDiv = document.createElement('div');
+      fieldDiv.id = `div-${field.name}`;
+      fieldDiv.className = 'transition-all duration-300 transform';
+
+      // Textarea spans 2 columns, standard inputs span 1
+      if (field.type === 'textarea') {
+        fieldDiv.className += ' col-span-1 sm:col-span-2';
+      }
+
+      // 1. Label
+      const label = document.createElement('label');
+      label.setAttribute('for', field.name);
+      label.className = 'block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2';
+      label.textContent = field.label;
+      if (field.required) {
+        const reqSpan = document.createElement('span');
+        reqSpan.className = 'text-red-500 ms-1';
+        reqSpan.textContent = '*';
+        label.appendChild(reqSpan);
+      }
+      fieldDiv.appendChild(label);
+
+      // 2. Input Element
+      let inputElement;
+
+      if (field.type === 'select') {
+        inputElement = document.createElement('select');
+        inputElement.className = 'w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors';
+        
+        const defaultOpt = document.createElement('option');
+        defaultOpt.value = '';
+        defaultOpt.disabled = true;
+        defaultOpt.selected = true;
+        defaultOpt.textContent = 'Selecciona una opción...';
+        inputElement.appendChild(defaultOpt);
+
+        if (Array.isArray(field.options)) {
+          field.options.forEach(opt => {
+            const option = document.createElement('option');
+            option.value = opt;
+            option.textContent = opt;
+            option.className = 'bg-white text-slate-900';
+            inputElement.appendChild(option);
+          });
+        }
+      } else if (field.type === 'textarea') {
+        inputElement = document.createElement('textarea');
+        inputElement.rows = 4;
+        inputElement.className = 'w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors resize-none';
+        inputElement.placeholder = 'Escribe aquí los comentarios...';
+      } else {
+        inputElement = document.createElement('input');
+        inputElement.type = field.type;
+        inputElement.className = 'w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors';
+        
+        // Placeholder dinámicos premium
+        if (field.type === 'email') inputElement.placeholder = 'Ej: ana@ejemplo.com';
+        else if (field.type === 'tel' || field.name.includes('phone')) inputElement.placeholder = 'Ej: 3001234567';
+        else inputElement.placeholder = `Escribe tu ${field.label.toLowerCase()}...`;
+      }
+
+      inputElement.id = field.name;
+      inputElement.name = field.name;
+      inputElement.required = !!field.required;
+
+      fieldDiv.appendChild(inputElement);
+      dynamicFieldsContainer.appendChild(fieldDiv);
+    });
+
+    // Mostrar contenedor de inputs, términos y botón
+    formSkeleton.classList.add('hidden');
+    dynamicFieldsContainer.classList.remove('hidden');
+    termsContainer.classList.remove('hidden');
+    
+    // Personalizar botón submit
+    btnSubmitText.textContent = schema.tipo === 'inscripcion' ? 'Enviar mi Inscripción' : (schema.tipo === 'informacion' ? 'Enviar Consulta' : 'Radicar Solicitud');
+    btnSubmit.classList.remove('hidden');
+
+    // Cambiar color temático en base al tipo
+    if (schema.tipo === 'inscripcion') {
+      btnSubmit.className = 'w-full py-4 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold rounded-xl btn-premium glow-orange flex items-center justify-center gap-2';
+    } else {
+      btnSubmit.className = 'w-full py-4 bg-accent-blue hover:bg-accent-blue-hover text-white font-extrabold rounded-xl btn-premium glow-blue flex items-center justify-center gap-2';
+    }
+
+    // Inicializar listeners de lógica condicional dinámica (CRM a prueba de fallos)
+    setupConditionalListeners(schema.fields, dynamicFieldsContainer);
+  }
+
+  // --- Motor de Evaluación de Lógica Condicional Dinámica Cliente-Servidor ---
+  function evaluateConditions(fields, inputsContainer) {
+    fields.forEach(field => {
+      if (!field.conditions || field.conditions.length === 0) return;
+      
+      const fieldDiv = document.getElementById(`div-${field.name}`);
+      if (!fieldDiv) return;
+      
+      let shouldShow = field.condition_action === 'hide' ? true : false;
+      
+      field.conditions.forEach(cond => {
+        const sourceInput = inputsContainer.querySelector(`#${cond.field_name}`);
+        if (!sourceInput) return;
+        
+        const val = sourceInput.value;
+        let condMet = false;
+        
+        if (cond.operator === 'equals') condMet = String(val) === String(cond.value);
+        else if (cond.operator === 'not_equals') condMet = String(val) !== String(cond.value);
+        else if (cond.operator === 'contains') condMet = String(val).includes(cond.value);
+        else if (cond.operator === 'not_empty') condMet = val !== '';
+        else if (cond.operator === 'empty') condMet = val === '';
+        
+        if (condMet) {
+          shouldShow = field.condition_action === 'hide' ? false : true;
+        }
+      });
+      
+      const inputElement = fieldDiv.querySelector('input, select, textarea');
+      
+      if (shouldShow) {
+        fieldDiv.classList.remove('hidden');
+        fieldDiv.offsetHeight; // force reflow
+        fieldDiv.classList.add('scale-100', 'opacity-100');
+        if (inputElement && field.required) inputElement.required = true;
+      } else {
+        fieldDiv.classList.remove('scale-100', 'opacity-100');
+        if (inputElement) {
+          inputElement.required = false;
+          inputElement.value = ''; // limpiar valor para evitar fallos de validación en server
+        }
+        fieldDiv.classList.add('hidden');
+      }
+    });
+  }
+
+  // --- Enlazar eventos de escucha condicional ---
+  function setupConditionalListeners(fields, inputsContainer) {
+    fields.forEach(field => {
+      if (!field.conditions || field.conditions.length === 0) return;
+      
+      field.conditions.forEach(cond => {
+        const sourceInput = inputsContainer.querySelector(`#${cond.field_name}`);
+        if (!sourceInput) return;
+        
+        if (!sourceInput.dataset.conditionalListenerAdded) {
+          sourceInput.dataset.conditionalListenerAdded = 'true';
+          ['change', 'input'].forEach(event => {
+            sourceInput.addEventListener(event, () => evaluateConditions(fields, inputsContainer));
+          });
+        }
+      });
+    });
+    
+    // Ejecución de visibilidad inicial
+    evaluateConditions(fields, inputsContainer);
+  }
+
+  // --- Cargar Esquema con Caché Inteligente (Stale-While-Revalidate) ---
+  function loadForm(tipo) {
+    currentTipo = tipo;
+    
+    // Ocultar campos anteriores y mostrar skeleton de carga
+    dynamicFieldsContainer.classList.add('hidden');
+    termsContainer.classList.add('hidden');
+    btnSubmit.classList.add('hidden');
+    formSkeleton.classList.remove('hidden');
+    formTitle.textContent = 'Cargando formulario...';
+    formDescription.textContent = '';
+
+    const cacheKey = `crm_schema_${tipo}`;
+    const cachedData = localStorage.getItem(cacheKey);
+
+    // Estrategia A (Caché local inmediato - 0ms de carga)
+    if (cachedData) {
+      try {
+        const schema = JSON.parse(cachedData);
+        renderFormSchema(schema);
+      } catch (e) {
+        localStorage.removeItem(cacheKey);
+      }
+    }
+
+    // Consulta en background a Jupiter para validar cambios de marketing en tiempo real
+    const apiBase = getApiBaseUrl();
+    const url = `${apiBase}/api/forms/schema/${tipo}`;
+
+    fetch(url)
+      .then(r => r.json())
+      .then(data => {
+        if (data && data.success && data.form) {
+          const stringified = JSON.stringify(data.form);
+          // Si el esquema es diferente al que teníamos en caché, renderizar la nueva versión
+          if (stringified !== cachedData) {
+            localStorage.setItem(cacheKey, stringified);
+            renderFormSchema(data.form);
+          }
+        }
+      })
+      .catch(err => {
+        console.warn("Error cargando esquema dinámico desde Jupiter en background:", err);
+        // Si no hay caché y falló el fetch, mostrar alerta de conexión
+        if (!localStorage.getItem(cacheKey)) {
+          formTitle.textContent = 'Error de Conexión';
+          formDescription.textContent = 'No pudimos conectar con Jupiter para cargar el formulario. Intenta refrescar.';
+          formSkeleton.classList.add('hidden');
+        }
+      });
+  }
+
+  // --- Lógica de Manejo de Pestañas (Tabs) ---
+  function selectTab(activeTab, tipo) {
+    // Resetear estilos de todos los botones de tabs
     [tabEnroll, tabInfo, tabPqrs].forEach(tab => {
       tab.classList.remove('bg-accent-orange', 'text-white', 'glow-orange', 'bg-accent-blue', 'glow-blue');
       tab.classList.add('text-slate-600');
     });
-    // Hide all forms
-    [formEnroll, formInfo, formPqrs].forEach(form => {
-      form.classList.add('hidden');
-    });
 
-    // Style active tab
+    // Dar color de acuerdo a la pestaña seleccionada
     activeTab.classList.remove('text-slate-600');
-    if (activeTab === tabEnroll) {
+    if (tipo === 'inscripcion') {
       activeTab.classList.add('bg-accent-orange', 'text-white', 'glow-orange');
     } else {
       activeTab.classList.add('bg-accent-blue', 'text-white', 'glow-blue');
     }
-    // Show active form
-    activeForm.classList.remove('hidden');
+
+    // Cargar esquema dinámico
+    loadForm(tipo);
   }
 
+  // Enlazar listeners a las pestañas
   if (tabEnroll && !tabEnroll.dataset.listenerAdded) {
     tabEnroll.dataset.listenerAdded = 'true';
-    tabEnroll.addEventListener('click', () => selectTab(tabEnroll, formEnroll));
+    tabEnroll.addEventListener('click', () => selectTab(tabEnroll, 'inscripcion'));
   }
   if (tabInfo && !tabInfo.dataset.listenerAdded) {
     tabInfo.dataset.listenerAdded = 'true';
-    tabInfo.addEventListener('click', () => selectTab(tabInfo, formInfo));
+    tabInfo.addEventListener('click', () => selectTab(tabInfo, 'informacion'));
   }
   if (tabPqrs && !tabPqrs.dataset.listenerAdded) {
     tabPqrs.dataset.listenerAdded = 'true';
-    tabPqrs.addEventListener('click', () => selectTab(tabPqrs, formPqrs));
+    tabPqrs.addEventListener('click', () => selectTab(tabPqrs, 'pqrs'));
   }
 
-  // --- Lógica de Campo Condicional (Astro Client-Side) ---
-  const enrollGrade = document.getElementById('enroll-grade');
-  const divTech = document.getElementById('div-technical-interest');
-  const enrollTechSelect = document.getElementById('enroll-technical-interest');
-
-  if (enrollGrade && divTech) {
-    if (!enrollGrade.dataset.listenerAdded) {
-      enrollGrade.dataset.listenerAdded = 'true';
-      enrollGrade.addEventListener('change', () => {
-        if (enrollGrade.value === '10') {
-          divTech.classList.remove('hidden');
-          // Forzar reflow para animación
-          divTech.offsetHeight;
-          divTech.classList.add('scale-100', 'opacity-100');
-          if (enrollTechSelect) enrollTechSelect.required = true;
-        } else {
-          divTech.classList.remove('scale-100', 'opacity-100');
-          if (enrollTechSelect) {
-            enrollTechSelect.required = false;
-            enrollTechSelect.value = '';
-          }
-          setTimeout(() => {
-            if (enrollGrade.value !== '10') {
-              divTech.classList.add('hidden');
-            }
-          }, 300);
-        }
-      });
-    }
-  }
-
-  // --- Envíos Asíncronos a la API EAV de Jupiter ---
-  [formEnroll, formInfo, formPqrs].forEach(form => {
-    if (!form || form.dataset.listenerAdded) return;
-    form.dataset.listenerAdded = 'true';
-
-    form.addEventListener('submit', (e) => {
+  // --- Radicación Asíncrona del Formulario Dinámico ---
+  if (dynamicCrmForm && !dynamicCrmForm.dataset.listenerAdded) {
+    dynamicCrmForm.dataset.listenerAdded = 'true';
+    
+    dynamicCrmForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const button = form.querySelector('button[type="submit"]');
+      const button = document.getElementById('btn-submit');
       const originalHtml = button.innerHTML;
 
-      // 1. Mostrar estado de carga (Spinner Premium)
+      // 1. Mostrar spinner de carga premium
       button.disabled = true;
       button.innerHTML = `
         <span class="flex items-center justify-center gap-2">
@@ -306,47 +429,36 @@ const JUPITER_API_URL = import.meta.env.PUBLIC_JUPITER_API_URL || 'http://127.0.
         </span>
       `;
 
-      // 2. Preparar el contenedor de errores
-      let errorContainer = form.querySelector('.form-errors-box');
+      // 2. Limpiar/crear contenedor de errores
+      let errorContainer = dynamicCrmForm.querySelector('.form-errors-box');
       if (!errorContainer) {
         errorContainer = document.createElement('div');
         errorContainer.className = 'form-errors-box mt-4 p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl hidden flex flex-col gap-1.5';
-        form.insertBefore(errorContainer, button);
+        dynamicCrmForm.insertBefore(errorContainer, button);
       }
       errorContainer.classList.add('hidden');
       errorContainer.innerHTML = '';
 
-      // 3. Serializar datos del formulario
+      // 3. Serializar dinámicamente los campos cargados
       const formData = {};
-      const inputs = form.querySelectorAll('input, select, textarea');
-      inputs.forEach(input => {
-        // Ignorar checkbox de términos en el mapeo EAV de datos de valor
-        if (input.type === 'checkbox' && input.id.endsWith('-terms')) {
-          return;
-        }
+      let isConditionalHidden = false;
 
-        if (input.id) {
-          // Ignorar campo condicional si está oculto para evitar validación del backend
-          if (input.id === 'enroll-technical-interest' && divTech.classList.contains('hidden')) {
-            return;
-          }
-          formData[input.id] = input.value;
+      loadedFormFields.forEach(field => {
+        const input = dynamicFieldsContainer.querySelector(`#${field.name}`);
+        if (!input) return;
+
+        // Comprobar si el campo está oculto por su contenedor condicional
+        const divWrap = document.getElementById(`div-${field.name}`);
+        const isHidden = divWrap && divWrap.classList.contains('hidden');
+
+        if (!isHidden) {
+          formData[field.name] = input.value;
         }
       });
 
-      // 4. Determinar tipo de endpoint e inyectar URL dinámica
-      const container = document.getElementById('contact-forms-container');
-      let apiBaseUrl = container ? (container.dataset.jupiterUrl || 'http://127.0.0.1:8000') : 'http://127.0.0.1:8000';
-      
-      // Inteligencia a prueba de fallos para Cloudflare Pages
-      // Si el navegador detecta que estamos en la web en vivo (aulasunivirtuales.com),
-      // fuerza la URL de producción real de Jupiter automáticamente.
-      if (typeof window !== 'undefined' && window.location.hostname.includes('aulasunivirtuales.com')) {
-        apiBaseUrl = 'https://jupiter.aulasunivirtuales.com';
-      }
-      
-      const tipo = form.id === 'form-enroll' ? 'inscripcion' : (form.id === 'form-info' ? 'informacion' : 'pqrs');
-      const url = `${apiBaseUrl.replace(/\/$/, '')}/api/forms/schema/${tipo}/submit`;
+      // 4. Endpoint dinámico
+      const apiBase = getApiBaseUrl();
+      const url = `${apiBase}/api/forms/schema/${currentTipo}/submit`;
 
       // 5. Enviar POST
       fetch(url, {
@@ -361,17 +473,15 @@ const JUPITER_API_URL = import.meta.env.PUBLIC_JUPITER_API_URL || 'http://127.0.
         const data = await response.json();
         
         if (response.status === 201) {
-          // Éxito: Limpiar formulario, ocultar condicional y mostrar modal
+          // Éxito rotundo
           successModal.classList.remove('hidden');
-          form.reset();
-          if (divTech) {
-            divTech.classList.add('hidden');
-            divTech.classList.remove('scale-100', 'opacity-100');
-          }
+          dynamicCrmForm.reset();
+          // Evaluar condiciones para limpiar/ocultar inputs condicionales
+          evaluateConditions(loadedFormFields, dynamicFieldsContainer);
         } else if (response.status === 422) {
-          // Error de validación: Renderizar los errores devueltos por Laravel de forma premium
+          // Errores de validación dinámicos mapeados desde Laravel
           errorContainer.classList.remove('hidden');
-          let errorHtml = '<strong class="font-bold">Por favor corrige los siguientes campos:</strong><ul class="list-disc pl-5 mt-1.5 flex flex-col gap-1">';
+          let errorHtml = '<strong class="font-bold">Corrige los siguientes campos:</strong><ul class="list-disc pl-5 mt-1.5 flex flex-col gap-1">';
           
           if (data.errors) {
             Object.keys(data.errors).forEach(key => {
@@ -385,24 +495,28 @@ const JUPITER_API_URL = import.meta.env.PUBLIC_JUPITER_API_URL || 'http://127.0.
           errorHtml += '</ul>';
           errorContainer.innerHTML = errorHtml;
         } else {
-          throw new Error(data.message || 'Error desconocido del servidor.');
+          throw new Error(data.message || 'Error del servidor.');
         }
       })
       .catch(err => {
         errorContainer.classList.remove('hidden');
-        errorContainer.innerHTML = `<strong class="font-bold">Error de Conexión:</strong> No pudimos conectar con Jupiter (Laravel). Por favor asegúrate de que el servidor esté activo localmente en <code class="bg-red-100/80 px-1.5 py-0.5 rounded text-xs">php artisan serve</code>.`;
-        console.error("Fetch Error:", err);
+        errorContainer.innerHTML = `<strong class="font-bold">Error de Conexión:</strong> No pudimos conectar con Jupiter (Laravel). Por favor verifica que tu servidor de producción o local esté activo.`;
+        console.error("Fetch EAV Submit Error:", err);
       })
       .finally(() => {
-        // Restaurar estado del botón
         button.disabled = false;
         button.innerHTML = originalHtml;
       });
     });
-  });
+  }
 
   successCloseBtn.addEventListener('click', () => {
     successModal.classList.add('hidden');
+  });
+
+  // --- Carga Inicial ---
+  document.addEventListener('DOMContentLoaded', () => {
+    loadForm('inscripcion');
   });
 </script>
 
