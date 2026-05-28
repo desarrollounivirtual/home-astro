@@ -1,0 +1,265 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import { generateComponentStyles } from '../utils/spacing';
+
+const { blok } = Astro.props;
+
+// Storyblok fields with robust fallback defaults
+const titlePrefix = blok.titlePrefix || "API DE FACTURACIÓN ELECTRÓNICA Y";
+const typedPhrases = blok.typedPhrases || "NÓMINA ELECTRÓNICA, DOCUMENTOS SOPORTE, NOTAS CRÉDITO, NOTAS DÉBITO, EVENTOS RADIAN, NOTAS DE AJUSTE";
+const subtitle = blok.subtitle || "Somos la API más rápida, confiable y con el mejor soporte de Colombia.";
+
+// Buttons configuration
+const btn1Text = blok.btn1Text || "Escríbenos";
+const btn1Link = blok.btn1Link || "https://api.whatsapp.com/send?phone=573161331234";
+
+const btn2Text = blok.btn2Text || "Documentación";
+const btn2Link = blok.btn2Link || "https://developers.factus.com.co/";
+
+const btn3Text = blok.btn3Text || "Descargar API";
+const btn3Link = blok.btn3Link || "https://developers.factus.com.co/coleccion";
+
+// Technical languages section
+const languagesPrefix = blok.languagesPrefix || "Integra nuestra API de forma sencilla desde cualquier lenguaje:";
+const languagesList = blok.languagesList || "JavaScript, Python, PHP, Ruby, Java, C#, Go, entre otros.";
+
+// Rating badge
+const ratingValue = blok.ratingValue || "4.5";
+const ratingUrl = blok.ratingUrl || "https://es.trustpilot.com/review/factus.com.co";
+
+// Mascot asset
+const mascotImage = typeof blok.mascotImage === 'string' ? blok.mascotImage : (blok.mascotImage?.filename || "/images/univirtual_astronaut_mascot.png");
+
+// Spacing styles generator
+const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
+const styles = generateComponentStyles(blok, spacingId);
+
+// Parse phrases for typewriter
+const phrases = typedPhrases.split(',').map((p: string) => p.trim()).filter((p: string) => p.length > 0);
+---
+
+{styles && <style is:inline set:html={styles} />}
+
+<div {...storyblokEditable(blok)} class={`${spacingId} relative overflow-hidden bg-slate-950 font-sans`}>
+  <!-- Premium Dark Theme Space-Gradient Background -->
+  <div class="absolute inset-0 z-0 bg-gradient-to-br from-[#0b0f19] via-[#111827] to-[#1e1b4b]">
+    <!-- Animated background mesh -->
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:3.5rem_3.5rem]"></div>
+    
+    <!-- Ambient Radial Glows -->
+    <div class="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-accent-blue/10 filter blur-[120px] animate-pulse pointer-events-none" style="animation-duration: 10s;"></div>
+    <div class="absolute bottom-[10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-accent-orange/8 filter blur-[140px] animate-pulse pointer-events-none" style="animation-duration: 15s;"></div>
+  </div>
+
+  <!-- Main Content Layout -->
+  <div class="max-w-[1350px] mx-auto px-4 sm:px-8 lg:px-[80px] pt-24 pb-20 lg:pt-32 lg:pb-28 relative z-10 text-white w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      
+      <!-- Left Column: Copywriting & CTAs -->
+      <div class="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+        
+        <!-- Premium Tag/Badge -->
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-accent-orange/10 border border-accent-orange/20 backdrop-blur-md mb-6 hover:border-accent-orange/35 transition-colors duration-300">
+          <span class="w-2 h-2 rounded-full bg-accent-orange animate-ping"></span>
+          <span class="text-xs font-bold tracking-wider text-accent-orange uppercase font-display">TECNOLOGÍA DE VANGUARDIA</span>
+        </div>
+
+        <!-- Master Typing Title -->
+        <h1 class="text-3.5xl sm:text-5xl md:text-[2.85rem] lg:text-[3.2rem] font-black font-display tracking-tight text-white leading-[1.15] mb-6">
+          <div class="opacity-95">{titlePrefix}</div>
+          <span 
+            id="factus-typed-text" 
+            class="text-[1.85rem] sm:text-[2.35rem] lg:text-[2.85rem] text-gradient-orange whitespace-nowrap border-r-4 border-accent-blue pr-1.5 animate-blink"
+            data-phrases={phrases.join('|')}
+          >
+            {phrases[0] || ""}
+          </span>
+        </h1>
+
+        <!-- High-converting subtitle -->
+        <p class="text-lg sm:text-xl text-slate-300 font-light leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-10">
+          {subtitle}
+        </p>
+
+        <!-- CTA Buttons Section -->
+        <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start items-center w-full sm:w-auto">
+          <!-- WhatsApp Button (Escríbenos) -->
+          {btn1Text && (
+            <a 
+              href={btn1Link} 
+              class="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-950 font-extrabold text-base rounded-full shadow-lg transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white"
+            >
+              <span>{btn1Text}</span>
+              <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+            </a>
+          )}
+
+          <!-- Documentation Button -->
+          {btn2Text && (
+            <a 
+              href={btn2Link} 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full sm:w-auto px-8 py-3.5 bg-slate-800/80 hover:bg-slate-700 text-white border border-slate-700 font-bold text-base rounded-full transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-slate-700"
+            >
+              <span>{btn2Text}</span>
+            </a>
+          )}
+
+          <!-- Download API Button -->
+          {btn3Text && (
+            <a 
+              href={btn3Link} 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full sm:w-auto px-8 py-3.5 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold text-base rounded-full btn-premium glow-orange flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-accent-orange"
+            >
+              <span>{btn3Text}</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </a>
+          )}
+        </div>
+
+        <!-- Horizontal Divider Line (Desktop only) -->
+        <div class="hidden lg:flex mt-10 w-full max-w-xl h-[3px] rounded-full overflow-hidden">
+          <div class="w-1/2" style="background: hsl(210, 100%, 50%);"></div>
+          <div class="w-1/4" style="background: hsl(20, 90%, 55%);"></div>
+          <div class="w-1/4" style="background: #1e1b4b;"></div>
+        </div>
+
+        <!-- Supported Languages Text -->
+        <div class="pt-6 pb-2 w-full text-slate-400 text-sm sm:text-base max-w-xl">
+          <p class="font-medium text-slate-300">
+            {languagesPrefix}
+          </p>
+          <p class="italic text-slate-400 font-light mt-1">
+            {languagesList}
+          </p>
+        </div>
+
+        <!-- Trustpilot CTA Badge -->
+        {ratingValue && (
+          <div class="flex justify-center lg:justify-start w-full mt-4">
+            <a 
+              href={ratingUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center gap-2.5 rounded-full px-5 py-2 bg-slate-900/90 border border-slate-800 text-sm font-medium text-slate-300 hover:text-white transition-all duration-300 hover:border-slate-700 shadow-lg"
+            >
+              <span class="font-bold text-white">{ratingValue}</span>
+              <span class="text-emerald-500 text-lg">★</span>
+              <span class="text-slate-400">en</span>
+              <span class="font-bold text-white tracking-wide">Trustpilot</span>
+            </a>
+          </div>
+        )}
+
+      </div>
+
+      <!-- Right Column: Visual Mascot / Image Block -->
+      <div class="lg:col-span-5 flex justify-center items-center relative select-none">
+        <!-- Floating Mascot Wrapper -->
+        <div class="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-none aspect-square flex items-center justify-center animate-float">
+          <!-- Background decorative mesh -->
+          <div class="absolute w-[120%] h-[120%] rounded-full bg-accent-blue/10 filter blur-3xl pointer-events-none"></div>
+          
+          <!-- Image -->
+          <img 
+            src={mascotImage} 
+            alt="Univirtual Astronaut Mascot" 
+            class="w-[90%] h-[90%] object-contain drop-shadow-[0_20px_50px_rgba(59,130,246,0.25)] hover:scale-105 transition-transform duration-500 relative z-10" 
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Custom smooth floating animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-16px) rotate(1deg);
+    }
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Typewriter blinking cursor animation */
+  @keyframes blink {
+    0%, 100% {
+      border-color: transparent;
+    }
+    50% {
+      border-color: hsl(20, 90%, 55%);
+    }
+  }
+  .animate-blink {
+    animation: blink 0.85s step-end infinite;
+  }
+</style>
+
+<script>
+  // Pure performance-optimized Typewriter script
+  document.addEventListener("DOMContentLoaded", () => {
+    const typedSpan = document.getElementById("factus-typed-text");
+    if (!typedSpan) return;
+
+    const dataAttr = typedSpan.getAttribute("data-phrases");
+    if (!dataAttr) return;
+
+    const phrases = dataAttr.split('|').filter(p => p.length > 0);
+    if (phrases.length === 0) return;
+
+    let wordIdx = 0;
+    let charIdx = phrases[0].length; // Start with the first word pre-rendered for SEO / Layout Shift
+    let isDeleting = false;
+    
+    const typeSpeed = 70;
+    const eraseSpeed = 35;
+    const pauseDelay = 2200;
+    const startDelay = 500;
+
+    function typeEffect() {
+      const currentWord = phrases[wordIdx];
+      
+      if (isDeleting) {
+        typedSpan.textContent = currentWord.substring(0, charIdx - 1);
+        charIdx--;
+      } else {
+        typedSpan.textContent = currentWord.substring(0, charIdx + 1);
+        charIdx++;
+      }
+
+      let delay = isDeleting ? eraseSpeed : typeSpeed;
+
+      if (!isDeleting && charIdx === currentWord.length) {
+        delay = pauseDelay;
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        wordIdx = (wordIdx + 1) % phrases.length;
+        delay = startDelay;
+      }
+
+      // Add a slight human-like randomness to the typing speed
+      if (charIdx > 0 && charIdx < currentWord.length) {
+        delay += Math.random() * 20 - 10;
+      }
+
+      setTimeout(typeEffect, delay);
+    }
+
+    // Begin typing sequence after initial delay
+    setTimeout(typeEffect, pauseDelay);
+  });
+</script>

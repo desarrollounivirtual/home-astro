@@ -27,7 +27,8 @@
             "coverage",
             "platformPromo",
             "textTicker",
-            "teachersSection"
+            "teachersSection",
+            "univirtualBanner"
           ]
         }
       }
@@ -2113,6 +2114,137 @@
             }
           ],
           "default_value": "blue"
+        }
+      }
+    },
+    {
+      "name": "univirtualBanner",
+      "display_name": "Banner Univirtual Premium",
+      "is_root": false,
+      "is_nestable": true,
+      "schema": {
+        "titlePrefix": {
+          "type": "text",
+          "display_name": "Prefijo del Título (Fijo)",
+          "default_value": "API DE FACTURACIÓN ELECTRÓNICA Y"
+        },
+        "typedPhrases": {
+          "type": "text",
+          "display_name": "Frases Animadas (Separadas por comas)",
+          "default_value": "NÓMINA ELECTRÓNICA, DOCUMENTOS SOPORTE, NOTAS CRÉDITO, NOTAS DÉBITO, EVENTOS RADIAN, NOTAS DE AJUSTE"
+        },
+        "subtitle": {
+          "type": "text",
+          "display_name": "Subtítulo",
+          "default_value": "Somos la API más rápida, confiable y con el mejor soporte de Colombia."
+        },
+        "btn1Text": {
+          "type": "text",
+          "display_name": "Texto Botón 1 (Escríbenos)",
+          "default_value": "Escríbenos"
+        },
+        "btn1Link": {
+          "type": "text",
+          "display_name": "Enlace Botón 1 (WhatsApp/URL)",
+          "default_value": "https://api.whatsapp.com/send?phone=573161331234"
+        },
+        "btn2Text": {
+          "type": "text",
+          "display_name": "Texto Botón 2 (Documentación)",
+          "default_value": "Documentación"
+        },
+        "btn2Link": {
+          "type": "text",
+          "display_name": "Enlace Botón 2 (URL)",
+          "default_value": "https://developers.factus.com.co/"
+        },
+        "btn3Text": {
+          "type": "text",
+          "display_name": "Texto Botón 3 (Descargar API)",
+          "default_value": "Descargar API"
+        },
+        "btn3Link": {
+          "type": "text",
+          "display_name": "Enlace Botón 3 (URL)",
+          "default_value": "https://developers.factus.com.co/coleccion"
+        },
+        "languagesPrefix": {
+          "type": "text",
+          "display_name": "Prefijo de Lenguajes",
+          "default_value": "Integra nuestra API de forma sencilla desde cualquier lenguaje:"
+        },
+        "languagesList": {
+          "type": "text",
+          "display_name": "Lista de Lenguajes",
+          "default_value": "JavaScript, Python, PHP, Ruby, Java, C#, Go, entre otros."
+        },
+        "ratingValue": {
+          "type": "text",
+          "display_name": "Calificación (Ej: 4.5)",
+          "default_value": "4.5"
+        },
+        "ratingUrl": {
+          "type": "text",
+          "display_name": "Enlace de Calificación (Trustpilot)",
+          "default_value": "https://es.trustpilot.com/review/factus.com.co"
+        },
+        "mascotImage": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "display_name": "Imagen de Mascota"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "display_name": "Unidad de Medida",
+          "options": [
+            {
+              "name": "Píxeles (px)",
+              "value": "px"
+            },
+            {
+              "name": "Rem (rem)",
+              "value": "rem"
+            },
+            {
+              "name": "Em (em)",
+              "value": "em"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopMobile": {
+          "type": "text",
+          "display_name": "Padding Superior (Móvil)"
+        },
+        "paddingBottomMobile": {
+          "type": "text",
+          "display_name": "Padding Inferior (Móvil)"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        },
+        "marginTopMobile": {
+          "type": "text",
+          "display_name": "Margen Superior (Móvil)"
+        },
+        "marginBottomMobile": {
+          "type": "text",
+          "display_name": "Margen Inferior (Móvil)"
+        },
+        "marginTopDesktop": {
+          "type": "text",
+          "display_name": "Margen Superior (PC)"
+        },
+        "marginBottomDesktop": {
+          "type": "text",
+          "display_name": "Margen Inferior (PC)"
         }
       }
     }

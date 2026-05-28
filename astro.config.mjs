@@ -22,6 +22,7 @@ export default defineConfig({
         // Mapeamos los componentes con sus nombres técnicos reales en minúscula procedentes de la API de Storyblok
         page: 'storyblok/Page',
         hero: 'storyblok/Hero',
+        univirtualBanner: 'storyblok/UnivirtualBanner',
         methodology: 'storyblok/Methodology',
         benefits: 'storyblok/Benefits',
         platformPromo: 'storyblok/PlatformPromo',
