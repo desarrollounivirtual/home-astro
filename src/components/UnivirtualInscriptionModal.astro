@@ -1,0 +1,491 @@
+---
+const JUPITER_API_URL = import.meta.env.PUBLIC_JUPITER_API_URL || 'http://127.0.0.1:8000';
+---
+
+<!-- Global Portal-like Modal Container -->
+<div 
+  id="univirtual-inscription-modal" 
+  class="fixed inset-0 z-[999] hidden flex items-center justify-center p-4 overflow-y-auto"
+  data-jupiter-url={JUPITER_API_URL}
+>
+  <!-- Dark glass overlay with heavy blur -->
+  <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-md transition-opacity duration-300" id="univirtual-modal-overlay"></div>
+  
+  <!-- Modal Card (sleek white education panel) -->
+  <div class="relative w-full max-w-2xl bg-white border border-slate-200/60 shadow-2xl rounded-[32px] overflow-hidden transform scale-95 opacity-0 transition-all duration-300 z-10 flex flex-col max-h-[90vh]" id="univirtual-modal-card">
+    
+    <!-- Close floating button -->
+    <button 
+      type="button" 
+      id="univirtual-modal-close" 
+      class="absolute top-5 right-5 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-800 transition-colors flex items-center justify-center hover:rotate-90 duration-300 z-50 shadow-sm"
+      aria-label="Cerrar"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Scrollable content -->
+    <div class="overflow-y-auto custom-scrollbar p-6 sm:p-10 flex-1">
+      
+      <!-- Header -->
+      <div class="mb-8 border-b border-slate-100 pb-5 pr-8">
+        <div class="flex items-center gap-2.5 mb-2.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-accent-orange animate-pulse"></span>
+          <span class="text-xs font-bold tracking-wider text-accent-orange uppercase font-display">Inscripción Online</span>
+        </div>
+        <h3 class="text-2xl sm:text-3.5xl font-black font-display text-slate-900 leading-tight">Formulario de Inscripción</h3>
+        <p class="text-slate-500 text-sm mt-1">Completa tus datos para iniciar tu bachillerato virtual en 10 meses.</p>
+      </div>
+
+      <!-- CRM Dynamic Form -->
+      <form id="univirtual-modal-crm-form" class="space-y-6">
+        
+        <!-- SKELETON LOADER -->
+        <div id="univirtual-modal-skeleton" class="space-y-5 py-2">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <div class="h-3 bg-slate-200 rounded w-1/3 mb-2 animate-pulse"></div>
+              <div class="h-11 bg-slate-100 rounded-xl w-full animate-pulse"></div>
+            </div>
+            <div>
+              <div class="h-3 bg-slate-200 rounded w-1/3 mb-2 animate-pulse"></div>
+              <div class="h-11 bg-slate-100 rounded-xl w-full animate-pulse"></div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <div class="h-3 bg-slate-200 rounded w-1/4 mb-2 animate-pulse"></div>
+              <div class="h-11 bg-slate-100 rounded-xl w-full animate-pulse"></div>
+            </div>
+            <div>
+              <div class="h-3 bg-slate-200 rounded w-1/4 mb-2 animate-pulse"></div>
+              <div class="h-11 bg-slate-100 rounded-xl w-full animate-pulse"></div>
+            </div>
+          </div>
+          <div>
+            <div class="h-3 bg-slate-200 rounded w-1/5 mb-2 animate-pulse"></div>
+            <div class="h-28 bg-slate-100 rounded-xl w-full animate-pulse"></div>
+          </div>
+        </div>
+
+        <!-- DYNAMIC FIELDS DESTINATION -->
+        <div id="univirtual-modal-fields" class="grid grid-cols-1 sm:grid-cols-2 gap-5 hidden animate-fade-in">
+          <!-- Rendered dynamically via JavaScript -->
+        </div>
+
+        <!-- Terms Compliance -->
+        <div id="univirtual-modal-terms" class="flex items-center gap-3 hidden">
+          <input type="checkbox" id="univirtual-modal-terms-check" required class="w-5 h-5 accent-accent-orange bg-slate-50 border-slate-200 rounded focus:ring-0 cursor-pointer" />
+          <label for="univirtual-modal-terms-check" class="text-xs text-slate-600 cursor-pointer select-none">Acepto el tratamiento de mis datos personales según las políticas de UNIVIRTUAL.</label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="univirtual-modal-submit" class="w-full py-4 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold rounded-xl btn-premium glow-orange flex items-center justify-center gap-2 hidden">
+          <span>Enviar mi Inscripción</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </form>
+
+      <!-- Dynamic Success Area -->
+      <div id="univirtual-modal-success" class="hidden absolute inset-0 bg-white/98 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center z-20 animate-fade-in rounded-[32px]">
+        <div class="w-20 h-20 rounded-full bg-green-500/8 border border-green-500/15 flex items-center justify-center text-green-600 mb-6 shadow-sm">
+          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h4 class="text-3xl font-extrabold font-display text-slate-900 mb-2">¡Inscripción Exitosa!</h4>
+        <p class="text-slate-600 max-w-md mb-8">Hemos recibido tu solicitud de inscripción de forma correcta. Un asesor educativo de UNIVIRTUAL se pondrá en contacto contigo en breve para formalizar tu proceso.</p>
+        <button type="button" id="univirtual-modal-success-close" class="px-8 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-full shadow-lg transition-all duration-300">Entendido</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  // Pure JavaScript dynamic modal handling & dynamic EAV form rendering
+  (() => {
+    // Prevent duplicated initialization
+    if (window.univirtualModalInitialized) return;
+    window.univirtualModalInitialized = true;
+
+    // DOM Elements Cache
+    let modal, overlay, card, closeBtn, successCloseBtn, successArea;
+    let form, skeleton, fieldsContainer, termsContainer, submitBtn;
+    
+    let loadedFormFields = [];
+
+    function initDOMElements() {
+      modal = document.getElementById('univirtual-inscription-modal');
+      overlay = document.getElementById('univirtual-modal-overlay');
+      card = document.getElementById('univirtual-modal-card');
+      closeBtn = document.getElementById('univirtual-modal-close');
+      successCloseBtn = document.getElementById('univirtual-modal-success-close');
+      successArea = document.getElementById('univirtual-modal-success');
+
+      form = document.getElementById('univirtual-modal-crm-form');
+      skeleton = document.getElementById('univirtual-modal-skeleton');
+      fieldsContainer = document.getElementById('univirtual-modal-fields');
+      termsContainer = document.getElementById('univirtual-modal-terms');
+      submitBtn = document.getElementById('univirtual-modal-submit');
+    }
+
+    // Secure API URL resolver
+    function getApiBaseUrl() {
+      const container = document.getElementById('univirtual-inscription-modal');
+      let url = container ? (container.dataset.jupiterUrl || 'http://127.0.0.1:8000') : 'http://127.0.0.1:8000';
+      if (typeof window !== 'undefined' && window.location.hostname.includes('aulasunivirtuales.com')) {
+        url = 'https://jupiter.aulasunivirtuales.com';
+      }
+      return url.replace(/\/$/, '');
+    }
+
+    // Modal state controllers
+    function openModal() {
+      initDOMElements();
+      if (!modal) return;
+      
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-y-hidden');
+
+      // Animaciones de entrada
+      setTimeout(() => {
+        card.classList.remove('scale-95', 'opacity-0');
+        card.classList.add('scale-100', 'opacity-100');
+      }, 50);
+
+      loadModalFormSchema();
+    }
+
+    function closeModal() {
+      initDOMElements();
+      if (!modal) return;
+
+      card.classList.remove('scale-100', 'opacity-100');
+      card.classList.add('scale-95', 'opacity-0');
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-y-hidden');
+        successArea.classList.add('hidden');
+      }, 300);
+    }
+
+    // Global listener for dynamic triggers (anchors linking to #inscripcion-modal OR elements with data attribute)
+    document.addEventListener('click', (e) => {
+      // 1. Detect closest anchor
+      const anchor = e.target.closest('a');
+      const href = anchor ? anchor.getAttribute('href') : '';
+      
+      // 2. Detect closest button or trigger with data attribute
+      const dataTrigger = e.target.closest('[data-open-inscription-modal]');
+
+      if ((anchor && href === '#inscripcion-modal') || dataTrigger) {
+        e.preventDefault();
+        openModal();
+      }
+    });
+
+    // Enlazar eventos del modal
+    document.addEventListener('DOMContentLoaded', () => {
+      initDOMElements();
+      if (overlay) overlay.addEventListener('click', closeModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (successCloseBtn) successCloseBtn.addEventListener('click', closeModal);
+      
+      // Submit handler
+      if (form) {
+        form.addEventListener('submit', handleFormSubmit);
+      }
+    });
+
+    // --- Dynamic Form Schema Loader ---
+    function loadModalFormSchema() {
+      initDOMElements();
+      
+      // Stale-While-Revalidate caching
+      const cacheKey = 'crm_schema_inscripcion';
+      const cachedData = localStorage.getItem(cacheKey);
+
+      if (cachedData) {
+        try {
+          renderModalForm(JSON.parse(cachedData));
+        } catch (e) {
+          localStorage.removeItem(cacheKey);
+        }
+      }
+
+      const apiBase = getApiBaseUrl();
+      const url = `${apiBase}/api/forms/schema/inscripcion`;
+
+      fetch(url)
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.success && data.form) {
+            const stringified = JSON.stringify(data.form);
+            if (stringified !== cachedData) {
+              localStorage.setItem(cacheKey, stringified);
+              renderModalForm(data.form);
+            }
+          }
+        })
+        .catch(err => {
+          console.warn("Error cargando esquema en modal background:", err);
+          if (!localStorage.getItem(cacheKey)) {
+            const header = form.querySelector('#form-header-area');
+            if (header) {
+              header.innerHTML = `<h3 class="text-xl font-bold text-red-600">Error de Conexión</h3>
+              <p class="text-xs text-slate-500 mt-1">Verifica la conexión del servidor Jupiter de Laravel.</p>`;
+            }
+            skeleton.classList.add('hidden');
+          }
+        });
+    }
+
+    // --- Form UI Builder ---
+    function renderModalForm(schema) {
+      if (!schema || !schema.fields) return;
+      loadedFormFields = schema.fields;
+
+      fieldsContainer.innerHTML = '';
+
+      schema.fields.forEach(field => {
+        const fieldDiv = document.createElement('div');
+        fieldDiv.id = `modal-div-${field.name}`;
+        fieldDiv.className = 'transition-all duration-300 transform';
+
+        if (field.type === 'textarea') {
+          fieldDiv.className += ' col-span-1 sm:col-span-2';
+        }
+
+        // Label
+        const label = document.createElement('label');
+        label.setAttribute('for', `modal-${field.name}`);
+        label.className = 'block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2';
+        label.textContent = field.label;
+        if (field.required) {
+          const reqSpan = document.createElement('span');
+          reqSpan.className = 'text-red-500 ms-1';
+          reqSpan.textContent = '*';
+          label.appendChild(reqSpan);
+        }
+        fieldDiv.appendChild(label);
+
+        // Input
+        let input;
+        if (field.type === 'select') {
+          input = document.createElement('select');
+          input.className = 'w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors text-sm';
+          
+          const defaultOpt = document.createElement('option');
+          defaultOpt.value = '';
+          defaultOpt.disabled = true;
+          defaultOpt.selected = true;
+          defaultOpt.textContent = 'Selecciona una opción...';
+          input.appendChild(defaultOpt);
+
+          if (Array.isArray(field.options)) {
+            field.options.forEach(opt => {
+              const optEl = document.createElement('option');
+              optEl.value = opt;
+              optEl.textContent = opt;
+              input.appendChild(optEl);
+            });
+          }
+        } else if (field.type === 'textarea') {
+          input = document.createElement('textarea');
+          input.rows = 3;
+          input.className = 'w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors text-sm resize-none';
+          input.placeholder = 'Comentarios o notas...';
+        } else {
+          input = document.createElement('input');
+          input.type = field.type;
+          input.className = 'w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors text-sm';
+          
+          if (field.type === 'email') input.placeholder = 'ana@ejemplo.com';
+          else if (field.type === 'tel' || field.name.includes('phone')) input.placeholder = '3001234567';
+          else input.placeholder = `${field.label.toLowerCase()}...`;
+        }
+
+        input.id = `modal-${field.name}`;
+        input.name = field.name;
+        input.required = !!field.required;
+
+        fieldDiv.appendChild(input);
+        fieldsContainer.appendChild(fieldDiv);
+      });
+
+      skeleton.classList.add('hidden');
+      fieldsContainer.classList.remove('hidden');
+      termsContainer.classList.remove('hidden');
+      submitBtn.classList.remove('hidden');
+
+      setupModalConditionalListeners(schema.fields, fieldsContainer);
+    }
+
+    // Conditional evaluation
+    function evaluateModalConditions(fields, container) {
+      fields.forEach(field => {
+        if (!field.conditions || field.conditions.length === 0) return;
+
+        const divWrap = document.getElementById(`modal-div-${field.name}`);
+        if (!divWrap) return;
+
+        let shouldShow = field.condition_action === 'hide' ? true : false;
+
+        field.conditions.forEach(cond => {
+          const source = container.querySelector(`#modal-${cond.field_name}`);
+          if (!source) return;
+
+          const val = source.value;
+          let condMet = false;
+
+          if (cond.operator === 'equals') condMet = String(val) === String(cond.value);
+          else if (cond.operator === 'not_equals') condMet = String(val) !== String(cond.value);
+          else if (cond.operator === 'contains') condMet = String(val).includes(cond.value);
+          else if (cond.operator === 'not_empty') condMet = val !== '';
+          else if (cond.operator === 'empty') condMet = val === '';
+
+          if (condMet) {
+            shouldShow = field.condition_action === 'hide' ? false : true;
+          }
+        });
+
+        const input = divWrap.querySelector('input, select, textarea');
+
+        if (shouldShow) {
+          divWrap.classList.remove('hidden');
+          if (input && field.required) input.required = true;
+        } else {
+          if (input) {
+            input.required = false;
+            input.value = '';
+          }
+          divWrap.classList.add('hidden');
+        }
+      });
+    }
+
+    function setupModalConditionalListeners(fields, container) {
+      fields.forEach(field => {
+        if (!field.conditions || field.conditions.length === 0) return;
+
+        field.conditions.forEach(cond => {
+          const source = container.querySelector(`#modal-${cond.field_name}`);
+          if (!source) return;
+
+          if (!source.dataset.modalListenerAdded) {
+            source.dataset.modalListenerAdded = 'true';
+            ['change', 'input'].forEach(ev => {
+              source.addEventListener(ev, () => evaluateModalConditions(fields, container));
+            });
+          }
+        });
+      });
+
+      evaluateModalConditions(fields, container);
+    }
+
+    // --- Inscription Submit ---
+    function handleFormSubmit(e) {
+      e.preventDefault();
+
+      const btn = document.getElementById('univirtual-modal-submit');
+      const originalText = btn.innerHTML;
+
+      // Loader
+      btn.disabled = true;
+      btn.innerHTML = `
+        <span class="flex items-center justify-center gap-2">
+          <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span>Procesando inscripción...</span>
+        </span>
+      `;
+
+      // Clear errors
+      let errorContainer = form.querySelector('.modal-errors-box');
+      if (!errorContainer) {
+        errorContainer = document.createElement('div');
+        errorContainer.className = 'modal-errors-box mt-4 p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl hidden flex flex-col gap-1.5';
+        form.insertBefore(errorContainer, btn);
+      }
+      errorContainer.classList.add('hidden');
+      errorContainer.innerHTML = '';
+
+      // Serialize data
+      const formData = {};
+      loadedFormFields.forEach(field => {
+        const input = fieldsContainer.querySelector(`#modal-${field.name}`);
+        if (!input) return;
+
+        const divWrap = document.getElementById(`modal-div-${field.name}`);
+        const isHidden = divWrap && divWrap.classList.contains('hidden');
+
+        if (!isHidden) {
+          formData[field.name] = input.value;
+        }
+      });
+
+      const apiBase = getApiBaseUrl();
+      const url = `${apiBase}/api/forms/schema/inscripcion/submit`;
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(async (response) => {
+        const data = await response.json();
+        
+        if (response.status === 201) {
+          // Success
+          successArea.classList.remove('hidden');
+          form.reset();
+          evaluateModalConditions(loadedFormFields, fieldsContainer);
+        } else if (response.status === 422) {
+          // Laravel Validation errors
+          errorContainer.classList.remove('hidden');
+          let errHtml = '<strong class="font-bold">Corrige los campos:</strong><ul class="list-disc pl-5 mt-1 mt-1.5 flex flex-col gap-1">';
+          if (data.errors) {
+            Object.keys(data.errors).forEach(k => {
+              data.errors[k].forEach(e => {
+                errHtml += `<li>${e}</li>`;
+              });
+            });
+          } else {
+            errHtml += `<li>${data.message || 'Error de datos.'}</li>`;
+          }
+          errHtml += '</ul>';
+          errorContainer.innerHTML = errHtml;
+        } else {
+          throw new Error(data.message || 'Error de respuesta.');
+        }
+      })
+      .catch(err => {
+        errorContainer.classList.remove('hidden');
+        errorContainer.innerHTML = `<strong class="font-bold">Error de Conexión:</strong> No pudimos comunicar tu inscripción con el servidor de Laravel. Por favor inténtalo de nuevo.`;
+        console.error("Modal Inscription EAV Submit Error:", err);
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      });
+    }
+
+    // Expose open trigger global callback
+    window.loadModalForm = () => {
+      initDOMElements();
+      loadModalFormSchema();
+    };
+  })();
+</script>

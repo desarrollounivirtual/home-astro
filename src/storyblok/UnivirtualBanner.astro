@@ -162,14 +162,16 @@ const phrases = typedPhrases.split(',').map((p: string) => p.trim()).filter((p: 
         <!-- Floating Mascot Wrapper -->
         <div class="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-none aspect-square flex items-center justify-center animate-float">
           <!-- Background decorative mesh -->
-          <div class="absolute w-[120%] h-[120%] rounded-full bg-accent-blue/10 filter blur-3xl pointer-events-none"></div>
+          <div class="absolute w-[120%] h-[120%] bg-accent-blue/10 filter blur-3xl pointer-events-none"></div>
           
           <!-- Mascot Image with dark background integration -->
-          <img 
-            src={mascotImage} 
-            alt="Mascota Astronauta Univirtual" 
-            class="w-[120%] h-[120%] object-contain drop-shadow-[0_20px_50px_rgba(59,130,246,0.25)] hover:scale-105 transition-transform duration-500 relative z-10" 
-          />
+          <div class="rounded-3xl overflow-hidden">
+            <img 
+              src={mascotImage} 
+              alt="Mascota Astronauta Univirtual" 
+              class="w-[120%] h-[120%] object-cover"
+            />
+          </div>
         </div>
       </div>
 

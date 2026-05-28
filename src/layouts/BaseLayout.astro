@@ -1,6 +1,7 @@
 ---
 import SEO from '../components/SEO.astro';
 import '../styles/global.css';
+import UnivirtualInscriptionModal from '../components/UnivirtualInscriptionModal.astro';
 
 interface Props {
   title?: string;
@@ -39,5 +40,8 @@ const { title, description, canonicalURL, ogImage, schemaType } = Astro.props;
     </main>
 
     <slot name="footer" />
+
+    <!-- Global Inscription Modal Popup -->
+    <UnivirtualInscriptionModal />
   </body>
 </html>
