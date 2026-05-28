@@ -48,13 +48,13 @@ const cleanWa2 = whatsApp2.replace(/[^0-9]/g, '');
 <div id="nav-wrapper" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform translate-y-0 select-none">
   
   <!-- LEVEL 1: Header Ticker (Carrusel Promocional Infinito) -->
-  <div id="header-ticker" class="h-[50px] bg-slate-950 text-white flex items-center overflow-hidden border-b border-white/5 relative z-30">
+  <div id="header-ticker" class="h-[30px] bg-slate-950 text-white flex items-center overflow-hidden border-b border-white/5 relative z-30">
     <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none select-none z-10"></div>
     <div class="relative w-full flex items-center overflow-x-hidden">
       <!-- Marquee Track Wrapper -->
       <div class="marquee-wrapper flex w-full">
         <!-- Track 1 -->
-        <div class="marquee-track flex whitespace-nowrap items-center gap-16 py-2.5 shrink-0 min-w-full" style="animation-duration: 26s;">
+        <div class="marquee-track flex whitespace-nowrap items-center gap-16 py-2.5 shrink-0 min-w-full" style="animation-duration: 50s;">
           {tickerPhrases.map((phrase) => (
             <div class="flex items-center gap-6 shrink-0">
               <span class="text-xs sm:text-sm font-semibold tracking-wide text-slate-100">{phrase}</span>
@@ -63,7 +63,7 @@ const cleanWa2 = whatsApp2.replace(/[^0-9]/g, '');
           ))}
         </div>
         <!-- Track 2 (Duplicate for seamless loop) -->
-        <div class="marquee-track flex whitespace-nowrap items-center gap-16 py-2.5 shrink-0 min-w-full" style="animation-duration: 26s;" aria-hidden="true">
+        <div class="marquee-track flex whitespace-nowrap items-center gap-16 py-2.5 shrink-0 min-w-full" style="animation-duration: 50s;" aria-hidden="true">
           {tickerPhrases.map((phrase) => (
             <div class="flex items-center gap-6 shrink-0">
               <span class="text-xs sm:text-sm font-semibold tracking-wide text-slate-100">{phrase}</span>
@@ -76,7 +76,7 @@ const cleanWa2 = whatsApp2.replace(/[^0-9]/g, '');
   </div>
   
   <!-- LEVEL 2: Main Brand Header -->
-  <header id="header-main" class="h-[65px] bg-white/80 backdrop-blur-md border-b border-slate-100 flex items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300 relative z-20">
+  <header id="header-main" class="h-[80px] bg-white/80 backdrop-blur-md border-b border-slate-100 flex items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300 relative z-20">
     <div class="max-w-7xl mx-auto w-full flex items-center justify-between">
       
       <!-- Left Side: Logo & WhatsApp Interactive Pills -->
@@ -94,7 +94,7 @@ const cleanWa2 = whatsApp2.replace(/[^0-9]/g, '');
 
         <!-- WhatsApp Links (Desktop and Large Devices only) -->
         <div class="hidden lg:flex items-center space-x-2.5 ml-4 pl-4 border-l border-slate-200">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mr-1">WhatsApp:</span>
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mr-1">Contacto:</span>
           
           <a href={`https://wa.me/57${cleanWa1}`} target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-50/70 text-emerald-700 hover:bg-emerald-100 hover:text-emerald-800 transition-all duration-200 text-xs font-bold border border-emerald-100/60 shadow-sm">
             <svg class="w-3.5 h-3.5 fill-[#25D366]" viewBox="0 0 24 24">
