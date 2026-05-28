@@ -24,6 +24,7 @@ export default defineConfig({
         hero: 'storyblok/Hero',
         univirtualBanner: 'storyblok/UnivirtualBanner',
         univirtualModalButton: 'storyblok/UnivirtualModalButton',
+        whatsappChat: 'storyblok/WhatsappChat',
         methodology: 'storyblok/Methodology',
         benefits: 'storyblok/Benefits',
         platformPromo: 'storyblok/PlatformPromo',

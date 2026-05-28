@@ -29,7 +29,8 @@
             "textTicker",
             "teachersSection",
             "univirtualBanner",
-            "univirtualModalButton"
+            "univirtualModalButton",
+            "whatsappChat"
           ]
         }
       }
@@ -2339,6 +2340,84 @@
         "marginBottomDesktop": {
           "type": "text",
           "display_name": "Margen Inferior (PC)"
+        }
+      }
+    },
+    {
+      "name": "whatsappChat",
+      "display_name": "Chat de WhatsApp Flotante",
+      "is_root": false,
+      "is_nestable": true,
+      "schema": {
+        "phone": {
+          "type": "text",
+          "display_name": "Número de WhatsApp (con indicativo, ej. +573208048128)",
+          "default_value": "+573208048128"
+        },
+        "message": {
+          "type": "text",
+          "display_name": "Mensaje predeterminado de envío",
+          "default_value": "Hola! Quisiera más información sobre el bachillerato virtual."
+        },
+        "title": {
+          "type": "text",
+          "display_name": "Título de la ventana de chat",
+          "default_value": "Aulas Univirtuales"
+        },
+        "subtitle": {
+          "type": "text",
+          "display_name": "Subtítulo (ej. Soporte en línea)",
+          "default_value": "Soporte Académico"
+        },
+        "welcomeMessage": {
+          "type": "textarea",
+          "display_name": "Mensaje de Bienvenida",
+          "default_value": "¡Hola! 👋 ¿Cómo podemos ayudarte hoy con tu bachillerato virtual?"
+        },
+        "agentAvatar": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "display_name": "Foto de Perfil del Agente (Avatar)"
+        },
+        "buttonText": {
+          "type": "text",
+          "display_name": "Texto del botón de enviar",
+          "default_value": "Iniciar conversación"
+        },
+        "placeholder": {
+          "type": "text",
+          "display_name": "Texto de ayuda en el input (Placeholder)",
+          "default_value": "Escribe tu mensaje aquí..."
+        }
+      }
+    },
+    {
+      "name": "config",
+      "display_name": "Configuración Global",
+      "is_root": true,
+      "is_nestable": false,
+      "schema": {
+        "tickerPhrases": {
+          "type": "text",
+          "display_name": "Frases del Carrusel (Separadas por comas)",
+          "default_value": "🎓 ¡Matrículas Abiertas 2026! Completa tu bachillerato virtual en solo 10 meses, ⚡ Flexibilidad 24/7 con plataforma educativa interactiva premium, 💰 Pago financiado a cuotas sin intereses - Consulta con tu asesor, 🌟 Título oficial con validez nacional avalado por la Secretaría de Educación, 🔥 Descuento especial por esta semana • ¡Escríbenos a WhatsApp! ⚡"
+        },
+        "whatsAppNumber1": {
+          "type": "text",
+          "display_name": "Número de WhatsApp 1 (ej. 3208048128)",
+          "default_value": "3208048128"
+        },
+        "whatsAppNumber2": {
+          "type": "text",
+          "display_name": "Número de WhatsApp 2 (ej. 3044623555)",
+          "default_value": "3044623555"
+        },
+        "paymentLink": {
+          "type": "text",
+          "display_name": "Enlace de Realizar Pago",
+          "default_value": "https://jupiter.aulasunivirtuales.com/pagar"
         }
       }
     }

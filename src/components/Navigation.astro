@@ -1,15 +1,89 @@
 ---
+import { useStoryblokApi } from '@storyblok/astro';
+
 const currentPath = Astro.url.pathname;
 const isHome = currentPath === '/' || currentPath === '/index.html';
+
+const storyblokApi = useStoryblokApi();
+
+// Default values for marketing texts, in case config is not present
+let tickerPhrases = [
+  "🎓 ¡Matrículas Abiertas 2026! Completa tu bachillerato virtual en solo 10 meses",
+  "⚡ Flexibilidad 24/7 con plataforma educativa interactiva premium",
+  "💰 Pago financiado a cuotas sin intereses - Consulta con tu asesor",
+  "🌟 Título oficial con validez nacional avalado por la Secretaría de Educación",
+  "🔥 Descuento especial por esta semana • ¡Escríbenos a WhatsApp! ⚡"
+];
+
+let whatsApp1 = "3208048128";
+let whatsApp2 = "3044623555";
+let paymentUrl = "https://jupiter.aulasunivirtuales.com/pagar";
+
+try {
+  const version = import.meta.env.DEV ? 'draft' : 'published';
+  const { data } = await storyblokApi.get('cdn/stories/config', { version });
+  const content = data?.story?.content;
+  if (content) {
+    if (content.tickerPhrases) {
+      if (typeof content.tickerPhrases === 'string') {
+        tickerPhrases = content.tickerPhrases.split(',').map((p) => p.trim()).filter(Boolean);
+      } else if (Array.isArray(content.tickerPhrases)) {
+        tickerPhrases = content.tickerPhrases.map((p) => p.text || p).filter(Boolean);
+      }
+    }
+    if (content.whatsAppNumber1) whatsApp1 = content.whatsAppNumber1.trim();
+    if (content.whatsAppNumber2) whatsApp2 = content.whatsAppNumber2.trim();
+    if (content.paymentLink) paymentUrl = content.paymentLink.trim();
+  }
+} catch (error) {
+  // Silent fallback to standard premium marketing texts
+}
+
+// Clean phone numbers for wa.me links
+const cleanWa1 = whatsApp1.replace(/[^0-9]/g, '');
+const cleanWa2 = whatsApp2.replace(/[^0-9]/g, '');
 ---
 
-<header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300" id="main-header">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-20">
+<!-- Navigation Container Wrapper -->
+<div id="nav-wrapper" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform translate-y-0 select-none">
+  
+  <!-- LEVEL 1: Header Ticker (Carrusel Promocional Infinito) -->
+  <div id="header-ticker" class="h-[50px] bg-slate-950 text-white flex items-center overflow-hidden border-b border-white/5 relative z-30">
+    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none select-none z-10"></div>
+    <div class="relative w-full flex items-center overflow-x-hidden">
+      <!-- Marquee Track Wrapper -->
+      <div class="marquee-wrapper flex w-full">
+        <!-- Track 1 -->
+        <div class="marquee-track flex whitespace-nowrap items-center gap-16 py-2.5 shrink-0 min-w-full" style="animation-duration: 26s;">
+          {tickerPhrases.map((phrase) => (
+            <div class="flex items-center gap-6 shrink-0">
+              <span class="text-xs sm:text-sm font-semibold tracking-wide text-slate-100">{phrase}</span>
+              <span class="text-xs text-accent-orange font-bold shrink-0">✦</span>
+            </div>
+          ))}
+        </div>
+        <!-- Track 2 (Duplicate for seamless loop) -->
+        <div class="marquee-track flex whitespace-nowrap items-center gap-16 py-2.5 shrink-0 min-w-full" style="animation-duration: 26s;" aria-hidden="true">
+          {tickerPhrases.map((phrase) => (
+            <div class="flex items-center gap-6 shrink-0">
+              <span class="text-xs sm:text-sm font-semibold tracking-wide text-slate-100">{phrase}</span>
+              <span class="text-xs text-accent-orange font-bold shrink-0">✦</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- LEVEL 2: Main Brand Header -->
+  <header id="header-main" class="h-[65px] bg-white/80 backdrop-blur-md border-b border-slate-100 flex items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300 relative z-20">
+    <div class="max-w-7xl mx-auto w-full flex items-center justify-between">
       
-      <!-- Logo -->
-        <a href={isHome ? "#inicio" : "/"} class="flex items-center space-x-3 group">
-          <div class="w-[40%] flex items-center justify-center transition-all duration-300 overflow-hidden">
+      <!-- Left Side: Logo & WhatsApp Interactive Pills -->
+      <div class="flex items-center space-x-3">
+        <!-- Logo (Must stay as it is) -->
+        <a href={isHome ? "#inicio" : "/"} class="flex items-center group shrink-0">
+          <div class="w-28 sm:w-36 flex items-center justify-center transition-all duration-300 overflow-hidden">
             <img
               src="/logo.png"
               alt="UNIVIRTUAL Logo"
@@ -18,112 +92,313 @@ const isHome = currentPath === '/' || currentPath === '/index.html';
           </div>
         </a>
 
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
-        <a href={isHome ? "#inicio" : "/"} class={`px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${isHome ? 'text-accent-orange bg-accent-orange/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}>
-          Inicio
-        </a>
-        <a href="/financiacion" class={`px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${currentPath.includes('/financiacion') ? 'text-accent-orange bg-accent-orange/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}>
-          Financiación
-        </a>
-        <a href="/soporte" class={`px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${currentPath.includes('/soporte') ? 'text-accent-orange bg-accent-orange/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}>
-          Soporte
-        </a>
-        <a href="/pqrs" class={`px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${currentPath.includes('/pqrs') ? 'text-accent-orange bg-accent-orange/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}>
-          PQRS
-        </a>
+        <!-- WhatsApp Links (Desktop and Large Devices only) -->
+        <div class="hidden lg:flex items-center space-x-2.5 ml-4 pl-4 border-l border-slate-200">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mr-1">WhatsApp:</span>
+          
+          <a href={`https://wa.me/57${cleanWa1}`} target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-50/70 text-emerald-700 hover:bg-emerald-100 hover:text-emerald-800 transition-all duration-200 text-xs font-bold border border-emerald-100/60 shadow-sm">
+            <svg class="w-3.5 h-3.5 fill-[#25D366]" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.706 1.459h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            <span>{whatsApp1}</span>
+          </a>
 
-        <!-- Separator -->
-        <span class="w-[1px] h-5 bg-slate-200 mx-2"></span>
+          <a href={`https://wa.me/57${cleanWa2}`} target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-50/70 text-emerald-700 hover:bg-emerald-100 hover:text-emerald-800 transition-all duration-200 text-xs font-bold border border-emerald-100/60 shadow-sm">
+            <svg class="w-3.5 h-3.5 fill-[#25D366]" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.706 1.459h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            <span>{whatsApp2}</span>
+          </a>
+        </div>
+      </div>
 
-        <!-- External Links -->
-        <a href="https://jupiter.aulasunivirtuales.com" target="_blank" rel="noopener noreferrer" class="px-3 py-2 text-slate-600 hover:text-accent-blue text-sm font-bold flex items-center gap-1 transition-colors duration-200">
-          Ingreso Júpiter
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-        </a>
-        
-        <a href="https://campus.aulasunivirtuales.com" target="_blank" rel="noopener noreferrer" class="px-3 py-2 text-slate-600 hover:text-accent-blue text-sm font-bold flex items-center gap-1 transition-colors duration-200">
-          Campus Técnicos
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-        </a>
+      <!-- Right Side: Action Buttons -->
+      <div class="hidden md:flex items-center space-x-3.5">
+        <!-- Ingresar Dropdown Button -->
+        <div class="relative group" id="ingreso-dropdown-container">
+          <button type="button" class="px-4 py-2 text-slate-600 hover:text-accent-blue text-sm font-bold flex items-center gap-1 transition-all duration-200 rounded-xl hover:bg-slate-50 focus:outline-none" aria-haspopup="true" aria-expanded="false">
+            <span>Ingresar</span>
+            <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          
+          <!-- Dropdown Card -->
+          <div class="absolute right-0 top-full mt-1.5 w-[250px] bg-white/95 backdrop-blur-xl border border-slate-100 rounded-2xl shadow-xl shadow-slate-200/50 p-2.5 opacity-0 pointer-events-none transform translate-y-2 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0 transition-all duration-300 z-50">
+            
+            <!-- Link Júpiter -->
+            <a href="https://jupiter.aulasunivirtuales.com" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3.5 p-3 rounded-xl hover:bg-accent-orange/5 group/item transition-colors duration-200">
+              <div class="w-8.5 h-8.5 rounded-lg bg-accent-orange/10 flex items-center justify-center text-accent-orange shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+              </div>
+              <div class="text-left">
+                <span class="block text-sm font-bold text-slate-800 group-hover/item:text-accent-orange transition-colors duration-200">Ingreso Júpiter</span>
+                <span class="block text-[10px] text-slate-400 mt-0.5">Plataforma de Bachillerato</span>
+              </div>
+            </a>
 
-        <a href="https://jupiter.aulasunivirtuales.com/pagar" target="_blank" rel="noopener noreferrer" class="ml-4 px-5 py-2.5 bg-accent-orange hover:bg-accent-orange-hover text-white text-sm font-bold rounded-xl btn-premium glow-orange flex items-center gap-2 shadow-md shadow-accent-orange/10">
-          <span>Realizar un pago</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-        </a>
-      </nav>
+            <!-- Link Campus -->
+            <a href="https://campus.aulasunivirtuales.com" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3.5 p-3 rounded-xl hover:bg-accent-blue/5 group/item transition-colors duration-200">
+              <div class="w-8.5 h-8.5 rounded-lg bg-accent-blue/10 flex items-center justify-center text-accent-blue shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              </div>
+              <div class="text-left">
+                <span class="block text-sm font-bold text-slate-800 group-hover/item:text-accent-blue transition-colors duration-200">Campus Técnicos</span>
+                <span class="block text-[10px] text-slate-400 mt-0.5">Programas y Cursos Técnicos</span>
+              </div>
+            </a>
 
-      <!-- Mobile menu button -->
-      <div class="md:hidden flex items-center">
-        <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-accent-orange" aria-controls="mobile-menu" aria-expanded="false">
-          <span class="sr-only">Abrir menú principal</span>
-          <svg class="block h-6 w-6" id="menu-icon-hamburger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </div>
+        </div>
+
+        <!-- Realizar Pago Button -->
+        <a href={paymentUrl} target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-accent-orange hover:bg-accent-orange-hover text-white text-xs font-black uppercase tracking-wider rounded-xl btn-premium glow-orange flex items-center gap-1.5 shadow-md shadow-accent-orange/10">
+          <span>Realizar Pago</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+        </a>
+      </div>
+
+      <!-- Mobile Right Section (Menu trigger & quick Whatsapp shortcut) -->
+      <div class="md:hidden flex items-center space-x-2.5">
+        <!-- Direct Quick WhatsApp Button -->
+        <a href={`https://wa.me/57${cleanWa1}`} target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 hover:bg-emerald-100 transition-all duration-200 shadow-sm" aria-label="WhatsApp directo">
+          <svg class="w-5 h-5 fill-[#25D366]" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.706 1.459h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
           </svg>
-          <svg class="hidden h-6 w-6" id="menu-icon-close" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </a>
+
+        <!-- Hamburger Menu Button -->
+        <button type="button" id="mobile-drawer-button" class="inline-flex items-center justify-center p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-accent-orange" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="sr-only">Abrir menú principal</span>
+          <svg class="block h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
 
     </div>
-  </div>
-
-  <!-- Mobile Menu -->
-  <div class="hidden md:hidden bg-white/98 border-t border-slate-200 shadow-xl backdrop-blur-xl" id="mobile-menu">
-    <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3 text-center">
-      <a href={isHome ? "#inicio" : "/"} class="block px-3 py-3 rounded-xl text-base font-bold text-slate-800 hover:bg-slate-100">
+  </header>
+  
+  <!-- LEVEL 3: Bottom Navbar (Links del Menú - Desvanece en scroll) -->
+  <div id="navbar-links" class="h-[48px] bg-white/90 backdrop-blur-md border-b border-slate-200/50 flex items-center justify-center transition-all duration-300 relative z-10">
+    <nav class="flex items-center space-x-2 sm:space-x-4">
+      <a href={isHome ? "#inicio" : "/"} class={`px-3.5 py-1.5 rounded-lg text-[11px] font-extrabold uppercase tracking-widest transition-all duration-200 ${isHome ? 'text-accent-orange bg-accent-orange/8' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100/50'}`}>
         Inicio
       </a>
-      <a href="/financiacion" class="block px-3 py-3 rounded-xl text-base font-bold text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+      <a href="/financiacion" class={`px-3.5 py-1.5 rounded-lg text-[11px] font-extrabold uppercase tracking-widest transition-all duration-200 ${currentPath.includes('/financiacion') ? 'text-accent-orange bg-accent-orange/8' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100/50'}`}>
         Financiación
       </a>
-      <a href="/soporte" class="block px-3 py-3 rounded-xl text-base font-bold text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+      <a href="/soporte" class={`px-3.5 py-1.5 rounded-lg text-[11px] font-extrabold uppercase tracking-widest transition-all duration-200 ${currentPath.includes('/soporte') ? 'text-accent-orange bg-accent-orange/8' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100/50'}`}>
         Soporte
       </a>
-      <a href="/pqrs" class="block px-3 py-3 rounded-xl text-base font-bold text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+      <a href="/pqrs" class={`px-3.5 py-1.5 rounded-lg text-[11px] font-extrabold uppercase tracking-widest transition-all duration-200 ${currentPath.includes('/pqrs') ? 'text-accent-orange bg-accent-orange/8' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100/50'}`}>
         PQRS
       </a>
-      
-      <div class="border-t border-slate-100 my-2 pt-2"></div>
+    </nav>
+  </div>
 
-      <a href="https://jupiter.aulasunivirtuales.com" target="_blank" rel="noopener noreferrer" class="block px-3 py-3 rounded-xl text-base font-bold text-accent-blue hover:bg-accent-blue/5">
-        Ingreso Júpiter ↗
-      </a>
-      <a href="https://campus.aulasunivirtuales.com" target="_blank" rel="noopener noreferrer" class="block px-3 py-3 rounded-xl text-base font-bold text-accent-blue hover:bg-accent-blue/5">
-        Campus Técnicos ↗
-      </a>
-      <a href="https://jupiter.aulasunivirtuales.com/pagar" target="_blank" rel="noopener noreferrer" class="block mx-3 mt-4 px-5 py-3.5 bg-accent-orange hover:bg-accent-orange-hover text-white text-base font-bold rounded-xl btn-premium glow-orange shadow-md">
+</div>
+
+<!-- Mobile Drawer Sidebar (Sliding in from the right) -->
+<div id="mobile-drawer" class="fixed inset-0 z-[100] pointer-events-none opacity-0 transition-opacity duration-300 select-none">
+  <!-- Backdrop -->
+  <div id="drawer-backdrop" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+  
+  <!-- Content Panel -->
+  <div id="drawer-content" class="absolute top-0 right-0 w-[295px] sm:w-[340px] h-full bg-white shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-out z-50">
+    
+    <!-- Drawer Header -->
+    <div class="px-5 py-4.5 border-b border-slate-100 flex items-center justify-between shrink-0">
+      <img src="/logo.png" alt="UNIVIRTUAL Logo" class="h-8 object-contain" />
+      <button type="button" id="mobile-drawer-close" class="p-2 rounded-xl text-slate-400 hover:text-slate-900 hover:bg-slate-50 focus:outline-none" aria-label="Cerrar menú">
+        <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+    </div>
+
+    <!-- Drawer Scrollable Body -->
+    <div class="flex-1 overflow-y-auto px-5 py-6 space-y-7">
+      
+      <!-- Section 1: Navigation links -->
+      <div class="space-y-2.5">
+        <span class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest pl-1">Menú de Navegación</span>
+        <div class="grid grid-cols-1 gap-1.5">
+          <a href={isHome ? "#inicio" : "/"} class={`px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200 ${isHome ? 'text-accent-orange bg-accent-orange/5 font-extrabold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>
+            Inicio
+          </a>
+          <a href="/financiacion" class={`px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200 ${currentPath.includes('/financiacion') ? 'text-accent-orange bg-accent-orange/5 font-extrabold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>
+            Financiación
+          </a>
+          <a href="/soporte" class={`px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200 ${currentPath.includes('/soporte') ? 'text-accent-orange bg-accent-orange/5 font-extrabold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>
+            Soporte
+          </a>
+          <a href="/pqrs" class={`px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200 ${currentPath.includes('/pqrs') ? 'text-accent-orange bg-accent-orange/5 font-extrabold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>
+            PQRS
+          </a>
+        </div>
+      </div>
+
+      <!-- Section 2: WhatsApp Channels -->
+      <div class="space-y-2.5">
+        <span class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest pl-1">WhatsApp de Atención</span>
+        <div class="grid grid-cols-1 gap-2">
+          
+          <a href={`https://wa.me/57${cleanWa1}`} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-emerald-50/50 border border-emerald-100 hover:bg-emerald-50 transition-colors duration-200 group">
+            <div class="w-8.5 h-8.5 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-500/20 transition-colors duration-200">
+              <svg class="w-4.5 h-4.5 fill-[#25D366]" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.706 1.459h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+            </div>
+            <div class="text-left">
+              <span class="block text-xs font-bold text-slate-800">WhatsApp 1</span>
+              <span class="block text-[10px] text-slate-500 font-semibold">{whatsApp1}</span>
+            </div>
+          </a>
+
+          <a href={`https://wa.me/57${cleanWa2}`} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-emerald-50/50 border border-emerald-100 hover:bg-emerald-50 transition-colors duration-200 group">
+            <div class="w-8.5 h-8.5 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-500/20 transition-colors duration-200">
+              <svg class="w-4.5 h-4.5 fill-[#25D366]" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.706 1.459h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+            </div>
+            <div class="text-left">
+              <span class="block text-xs font-bold text-slate-800">WhatsApp 2</span>
+              <span class="block text-[10px] text-slate-500 font-semibold">{whatsApp2}</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Section 3: Portals -->
+      <div class="space-y-2.5">
+        <span class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest pl-1">Portales de Alumnos</span>
+        <div class="grid grid-cols-1 gap-2">
+          
+          <a href="https://jupiter.aulasunivirtuales.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3.5 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors duration-200">
+            <div class="w-8.5 h-8.5 rounded-lg bg-accent-orange/10 flex items-center justify-center text-accent-orange shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+            </div>
+            <div class="text-left">
+              <span class="block text-sm font-bold text-slate-800">Ingreso Júpiter</span>
+              <span class="block text-[10px] text-slate-400 mt-0.5">Plataforma de Bachillerato</span>
+            </div>
+          </a>
+
+          <a href="https://campus.aulasunivirtuales.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3.5 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors duration-200">
+            <div class="w-8.5 h-8.5 rounded-lg bg-accent-blue/10 flex items-center justify-center text-accent-blue shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            </div>
+            <div class="text-left">
+              <span class="block text-sm font-bold text-slate-800">Campus Técnicos</span>
+              <span class="block text-[10px] text-slate-400 mt-0.5">Programas y Cursos Técnicos</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Drawer Footer (Payments CTA) -->
+    <div class="px-5 py-5 border-t border-slate-100 bg-slate-50/70 shrink-0">
+      <a href={paymentUrl} target="_blank" rel="noopener noreferrer" class="block w-full py-3.5 bg-accent-orange hover:bg-accent-orange-hover text-white text-center text-sm font-bold uppercase tracking-wider rounded-xl btn-premium glow-orange shadow-md">
         Realizar un pago
       </a>
     </div>
+
   </div>
-</header>
+</div>
 
-<script is:inline>
-  const btn = document.getElementById('mobile-menu-button');
-  const menu = document.getElementById('mobile-menu');
-  const hamburgerIcon = document.getElementById('menu-icon-hamburger');
-  const closeIcon = document.getElementById('menu-icon-close');
-
-  if (btn && menu) {
-    btn.addEventListener('click', () => {
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', !expanded);
-      menu.classList.toggle('hidden');
-      hamburgerIcon.classList.toggle('hidden');
-      closeIcon.classList.toggle('hidden');
-    });
+<style>
+  .marquee-track {
+    animation: marquee linear infinite;
+  }
+  
+  .marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
   }
 
-  const header = document.getElementById('main-header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      header.classList.add('shadow-md', 'bg-white/95');
-      header.classList.remove('bg-white/80');
-    } else {
-      header.classList.remove('shadow-md', 'bg-white/95');
-      header.classList.add('bg-white/80');
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
     }
-  });
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .cubic-bezier {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+</style>
+
+<script is:inline>
+  function initNavigation() {
+    const navWrapper = document.getElementById('nav-wrapper');
+    const navbarLinks = document.getElementById('navbar-links');
+    const headerMain = document.getElementById('header-main');
+    const mobileBtn = document.getElementById('mobile-drawer-button');
+    const closeBtn = document.getElementById('mobile-drawer-close');
+    const drawer = document.getElementById('mobile-drawer');
+    const backdrop = document.getElementById('drawer-backdrop');
+    const drawerContent = document.getElementById('drawer-content');
+    
+    function handleScroll() {
+      if (window.scrollY > 40) {
+        if (navWrapper) navWrapper.style.transform = 'translateY(-50px)';
+        if (navbarLinks) {
+          navbarLinks.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+          navbarLinks.classList.remove('opacity-100', 'translate-y-0');
+        }
+        if (headerMain) {
+          headerMain.classList.add('shadow-md', 'bg-white/95');
+          headerMain.classList.remove('bg-white/80');
+        }
+      } else {
+        if (navWrapper) navWrapper.style.transform = 'translateY(0)';
+        if (navbarLinks) {
+          navbarLinks.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-2');
+          navbarLinks.classList.add('opacity-100', 'translate-y-0');
+        }
+        if (headerMain) {
+          headerMain.classList.remove('shadow-md', 'bg-white/95');
+          headerMain.classList.add('bg-white/80');
+        }
+      }
+    }
+    
+    // Clean listener and re-add to avoid leaks
+    window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Run initially
+
+    // Drawer functionality
+    if (mobileBtn && drawer && backdrop && drawerContent) {
+      mobileBtn.addEventListener('click', () => {
+        drawer.classList.remove('pointer-events-none', 'opacity-0');
+        drawer.classList.add('opacity-100');
+        backdrop.classList.add('opacity-100');
+        drawerContent.classList.remove('translate-x-full');
+      });
+    }
+
+    function closeDrawer() {
+      if (drawer && backdrop && drawerContent) {
+        drawerContent.classList.add('translate-x-full');
+        backdrop.classList.remove('opacity-100');
+        drawer.classList.add('pointer-events-none');
+        setTimeout(() => {
+          drawer.classList.remove('opacity-100');
+        }, 300);
+      }
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    if (backdrop) backdrop.addEventListener('click', closeDrawer);
+  }
+
+  // Set listeners on page load/transitions
+  document.addEventListener('DOMContentLoaded', initNavigation);
+  document.addEventListener('astro:after-swap', initNavigation);
+  
+  // Direct execution call in case layout renders inline
+  initNavigation();
 </script>
