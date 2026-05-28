@@ -3,18 +3,22 @@ import { storyblokEditable } from '@storyblok/astro';
 import { generateComponentStyles } from '../utils/spacing';
 const { blok } = Astro.props;
 
-const tagline = blok.tagline || blok.Tagline || 'Canales de Atención';
-const title = blok.title || blok.Title || 'Contáctanos e inicia <span class="text-gradient-blue">tu proceso</span>';
-const description = blok.description || blok.Description || 'Selecciona la opción de tu preferencia para rellenar el formulario. Nuestro equipo te responderá en tiempo récord.';
+const tagline = blok?.tagline || blok?.Tagline || 'Canales de Atención';
+const title = blok?.title || blok?.Title || 'Contáctanos e inicia <span class="text-gradient-blue">tu proceso</span>';
+const description = blok?.description || blok?.Description || 'Selecciona la opción de tu preferencia para rellenar el formulario. Nuestro equipo te responderá en tiempo récord.';
 
 const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
 const styles = generateComponentStyles(blok, spacingId);
 
 const JUPITER_API_URL = import.meta.env.PUBLIC_JUPITER_API_URL || 'http://127.0.0.1:8000';
+
+// Soporte dinámico para campañas multilanding Zero-Code
+const defaultForm = Astro.props.defaultForm || blok?.defaultForm || 'inscripcion';
+const hideTabs = Astro.props.hideTabs || blok?.hideTabs || false;
 ---
 {styles && <style is:inline set:html={styles} />}
 
-<div {...storyblokEditable(blok)} class={spacingId} id="contact-forms-container" data-jupiter-url={JUPITER_API_URL}>
+<div {...storyblokEditable(blok)} class={spacingId} id="contact-forms-container" data-jupiter-url={JUPITER_API_URL} data-default-form={defaultForm} data-hide-tabs={hideTabs ? 'true' : 'false'}>
 
 <section id="inscripcion" class="py-24 relative overflow-hidden bg-slate-50 border-y border-slate-200/60">
   
@@ -35,7 +39,7 @@ const JUPITER_API_URL = import.meta.env.PUBLIC_JUPITER_API_URL || 'http://127.0.
 
     <div class="max-w-4xl mx-auto w-full">
       <!-- Interactive Custom Tabs -->
-      <div class="flex items-center justify-center p-1.5 bg-slate-100 rounded-2xl border border-slate-200 mb-8 max-w-md mx-auto">
+      <div class={`flex items-center justify-center p-1.5 bg-slate-100 rounded-2xl border border-slate-200 mb-8 max-w-md mx-auto ${hideTabs ? 'hidden' : ''}`}>
         <button type="button" class="w-full py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 bg-accent-orange text-white glow-orange" id="tab-enroll" data-tipo="inscripcion">
           Inscripción
         </button>
@@ -516,7 +520,24 @@ const JUPITER_API_URL = import.meta.env.PUBLIC_JUPITER_API_URL || 'http://127.0.
 
   // --- Carga Inicial ---
   document.addEventListener('DOMContentLoaded', () => {
-    loadForm('inscripcion');
+    const container = document.getElementById('contact-forms-container');
+    const defaultForm = container ? (container.dataset.defaultForm || 'inscripcion') : 'inscripcion';
+    const hideTabs = container ? (container.dataset.hideTabs === 'true') : false;
+
+    if (hideTabs) {
+      loadForm(defaultForm);
+    } else {
+      // Activar tab correspondiente
+      if (defaultForm === 'pqrs') {
+        if (tabPqrs) tabPqrs.click();
+      } else if (defaultForm === 'informacion') {
+        if (tabInfo) tabInfo.click();
+      } else if (defaultForm === 'inscripcion') {
+        if (tabEnroll) tabEnroll.click();
+      } else {
+        loadForm(defaultForm);
+      }
+    }
   });
 </script>
 
