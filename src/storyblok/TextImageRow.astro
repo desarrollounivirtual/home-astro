@@ -32,10 +32,10 @@ const styles = generateComponentStyles(blok, spacingId);
 
       <!-- Image Side -->
       <div class={`lg:col-span-5 ${align === 'left' ? 'lg:order-first' : 'lg:order-last'} flex justify-center`}>
-        {image ? (
+        {imageUrl ? (
           <div class="relative w-full max-w-md aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border border-slate-200/60 group">
             <img 
-              src={image} 
+              src={imageUrl} 
               alt={title} 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
               loading="lazy"

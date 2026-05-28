@@ -68,6 +68,22 @@
         ],
         "display_name": "Icono/Imagen de Tarjeta"
       },
+      "titleColor": {
+        "type": "text",
+        "display_name": "Color del Título (Hex/CSS)"
+      },
+      "titleSizeDesktop": {
+        "type": "text",
+        "display_name": "Tamaño de Título (PC)"
+      },
+      "bodyColor": {
+        "type": "text",
+        "display_name": "Color de Texto de Cuerpo"
+      },
+      "bodySizeDesktop": {
+        "type": "text",
+        "display_name": "Tamaño de Texto (PC)"
+      },
       "spacingUnit": {
         "type": "option",
         "display_name": "Unidad de Medida",
@@ -83,10 +99,6 @@
           {
             "name": "Em (em)",
             "value": "em"
-          },
-          {
-            "name": "Porcentaje (%)",
-            "value": "%"
           }
         ],
         "default_value": "px"
@@ -107,21 +119,21 @@
         "type": "text",
         "display_name": "Padding Inferior (PC)"
       },
-      "titleColor": {
+      "marginTopMobile": {
         "type": "text",
-        "display_name": "Color del Título (Hex/CSS)"
+        "display_name": "Margen Superior (Móvil)"
       },
-      "titleSizeDesktop": {
+      "marginBottomMobile": {
         "type": "text",
-        "display_name": "Tamaño de Título (PC)"
+        "display_name": "Margen Inferior (Móvil)"
       },
-      "bodyColor": {
+      "marginTopDesktop": {
         "type": "text",
-        "display_name": "Color de Texto de Cuerpo"
+        "display_name": "Margen Superior (PC)"
       },
-      "bodySizeDesktop": {
+      "marginBottomDesktop": {
         "type": "text",
-        "display_name": "Tamaño de Texto (PC)"
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -144,17 +156,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -163,6 +188,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -259,17 +300,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -278,6 +332,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -320,17 +390,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -339,6 +422,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -396,17 +495,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -415,6 +527,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -468,17 +596,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -487,6 +628,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -583,17 +740,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -602,6 +772,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -644,17 +830,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -663,6 +862,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -718,17 +933,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -737,6 +965,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -763,17 +1007,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -782,6 +1039,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -897,17 +1170,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -916,6 +1202,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -946,17 +1248,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -965,6 +1280,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -1011,17 +1342,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -1030,6 +1374,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -1060,17 +1420,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -1079,6 +1452,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -1153,17 +1542,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -1172,6 +1574,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -1274,17 +1692,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -1293,6 +1724,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },
@@ -1331,17 +1778,30 @@
       },
       "spacingUnit": {
         "type": "option",
+        "display_name": "Unidad de Medida",
         "options": [
           {
-            "name": "px",
+            "name": "Píxeles (px)",
             "value": "px"
           },
           {
-            "name": "rem",
+            "name": "Rem (rem)",
             "value": "rem"
+          },
+          {
+            "name": "Em (em)",
+            "value": "em"
           }
         ],
         "default_value": "px"
+      },
+      "paddingTopMobile": {
+        "type": "text",
+        "display_name": "Padding Superior (Móvil)"
+      },
+      "paddingBottomMobile": {
+        "type": "text",
+        "display_name": "Padding Inferior (Móvil)"
       },
       "paddingTopDesktop": {
         "type": "text",
@@ -1350,6 +1810,22 @@
       "paddingBottomDesktop": {
         "type": "text",
         "display_name": "Padding Inferior (PC)"
+      },
+      "marginTopMobile": {
+        "type": "text",
+        "display_name": "Margen Superior (Móvil)"
+      },
+      "marginBottomMobile": {
+        "type": "text",
+        "display_name": "Margen Inferior (Móvil)"
+      },
+      "marginTopDesktop": {
+        "type": "text",
+        "display_name": "Margen Superior (PC)"
+      },
+      "marginBottomDesktop": {
+        "type": "text",
+        "display_name": "Margen Inferior (PC)"
       }
     }
   },

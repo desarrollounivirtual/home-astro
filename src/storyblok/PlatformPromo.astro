@@ -114,21 +114,20 @@ const styles = generateComponentStyles(blok, spacingId);
                 <span class="text-xs font-semibold text-slate-700">{dashGraphTitle}</span>
                 <span class="text-xs text-slate-600">{dashGraphSubtitle}</span>
               </div>
-              <!-- Simulated bar chart -->
-              <div class="flex items-end justify-between gap-4 h-24 pt-2">
-                <div class="w-full bg-slate-200/40 rounded-t-md h-[40%] relative group">
-                  <div class="absolute inset-0 bg-accent-blue/40 rounded-t-md group-hover:bg-accent-blue/60 transition-colors"></div>
+                <!-- Mockup Image -->
+                <div class="w-full pt-2">
+                  <div class="relative overflow-hidden rounded-2xl border border-slate-200/60 shadow-lg bg-white">
+                    
+                    <img
+                      src="/mockup-jupiter-univirtual.jpg"
+                      alt="Mockup Jupiter Univirtual"
+                      class="w-full h-auto object-cover transition-transform duration-500 hover:scale-[1.02]"
+                    />
+
+                    <!-- Optional overlay glow -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-accent-blue/5 to-accent-orange/5 pointer-events-none"></div>
+                  </div>
                 </div>
-                <div class="w-full bg-slate-200/40 rounded-t-md h-[70%] relative group">
-                  <div class="absolute inset-0 bg-accent-blue/60 rounded-t-md group-hover:bg-accent-blue/80 transition-colors"></div>
-                </div>
-                <div class="w-full bg-slate-200/40 rounded-t-md h-[55%] relative group">
-                  <div class="absolute inset-0 bg-accent-blue/40 rounded-t-md group-hover:bg-accent-blue/60 transition-colors"></div>
-                </div>
-                <div class="w-full bg-slate-200/40 rounded-t-md h-[90%] relative group">
-                  <div class="absolute inset-0 bg-gradient-to-t from-accent-blue to-accent-orange rounded-t-md filter drop-shadow(0_0_10px_rgba(249,115,22,0.15))"></div>
-                </div>
-              </div>
             </div>
 
           </div>

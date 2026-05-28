@@ -9,10 +9,12 @@ const description = blok.description || blok.Description || 'Selecciona la opci�
 
 const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
 const styles = generateComponentStyles(blok, spacingId);
+
+const JUPITER_API_URL = import.meta.env.PUBLIC_JUPITER_API_URL || 'http://127.0.0.1:8000';
 ---
 {styles && <style is:inline set:html={styles} />}
 
-<div {...storyblokEditable(blok)} class={spacingId}>
+<div {...storyblokEditable(blok)} class={spacingId} id="contact-forms-container" data-jupiter-url={JUPITER_API_URL}>
 
 <section id="inscripcion" class="py-24 relative overflow-hidden bg-slate-50 border-y border-slate-200/60">
   
@@ -20,10 +22,10 @@ const styles = generateComponentStyles(blok, spacingId);
   <div class="absolute top-[20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-accent-blue/5 filter blur-[120px] pointer-events-none select-none"></div>
   <div class="absolute bottom-[20%] right-[-10%] w-[400px] h-[400px] rounded-full bg-accent-orange/5 filter blur-[100px] pointer-events-none select-none"></div>
 
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
     
     <!-- Section Header -->
-    <div class="text-center max-w-2xl mx-auto mb-12">
+    <div class="text-center max-w-3xl mx-auto mb-12">
       <span class="text-sm font-extrabold tracking-wider text-accent-orange uppercase">{tagline}</span>
       <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-slate-900 mt-3 mb-4" set:html={title} />
       <p class="text-slate-600 text-sm sm:text-base">
@@ -31,7 +33,8 @@ const styles = generateComponentStyles(blok, spacingId);
       </p>
     </div>
 
-    <!-- Interactive Custom Tabs -->
+    <div class="max-w-4xl mx-auto w-full">
+      <!-- Interactive Custom Tabs -->
     <div class="flex items-center justify-center p-1.5 bg-slate-100 rounded-2xl border border-slate-200 mb-8 max-w-md mx-auto">
       <button type="button" class="w-full py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 bg-accent-orange text-white glow-orange" id="tab-enroll">
         Inscripción
@@ -80,6 +83,16 @@ const styles = generateComponentStyles(blok, spacingId);
               <option value="10" class="bg-white text-slate-900">10° Bachillerato</option>
             </select>
           </div>
+        </div>
+
+        <!-- Campo Condicional: Especialidad Técnica (EAV dinámica) -->
+        <div id="div-technical-interest" class="hidden transition-all duration-300 transform scale-95 opacity-0">
+          <label for="enroll-technical-interest" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">¿Te interesa cursar media técnica con nosotros?</label>
+          <select id="enroll-technical-interest" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-900 focus:outline-none focus:bg-white focus:border-accent-orange transition-colors">
+            <option value="" disabled selected class="bg-white text-slate-500">Selecciona una opción...</option>
+            <option value="Sí" class="bg-white text-slate-900">Sí, me interesa</option>
+            <option value="No" class="bg-white text-slate-900">No, prefiero bachillerato académico clásico</option>
+          </select>
         </div>
 
         <div>
@@ -188,6 +201,7 @@ const styles = generateComponentStyles(blok, spacingId);
     </div>
 
   </div>
+  </div>
 </section>
 
 <script is:inline>
@@ -225,16 +239,157 @@ const styles = generateComponentStyles(blok, spacingId);
     activeForm.classList.remove('hidden');
   }
 
-  tabEnroll.addEventListener('click', () => selectTab(tabEnroll, formEnroll));
-  tabInfo.addEventListener('click', () => selectTab(tabInfo, formInfo));
-  tabPqrs.addEventListener('click', () => selectTab(tabPqrs, formPqrs));
+  if (tabEnroll && !tabEnroll.dataset.listenerAdded) {
+    tabEnroll.dataset.listenerAdded = 'true';
+    tabEnroll.addEventListener('click', () => selectTab(tabEnroll, formEnroll));
+  }
+  if (tabInfo && !tabInfo.dataset.listenerAdded) {
+    tabInfo.dataset.listenerAdded = 'true';
+    tabInfo.addEventListener('click', () => selectTab(tabInfo, formInfo));
+  }
+  if (tabPqrs && !tabPqrs.dataset.listenerAdded) {
+    tabPqrs.dataset.listenerAdded = 'true';
+    tabPqrs.addEventListener('click', () => selectTab(tabPqrs, formPqrs));
+  }
 
-  // Form submission simulators
+  // --- Lógica de Campo Condicional (Astro Client-Side) ---
+  const enrollGrade = document.getElementById('enroll-grade');
+  const divTech = document.getElementById('div-technical-interest');
+  const enrollTechSelect = document.getElementById('enroll-technical-interest');
+
+  if (enrollGrade && divTech) {
+    if (!enrollGrade.dataset.listenerAdded) {
+      enrollGrade.dataset.listenerAdded = 'true';
+      enrollGrade.addEventListener('change', () => {
+        if (enrollGrade.value === '10') {
+          divTech.classList.remove('hidden');
+          // Forzar reflow para animación
+          divTech.offsetHeight;
+          divTech.classList.add('scale-100', 'opacity-100');
+          if (enrollTechSelect) enrollTechSelect.required = true;
+        } else {
+          divTech.classList.remove('scale-100', 'opacity-100');
+          if (enrollTechSelect) {
+            enrollTechSelect.required = false;
+            enrollTechSelect.value = '';
+          }
+          setTimeout(() => {
+            if (enrollGrade.value !== '10') {
+              divTech.classList.add('hidden');
+            }
+          }, 300);
+        }
+      });
+    }
+  }
+
+  // --- Envíos Asíncronos a la API EAV de Jupiter ---
   [formEnroll, formInfo, formPqrs].forEach(form => {
+    if (!form || form.dataset.listenerAdded) return;
+    form.dataset.listenerAdded = 'true';
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      successModal.classList.remove('hidden');
-      form.reset();
+
+      const button = form.querySelector('button[type="submit"]');
+      const originalHtml = button.innerHTML;
+
+      // 1. Mostrar estado de carga (Spinner Premium)
+      button.disabled = true;
+      button.innerHTML = `
+        <span class="flex items-center justify-center gap-2">
+          <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span>Enviando solicitud...</span>
+        </span>
+      `;
+
+      // 2. Preparar el contenedor de errores
+      let errorContainer = form.querySelector('.form-errors-box');
+      if (!errorContainer) {
+        errorContainer = document.createElement('div');
+        errorContainer.className = 'form-errors-box mt-4 p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl hidden flex flex-col gap-1.5';
+        form.insertBefore(errorContainer, button);
+      }
+      errorContainer.classList.add('hidden');
+      errorContainer.innerHTML = '';
+
+      // 3. Serializar datos del formulario
+      const formData = {};
+      const inputs = form.querySelectorAll('input, select, textarea');
+      inputs.forEach(input => {
+        // Ignorar checkbox de términos en el mapeo EAV de datos de valor
+        if (input.type === 'checkbox' && input.id.endsWith('-terms')) {
+          return;
+        }
+
+        if (input.id) {
+          // Ignorar campo condicional si está oculto para evitar validación del backend
+          if (input.id === 'enroll-technical-interest' && divTech.classList.contains('hidden')) {
+            return;
+          }
+          formData[input.id] = input.value;
+        }
+      });
+
+      // 4. Determinar tipo de endpoint e inyectar URL dinámica
+      const container = document.getElementById('contact-forms-container');
+      const apiBaseUrl = container ? (container.dataset.jupiterUrl || 'http://127.0.0.1:8000') : 'http://127.0.0.1:8000';
+      const tipo = form.id === 'form-enroll' ? 'inscripcion' : (form.id === 'form-info' ? 'informacion' : 'pqrs');
+      const url = `${apiBaseUrl.replace(/\/$/, '')}/api/forms/schema/${tipo}/submit`;
+
+      // 5. Enviar POST
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(async (response) => {
+        const data = await response.json();
+        
+        if (response.status === 201) {
+          // Éxito: Limpiar formulario, ocultar condicional y mostrar modal
+          successModal.classList.remove('hidden');
+          form.reset();
+          if (divTech) {
+            divTech.classList.add('hidden');
+            divTech.classList.remove('scale-100', 'opacity-100');
+          }
+        } else if (response.status === 422) {
+          // Error de validación: Renderizar los errores devueltos por Laravel de forma premium
+          errorContainer.classList.remove('hidden');
+          let errorHtml = '<strong class="font-bold">Por favor corrige los siguientes campos:</strong><ul class="list-disc pl-5 mt-1.5 flex flex-col gap-1">';
+          
+          if (data.errors) {
+            Object.keys(data.errors).forEach(key => {
+              data.errors[key].forEach(err => {
+                errorHtml += `<li>${err}</li>`;
+              });
+            });
+          } else {
+            errorHtml += `<li>${data.message || 'Error de validación.'}</li>`;
+          }
+          errorHtml += '</ul>';
+          errorContainer.innerHTML = errorHtml;
+        } else {
+          throw new Error(data.message || 'Error desconocido del servidor.');
+        }
+      })
+      .catch(err => {
+        errorContainer.classList.remove('hidden');
+        errorContainer.innerHTML = `<strong class="font-bold">Error de Conexión:</strong> No pudimos conectar con Jupiter (Laravel). Por favor asegúrate de que el servidor esté activo localmente en <code class="bg-red-100/80 px-1.5 py-0.5 rounded text-xs">php artisan serve</code>.`;
+        console.error("Fetch Error:", err);
+      })
+      .finally(() => {
+        // Restaurar estado del botón
+        button.disabled = false;
+        button.innerHTML = originalHtml;
+      });
     });
   });
 
