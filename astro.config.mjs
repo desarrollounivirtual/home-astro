@@ -23,6 +23,7 @@ export default defineConfig({
         page: 'storyblok/Page',
         hero: 'storyblok/Hero',
         univirtualBanner: 'storyblok/UnivirtualBanner',
+        univirtualModalButton: 'storyblok/UnivirtualModalButton',
         methodology: 'storyblok/Methodology',
         benefits: 'storyblok/Benefits',
         platformPromo: 'storyblok/PlatformPromo',

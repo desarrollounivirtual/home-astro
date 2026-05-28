@@ -4,30 +4,30 @@ import { generateComponentStyles } from '../utils/spacing';
 
 const { blok } = Astro.props;
 
-// Storyblok fields with robust fallback defaults
-const titlePrefix = blok.titlePrefix || "API DE FACTURACIÓN ELECTRÓNICA Y";
-const typedPhrases = blok.typedPhrases || "NÓMINA ELECTRÓNICA, DOCUMENTOS SOPORTE, NOTAS CRÉDITO, NOTAS DÉBITO, EVENTOS RADIAN, NOTAS DE AJUSTE";
-const subtitle = blok.subtitle || "Somos la API más rápida, confiable y con el mejor soporte de Colombia.";
+// Storyblok fields with robust fallback defaults tailored for Aulas Univirtuales
+const titlePrefix = blok.titlePrefix || "VALIDACIÓN DE BACHILLERATO EN";
+const typedPhrases = blok.typedPhrases || "10 MESES, MODALIDAD 100% VIRTUAL, PLATAFORMA 24/7, CEREMONIA DE GRADO";
+const subtitle = blok.subtitle || "Obtén tu título de Bachiller Académico con resolución oficial, flexibilidad total y acompañamiento docente de primer nivel.";
 
 // Buttons configuration
-const btn1Text = blok.btn1Text || "Escríbenos";
-const btn1Link = blok.btn1Link || "https://api.whatsapp.com/send?phone=573161331234";
+const btn1Text = blok.btn1Text || "Matricularse Hoy";
+const btn1Link = blok.btn1Link || "https://api.whatsapp.com/send?phone=573208048128";
 
-const btn2Text = blok.btn2Text || "Documentación";
-const btn2Link = blok.btn2Link || "https://developers.factus.com.co/";
+const btn2Text = blok.btn2Text || "Ver Metodología";
+const btn2Link = blok.btn2Link || "#metodologia";
 
-const btn3Text = blok.btn3Text || "Descargar API";
-const btn3Link = blok.btn3Link || "https://developers.factus.com.co/coleccion";
+const btn3Text = blok.btn3Text || "Plan de Estudios";
+const btn3Link = blok.btn3Link || "#plan-estudios";
 
-// Technical languages section
-const languagesPrefix = blok.languagesPrefix || "Integra nuestra API de forma sencilla desde cualquier lenguaje:";
-const languagesList = blok.languagesList || "JavaScript, Python, PHP, Ruby, Java, C#, Go, entre otros.";
+// Mobile/Desktop Device support section
+const languagesPrefix = blok.languagesPrefix || "Estudia desde cualquier dispositivo y a tu propio ritmo:";
+const languagesList = blok.languagesList || "Computadora, tablet o celular. Conexión las 24 horas sin horarios fijos.";
 
 // Rating badge
-const ratingValue = blok.ratingValue || "4.5";
-const ratingUrl = blok.ratingUrl || "https://es.trustpilot.com/review/factus.com.co";
+const ratingValue = blok.ratingValue || "4.8";
+const ratingUrl = blok.ratingUrl || "#testimonios";
 
-// Mascot asset
+// Mascot asset (Astronaut in space)
 const mascotImage = typeof blok.mascotImage === 'string' ? blok.mascotImage : (blok.mascotImage?.filename || "/images/univirtual_astronaut_mascot.png");
 
 // Spacing styles generator
@@ -61,14 +61,14 @@ const phrases = typedPhrases.split(',').map((p: string) => p.trim()).filter((p: 
         <!-- Premium Tag/Badge -->
         <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-accent-orange/10 border border-accent-orange/20 backdrop-blur-md mb-6 hover:border-accent-orange/35 transition-colors duration-300">
           <span class="w-2 h-2 rounded-full bg-accent-orange animate-ping"></span>
-          <span class="text-xs font-bold tracking-wider text-accent-orange uppercase font-display">TECNOLOGÍA DE VANGUARDIA</span>
+          <span class="text-xs font-bold tracking-wider text-accent-orange uppercase font-display">Matrículas Abiertas</span>
         </div>
 
         <!-- Master Typing Title -->
         <h1 class="text-3.5xl sm:text-5xl md:text-[2.85rem] lg:text-[3.2rem] font-black font-display tracking-tight text-white leading-[1.15] mb-6">
           <div class="opacity-95">{titlePrefix}</div>
           <span 
-            id="factus-typed-text" 
+            id="univirtual-typed-text" 
             class="text-[1.85rem] sm:text-[2.35rem] lg:text-[2.85rem] text-gradient-orange whitespace-nowrap border-r-4 border-accent-blue pr-1.5 animate-blink"
             data-phrases={phrases.join('|')}
           >
@@ -83,10 +83,11 @@ const phrases = typedPhrases.split(',').map((p: string) => p.trim()).filter((p: 
 
         <!-- CTA Buttons Section -->
         <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start items-center w-full sm:w-auto">
-          <!-- WhatsApp Button (Escríbenos) -->
+          <!-- Button 1 (Matricularse) -->
           {btn1Text && (
             <a 
               href={btn1Link} 
+              data-open-inscription-modal={btn1Link === "#inscripcion-modal" ? "true" : null}
               class="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-950 font-extrabold text-base rounded-full shadow-lg transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white"
             >
               <span>{btn1Text}</span>
@@ -96,29 +97,27 @@ const phrases = typedPhrases.split(',').map((p: string) => p.trim()).filter((p: 
             </a>
           )}
 
-          <!-- Documentation Button -->
+          <!-- Button 2 (Metodología) -->
           {btn2Text && (
             <a 
               href={btn2Link} 
-              target="_blank"
-              rel="noopener noreferrer"
+              data-open-inscription-modal={btn2Link === "#inscripcion-modal" ? "true" : null}
               class="w-full sm:w-auto px-8 py-3.5 bg-slate-800/80 hover:bg-slate-700 text-white border border-slate-700 font-bold text-base rounded-full transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-slate-700"
             >
               <span>{btn2Text}</span>
             </a>
           )}
 
-          <!-- Download API Button -->
+          <!-- Button 3 (Plan de estudios) -->
           {btn3Text && (
             <a 
               href={btn3Link} 
-              target="_blank"
-              rel="noopener noreferrer"
+              data-open-inscription-modal={btn3Link === "#inscripcion-modal" ? "true" : null}
               class="w-full sm:w-auto px-8 py-3.5 bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold text-base rounded-full btn-premium glow-orange flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-accent-orange"
             >
               <span>{btn3Text}</span>
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7M5 5l7 7-7 7" />
               </svg>
             </a>
           )}
@@ -131,9 +130,9 @@ const phrases = typedPhrases.split(',').map((p: string) => p.trim()).filter((p: 
           <div class="w-1/4" style="background: #1e1b4b;"></div>
         </div>
 
-        <!-- Supported Languages Text -->
+        <!-- Devices support details -->
         <div class="pt-6 pb-2 w-full text-slate-400 text-sm sm:text-base max-w-xl">
-          <p class="font-medium text-slate-300">
+          <p class="font-medium text-slate-300 font-display">
             {languagesPrefix}
           </p>
           <p class="italic text-slate-400 font-light mt-1">
@@ -141,19 +140,17 @@ const phrases = typedPhrases.split(',').map((p: string) => p.trim()).filter((p: 
           </p>
         </div>
 
-        <!-- Trustpilot CTA Badge -->
+        <!-- Testimonials / Score badge -->
         {ratingValue && (
           <div class="flex justify-center lg:justify-start w-full mt-4">
             <a 
               href={ratingUrl} 
-              target="_blank" 
-              rel="noopener noreferrer" 
               class="inline-flex items-center gap-2.5 rounded-full px-5 py-2 bg-slate-900/90 border border-slate-800 text-sm font-medium text-slate-300 hover:text-white transition-all duration-300 hover:border-slate-700 shadow-lg"
             >
-              <span class="font-bold text-white">{ratingValue}</span>
+              <span class="font-bold text-white">{ratingValue}/5</span>
               <span class="text-emerald-500 text-lg">★</span>
               <span class="text-slate-400">en</span>
-              <span class="font-bold text-white tracking-wide">Trustpilot</span>
+              <span class="font-bold text-white tracking-wide">Opiniones de Alumnos</span>
             </a>
           </div>
         )}
@@ -167,11 +164,11 @@ const phrases = typedPhrases.split(',').map((p: string) => p.trim()).filter((p: 
           <!-- Background decorative mesh -->
           <div class="absolute w-[120%] h-[120%] rounded-full bg-accent-blue/10 filter blur-3xl pointer-events-none"></div>
           
-          <!-- Image -->
+          <!-- Mascot Image with dark background integration -->
           <img 
             src={mascotImage} 
-            alt="Univirtual Astronaut Mascot" 
-            class="w-[90%] h-[90%] object-contain drop-shadow-[0_20px_50px_rgba(59,130,246,0.25)] hover:scale-105 transition-transform duration-500 relative z-10" 
+            alt="Mascota Astronauta Univirtual" 
+            class="w-[120%] h-[120%] object-contain drop-shadow-[0_20px_50px_rgba(59,130,246,0.25)] hover:scale-105 transition-transform duration-500 relative z-10" 
           />
         </div>
       </div>
@@ -211,7 +208,7 @@ const phrases = typedPhrases.split(',').map((p: string) => p.trim()).filter((p: 
 <script>
   // Pure performance-optimized Typewriter script
   document.addEventListener("DOMContentLoaded", () => {
-    const typedSpan = document.getElementById("factus-typed-text");
+    const typedSpan = document.getElementById("univirtual-typed-text");
     if (!typedSpan) return;
 
     const dataAttr = typedSpan.getAttribute("data-phrases");
@@ -221,8 +218,8 @@ const phrases = typedPhrases.split(',').map((p: string) => p.trim()).filter((p: 
     if (phrases.length === 0) return;
 
     let wordIdx = 0;
-    let charIdx = phrases[0].length; // Start with the first word pre-rendered for SEO / Layout Shift
-    let isDeleting = false;
+    let charIdx = phrases[0].length; // Start fully typed for SEO/layout
+    let isDeleting = true; // Start by deleting the pre-rendered first word
     
     const typeSpeed = 70;
     const eraseSpeed = 35;
@@ -251,7 +248,7 @@ const phrases = typedPhrases.split(',').map((p: string) => p.trim()).filter((p: 
         delay = startDelay;
       }
 
-      // Add a slight human-like randomness to the typing speed
+      // Add human-like typing randomness
       if (charIdx > 0 && charIdx < currentWord.length) {
         delay += Math.random() * 20 - 10;
       }
@@ -259,7 +256,7 @@ const phrases = typedPhrases.split(',').map((p: string) => p.trim()).filter((p: 
       setTimeout(typeEffect, delay);
     }
 
-    // Begin typing sequence after initial delay
+    // Schedule the deletion sequence of the first word
     setTimeout(typeEffect, pauseDelay);
   });
 </script>

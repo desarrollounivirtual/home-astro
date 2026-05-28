@@ -28,7 +28,8 @@
             "platformPromo",
             "textTicker",
             "teachersSection",
-            "univirtualBanner"
+            "univirtualBanner",
+            "univirtualModalButton"
           ]
         }
       }
@@ -2126,22 +2127,22 @@
         "titlePrefix": {
           "type": "text",
           "display_name": "Prefijo del Título (Fijo)",
-          "default_value": "API DE FACTURACIÓN ELECTRÓNICA Y"
+          "default_value": "VALIDACIÓN DE BACHILLERATO EN"
         },
         "typedPhrases": {
           "type": "text",
           "display_name": "Frases Animadas (Separadas por comas)",
-          "default_value": "NÓMINA ELECTRÓNICA, DOCUMENTOS SOPORTE, NOTAS CRÉDITO, NOTAS DÉBITO, EVENTOS RADIAN, NOTAS DE AJUSTE"
+          "default_value": "10 MESES, MODALIDAD 100% VIRTUAL, PLATAFORMA 24/7, CEREMONIA DE GRADO"
         },
         "subtitle": {
           "type": "text",
           "display_name": "Subtítulo",
-          "default_value": "Somos la API más rápida, confiable y con el mejor soporte de Colombia."
+          "default_value": "Obtén tu título de Bachiller Académico con resolución oficial, flexibilidad total y acompañamiento docente de primer nivel."
         },
         "btn1Text": {
           "type": "text",
-          "display_name": "Texto Botón 1 (Escríbenos)",
-          "default_value": "Escríbenos"
+          "display_name": "Texto Botón 1 (Matricularse)",
+          "default_value": "Matricularse Hoy"
         },
         "btn1Link": {
           "type": "text",
@@ -2150,43 +2151,43 @@
         },
         "btn2Text": {
           "type": "text",
-          "display_name": "Texto Botón 2 (Documentación)",
-          "default_value": "Documentación"
+          "display_name": "Texto Botón 2 (Metodología)",
+          "default_value": "Ver Metodología"
         },
         "btn2Link": {
           "type": "text",
           "display_name": "Enlace Botón 2 (URL)",
-          "default_value": "https://developers.factus.com.co/"
+          "default_value": "#metodologia"
         },
         "btn3Text": {
           "type": "text",
-          "display_name": "Texto Botón 3 (Descargar API)",
-          "default_value": "Descargar API"
+          "display_name": "Texto Botón 3 (Plan de Estudios)",
+          "default_value": "Plan de Estudios"
         },
         "btn3Link": {
           "type": "text",
           "display_name": "Enlace Botón 3 (URL)",
-          "default_value": "https://developers.factus.com.co/coleccion"
+          "default_value": "#plan-estudios"
         },
         "languagesPrefix": {
           "type": "text",
-          "display_name": "Prefijo de Lenguajes",
-          "default_value": "Integra nuestra API de forma sencilla desde cualquier lenguaje:"
+          "display_name": "Prefijo de Dispositivos / Canales",
+          "default_value": "Estudia desde cualquier dispositivo y a tu propio ritmo:"
         },
         "languagesList": {
           "type": "text",
-          "display_name": "Lista de Lenguajes",
-          "default_value": "JavaScript, Python, PHP, Ruby, Java, C#, Go, entre otros."
+          "display_name": "Lista de Dispositivos / Canales",
+          "default_value": "Computadora, tablet o celular. Conexión las 24 horas sin horarios fijos."
         },
         "ratingValue": {
           "type": "text",
-          "display_name": "Calificación (Ej: 4.5)",
-          "default_value": "4.5"
+          "display_name": "Calificación (Ej: 4.8)",
+          "default_value": "4.8"
         },
         "ratingUrl": {
           "type": "text",
-          "display_name": "Enlace de Calificación (Trustpilot)",
-          "default_value": "https://es.trustpilot.com/review/factus.com.co"
+          "display_name": "Enlace de Calificación / Testimonios",
+          "default_value": "#testimonios"
         },
         "mascotImage": {
           "type": "asset",
@@ -2194,6 +2195,99 @@
             "images"
           ],
           "display_name": "Imagen de Mascota"
+        },
+        "spacingUnit": {
+          "type": "option",
+          "display_name": "Unidad de Medida",
+          "options": [
+            {
+              "name": "Píxeles (px)",
+              "value": "px"
+            },
+            {
+              "name": "Rem (rem)",
+              "value": "rem"
+            },
+            {
+              "name": "Em (em)",
+              "value": "em"
+            }
+          ],
+          "default_value": "px"
+        },
+        "paddingTopMobile": {
+          "type": "text",
+          "display_name": "Padding Superior (Móvil)"
+        },
+        "paddingBottomMobile": {
+          "type": "text",
+          "display_name": "Padding Inferior (Móvil)"
+        },
+        "paddingTopDesktop": {
+          "type": "text",
+          "display_name": "Padding Superior (PC)"
+        },
+        "paddingBottomDesktop": {
+          "type": "text",
+          "display_name": "Padding Inferior (PC)"
+        },
+        "marginTopMobile": {
+          "type": "text",
+          "display_name": "Margen Superior (Móvil)"
+        },
+        "marginBottomMobile": {
+          "type": "text",
+          "display_name": "Margen Inferior (Móvil)"
+        },
+        "marginTopDesktop": {
+          "type": "text",
+          "display_name": "Margen Superior (PC)"
+        },
+        "marginBottomDesktop": {
+          "type": "text",
+          "display_name": "Margen Inferior (PC)"
+        }
+      }
+    },
+    {
+      "name": "univirtualModalButton",
+      "display_name": "Botón de Inscripción (Popup Modal)",
+      "is_root": false,
+      "is_nestable": true,
+      "schema": {
+        "buttonText": {
+          "type": "text",
+          "display_name": "Texto del Botón",
+          "default_value": "Inscribirse Ahora"
+        },
+        "buttonStyle": {
+          "type": "option",
+          "display_name": "Estilo del Botón",
+          "options": [
+            {
+              "name": "Premium Naranja",
+              "value": "orange"
+            },
+            {
+              "name": "Premium Azul",
+              "value": "blue"
+            },
+            {
+              "name": "Outline Blanco",
+              "value": "white"
+            }
+          ],
+          "default_value": "orange"
+        },
+        "modalTitle": {
+          "type": "text",
+          "display_name": "Título del Popup Modal",
+          "default_value": "Formulario de Inscripción"
+        },
+        "modalSubtitle": {
+          "type": "text",
+          "display_name": "Subtítulo del Popup Modal",
+          "default_value": "Completa tus datos para iniciar tu bachillerato virtual en 10 meses."
         },
         "spacingUnit": {
           "type": "option",
