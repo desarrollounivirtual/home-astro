@@ -336,7 +336,15 @@ const JUPITER_API_URL = import.meta.env.PUBLIC_JUPITER_API_URL || 'http://127.0.
 
       // 4. Determinar tipo de endpoint e inyectar URL dinámica
       const container = document.getElementById('contact-forms-container');
-      const apiBaseUrl = container ? (container.dataset.jupiterUrl || 'http://127.0.0.1:8000') : 'http://127.0.0.1:8000';
+      let apiBaseUrl = container ? (container.dataset.jupiterUrl || 'http://127.0.0.1:8000') : 'http://127.0.0.1:8000';
+      
+      // Inteligencia a prueba de fallos para Cloudflare Pages
+      // Si el navegador detecta que estamos en la web en vivo (aulasunivirtuales.com),
+      // fuerza la URL de producción real de Jupiter automáticamente.
+      if (typeof window !== 'undefined' && window.location.hostname.includes('aulasunivirtuales.com')) {
+        apiBaseUrl = 'https://jupiter.aulasunivirtuales.com';
+      }
+      
       const tipo = form.id === 'form-enroll' ? 'inscripcion' : (form.id === 'form-info' ? 'informacion' : 'pqrs');
       const url = `${apiBaseUrl.replace(/\/$/, '')}/api/forms/schema/${tipo}/submit`;
 
