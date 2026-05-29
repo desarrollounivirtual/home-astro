@@ -15,35 +15,43 @@ const styles = generateComponentStyles(blok, spacingId);
 
 {styles && <style is:inline set:html={styles} />}
 
-<div {...storyblokEditable(blok)} class={spacingId}>
-  <section class="py-20 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
-    <!-- Visual background blobs for premium feel -->
-    <div class="absolute inset-0 pointer-events-none select-none z-0">
-      <div class="absolute top-[30%] left-[-10%] w-[350px] h-[350px] rounded-full bg-accent-blue/3 filter blur-[80px]"></div>
-      <div class="absolute bottom-[20%] right-[-10%] w-[400px] h-[400px] rounded-full bg-accent-orange/3 filter blur-[90px]"></div>
-    </div>
+<div {...storyblokEditable(blok)} class={`${spacingId} relative overflow-hidden bg-slate-950 font-sans`}>
+  <!-- Premium Dark Theme Space-Gradient Background (Identical to UnivirtualBanner.astro) -->
+  <div class="absolute inset-0 z-0 bg-gradient-to-br from-[#0b0f19] via-[#111827] to-[#1e1b4b]">
+    <!-- Animated background tech mesh -->
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none"></div>
+    
+    <!-- Ambient Radial Glows -->
+    <div class="absolute top-[20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-accent-blue/10 filter blur-[120px] animate-pulse pointer-events-none" style="animation-duration: 10s;"></div>
+    <div class="absolute bottom-[10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-accent-orange/8 filter blur-[140px] animate-pulse pointer-events-none" style="animation-duration: 15s;"></div>
+  </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-      <!-- Section Header -->
-      {title && (
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-slate-900 tracking-tight leading-tight mb-4">
-            {title}
-          </h2>
-          {subtitle && (
-            <p class="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
-              {subtitle}
-            </p>
-          )}
+  <div class="max-w-[1350px] mx-auto px-4 sm:px-8 lg:px-[80px] pt-24 pb-20 lg:pt-10 lg:pb-10 relative z-10 text-white w-full">
+    <!-- Section Header -->
+    {title && (
+      <div class="text-center max-w-3xl mx-auto mb-16 select-none flex flex-col items-center">
+        <!-- Premium Tag/Badge -->
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-accent-orange/10 border border-accent-orange/20 backdrop-blur-md mb-6 hover:border-accent-orange/35 transition-colors duration-300">
+          <span class="w-2 h-2 rounded-full bg-accent-orange animate-ping"></span>
+          <span class="text-xs font-bold tracking-wider text-accent-orange uppercase font-display">Clases en Vivo y Tutorías</span>
         </div>
-      )}
 
-      <!-- Teachers Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {teachers.map((teacher: any) => (
-          <StoryblokComponent blok={teacher} />
-        ))}
+        <h2 class="text-3.5xl sm:text-4xl lg:text-[2.6rem] font-black font-display text-white tracking-tight leading-tight mb-4">
+          {title}
+        </h2>
+        {subtitle && (
+          <p class="text-base sm:text-lg text-slate-300 font-light leading-relaxed max-w-2xl mx-auto">
+            {subtitle}
+          </p>
+        )}
       </div>
+    )}
+
+    <!-- Teachers Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {teachers.map((teacher: any) => (
+        <StoryblokComponent blok={teacher} />
+      ))}
     </div>
-  </section>
+  </div>
 </div>

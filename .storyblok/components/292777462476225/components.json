@@ -1101,6 +1101,13 @@
       "quote": {
         "type": "textarea",
         "display_name": "Testimonio/Cita"
+      },
+      "avatar": {
+        "type": "asset",
+        "filetypes": [
+          "images"
+        ],
+        "display_name": "Foto de Perfil (Avatar)"
       }
     }
   },

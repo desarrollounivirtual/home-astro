@@ -140,6 +140,9 @@ if (blok.agentAvatar && blok.agentAvatar.filename) {
   // Inicialización de la interacción y lógica de WhatsApp
   const initWhatsappChat = () => {
     const chatBtn = document.getElementById('wa-chat-btn');
+    if (!chatBtn || chatBtn.dataset.initialized === 'true') return;
+    chatBtn.dataset.initialized = 'true';
+
     const chatWindow = document.getElementById('wa-chat-window');
     const closeBtn = document.getElementById('wa-close-btn');
     const sendBtn = document.getElementById('wa-send-btn');
@@ -148,7 +151,7 @@ if (blok.agentAvatar && blok.agentAvatar.filename) {
     const chatContainer = document.getElementById('wa-chat-container');
     const footer = document.querySelector('footer');
 
-    if (!chatBtn || !chatWindow || !closeBtn || !sendBtn || !messageInput) return;
+    if (!chatWindow || !closeBtn || !sendBtn || !messageInput) return;
 
     // Ajustar marca de tiempo
     if (timeStamp) {
@@ -164,13 +167,47 @@ if (blok.agentAvatar && blok.agentAvatar.filename) {
       messageInput.style.height = Math.min(messageInput.scrollHeight, 80) + 'px';
     });
 
-    // Abrir Ventana con animación
+    // Envío Inteligente por WhatsApp (Detectar Dispositivo)
+    const handleSend = () => {
+      const phone = sendBtn.getAttribute('data-phone') || '';
+      const text = messageInput.value.trim();
+      if (!phone) return;
+
+      // Limpiamos el número de teléfono para que contenga solo números
+      let cleanPhone = phone.replace(/[^0-9]/g, '');
+      
+      // Detección del Dispositivo
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      // Construir la URL ideal
+      const baseUrl = isMobile 
+        ? 'https://api.whatsapp.com/send' 
+        : 'https://web.whatsapp.com/send';
+      
+      const whatsappUrl = `${baseUrl}?phone=${cleanPhone}&text=${encodeURIComponent(text)}`;
+      
+      // Abrimos en una ventana nueva
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      
+      // Cerramos el chat suavemente después de enviar (solo relevante en desktop)
+      setTimeout(closeChat, 600);
+    };
+
+    // Abrir/Cerrar Ventana (Desktop) o Redirección Directa (Móvil/Tablet)
     chatBtn.addEventListener('click', () => {
-      const isOpen = !chatWindow.classList.contains('pointer-events-none');
-      if (isOpen) {
-        closeChat();
+      const isMobileOrTablet = window.innerWidth < 1024; // lg Breakpoint
+      
+      if (isMobileOrTablet) {
+        // En Móvil y Tablet abrimos directamente para evitar popups invasivos
+        handleSend();
       } else {
-        openChat();
+        // En Desktop desplegamos la ventana de chat premium
+        const isOpen = !chatWindow.classList.contains('pointer-events-none');
+        if (isOpen) {
+          closeChat();
+        } else {
+          openChat();
+        }
       }
     });
 
@@ -196,32 +233,6 @@ if (blok.agentAvatar && blok.agentAvatar.filename) {
       chatWindow.classList.add('opacity-0', 'scale-90', 'pointer-events-none');
     };
 
-    // Envío Inteligente por WhatsApp (Detectar Dispositivo)
-    const handleSend = () => {
-      const phone = sendBtn.getAttribute('data-phone') || '';
-      const text = messageInput.value.trim();
-      if (!phone) return;
-
-      // Limpiamos el número de teléfono para que contenga solo números
-      let cleanPhone = phone.replace(/[^0-9]/g, '');
-      
-      // Detección del Dispositivo
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      
-      // Construir la URL ideal.
-      const baseUrl = isMobile 
-        ? 'https://api.whatsapp.com/send' 
-        : 'https://web.whatsapp.com/send';
-      
-      const whatsappUrl = `${baseUrl}?phone=${cleanPhone}&text=${encodeURIComponent(text)}`;
-      
-      // Abrimos en una ventana nueva
-      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      
-      // Cerramos el chat suavemente después de enviar
-      setTimeout(closeChat, 600);
-    };
-
     sendBtn.addEventListener('click', handleSend);
 
     // Permitir enviar con la tecla Enter (siempre que no se pulse Shift)
@@ -231,20 +242,6 @@ if (blok.agentAvatar && blok.agentAvatar.filename) {
         handleSend();
       }
     });
-
-    // Auto-apertura inteligente premium: 
-    // Si es la primera vez en la sesión que entra, abrir el chat automáticamente tras 5 segundos
-    const hasBeenOpened = sessionStorage.getItem('univirtual_wa_auto_opened');
-    if (!hasBeenOpened) {
-      setTimeout(() => {
-        // Verificar que no se haya abierto ya manualmente en esos 5 segundos
-        const isCurrentlyClosed = chatWindow.classList.contains('pointer-events-none');
-        if (isCurrentlyClosed) {
-          openChat();
-          sessionStorage.setItem('univirtual_wa_auto_opened', 'true');
-        }
-      }, 5000);
-    }
 
     // Dynamic position adjustment relative to the footer to avoid collision (Expert UI/UX snap)
     if (chatContainer && footer) {
