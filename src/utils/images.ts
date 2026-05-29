@@ -14,7 +14,7 @@ export function getOptimizedImageUrl(
     return url;
   }
 
-  const quality = options.quality || 80; // Calidad del 80% (relación óptima peso/calidad)
+  const quality = options.quality || 75; // Calidad del 75% (relación óptima peso/calidad auditada por Lighthouse)
   let resizeParam = '';
 
   // Si se especifican dimensiones opcionales de redimensionamiento
