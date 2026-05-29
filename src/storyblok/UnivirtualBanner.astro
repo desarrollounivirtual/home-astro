@@ -1,6 +1,7 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import { generateComponentStyles } from '../utils/spacing';
+import { getOptimizedImageUrl } from '../utils/images';
 
 const { blok } = Astro.props;
 
@@ -28,7 +29,8 @@ const ratingValue = blok.ratingValue || "4.8";
 const ratingUrl = blok.ratingUrl || "#testimonios";
 
 // Mascot asset (Astronaut in space)
-const mascotImage = typeof blok.mascotImage === 'string' ? blok.mascotImage : (blok.mascotImage?.filename || "/images/univirtual_astronaut_mascot.png");
+const rawMascot = typeof blok.mascotImage === 'string' ? blok.mascotImage : (blok.mascotImage?.filename || "/images/univirtual_astronaut_mascot.png");
+const mascotImage = getOptimizedImageUrl(rawMascot, { width: 600 });
 
 // Spacing styles generator
 const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;

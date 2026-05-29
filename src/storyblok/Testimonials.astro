@@ -1,6 +1,8 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import { generateComponentStyles } from '../utils/spacing';
+import { getOptimizedImageUrl } from '../utils/images';
+
 const { blok } = Astro.props;
 
 const title = blok.title || blok.Title || null;
@@ -10,7 +12,7 @@ const list = (blok.testimonials || blok.Testimonials || []).map((t: any) => ({
   name: t.name || t.Name || '',
   role: t.role || t.Role || '',
   quote: t.quote || t.Quote || '',
-  avatar: typeof t.avatar === 'string' ? t.avatar : (t.avatar?.filename || null),
+  avatar: getOptimizedImageUrl(typeof t.avatar === 'string' ? t.avatar : (t.avatar?.filename || null), { width: 96, height: 96 }),
   rating: Number(t.rating) || 5,
   location: t.location || t.Location || ''
 }));

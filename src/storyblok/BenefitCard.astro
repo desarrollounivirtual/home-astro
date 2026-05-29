@@ -1,12 +1,14 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
+import { getOptimizedImageUrl } from '../utils/images';
 
 const { blok } = Astro.props;
 
 const title = blok.title || blok.Title || '';
 const description = blok.description || blok.Description || '';
 const icon = blok.icon || 'rocket';
-const image = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+const rawImage = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+const image = getOptimizedImageUrl(rawImage, { width: 180, height: 180 });
 const accent = blok.accent || 'orange';
 
 // Mapeos de colores de acento para la tarjeta

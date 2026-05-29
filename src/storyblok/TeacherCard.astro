@@ -1,12 +1,14 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
+import { getOptimizedImageUrl } from '../utils/images';
 
 const { blok } = Astro.props;
 
 const name = blok.name || blok.Name || 'Nombre del Docente';
 const role = blok.role || blok.Role || 'Área de Enseñanza';
 const description = blok.description || blok.Description || '';
-const image = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+const rawImage = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+const image = getOptimizedImageUrl(rawImage, { width: 320, height: 400 });
 const socialLink = blok.socialLink || blok.social_link || '';
 
 // High-contrast space neon gradients (matching space-tech theme)

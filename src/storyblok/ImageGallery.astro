@@ -1,14 +1,18 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import { generateComponentStyles } from '../utils/spacing';
+import { getOptimizedImageUrl } from '../utils/images';
 const { blok } = Astro.props;
 
 const sectionTitle = blok.sectionTitle || blok.section_title || '';
 const columns = Number(blok.columns) || 3;
-const images = (blok.images || []).map((img: any) => ({
-  image: typeof img.image === 'string' ? img.image : (img.image?.filename || null),
-  caption: img.caption || img.Caption || '',
-}));
+const images = (blok.images || []).map((img: any) => {
+  const rawImage = typeof img.image === 'string' ? img.image : (img.image?.filename || null);
+  return {
+    image: getOptimizedImageUrl(rawImage, { width: 500 }),
+    caption: img.caption || img.Caption || '',
+  };
+});
 
 const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
 const styles = generateComponentStyles(blok, spacingId);

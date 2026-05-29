@@ -1,6 +1,7 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import { generateComponentStyles } from '../utils/spacing';
+import { getOptimizedImageUrl } from '../utils/images';
 const { blok } = Astro.props;
 
 const title = blok.title || blok.Title || blok['Title'];
@@ -10,7 +11,8 @@ const ctaLink = blok.ctaLink || blok.cta_link || blok.CtaLink || blok['Cta Link'
 
 const cardTitle = blok.cardTitle || blok.card_title || blok.CardTitle || blok['Card Title'] || blok['cardTitle'] || blok['card-title'];
 const cardDescription = blok.cardDescription || blok.card_description || blok.CardDescription || blok['Card Description'] || blok['cardDescription'] || blok['card-description'];
-const cardImage = typeof blok.cardImage === 'string' ? blok.cardImage : (blok.cardImage?.filename || blok.card_image?.filename || null);
+const rawCardImage = typeof blok.cardImage === 'string' ? blok.cardImage : (blok.cardImage?.filename || blok.card_image?.filename || null);
+const cardImage = getOptimizedImageUrl(rawCardImage, { width: 600 });
 
 const spacingId = `spacing-${Math.random().toString(36).substring(2, 9)}`;
 const styles = generateComponentStyles(blok, spacingId);

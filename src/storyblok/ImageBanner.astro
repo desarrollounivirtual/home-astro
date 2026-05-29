@@ -1,11 +1,13 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import { generateComponentStyles } from '../utils/spacing';
+import { getOptimizedImageUrl } from '../utils/images';
 const { blok } = Astro.props;
 
 const title = blok.title || blok.Title || blok['Title'];
 const subtitle = blok.subtitle || blok.Subtitle || blok['Subtitle'];
-const imageUrl = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+const rawImage = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+const imageUrl = getOptimizedImageUrl(rawImage, { width: 1200 });
 const ctaText = blok.ctaText || blok.cta_text || blok.CtaText || blok['Cta Text'] || blok['Cta text'];
 const ctaLink = blok.ctaLink || blok.cta_link || blok.CtaLink || blok['Cta Link'] || blok['Cta link'];
 const overlayOpacity = blok.overlayOpacity || blok.overlay_opacity || blok.OverlayOpacity || blok['Overlay Opacity'] || 'opacity-40';

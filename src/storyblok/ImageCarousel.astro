@@ -1,16 +1,20 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import { generateComponentStyles } from '../utils/spacing';
+import { getOptimizedImageUrl } from '../utils/images';
 const { blok } = Astro.props;
 
 const title = blok.title || blok.Title || '';
-const slides = (blok.slides || []).map((slide: any) => ({
-  title: slide.title || slide.Title || '',
-  subtitle: slide.subtitle || slide.Subtitle || '',
-  image: typeof slide.image === 'string' ? slide.image : (slide.image?.filename || null),
-  ctaText: slide.ctaText || slide.cta_text || '',
-  ctaLink: slide.ctaLink || slide.cta_link || '',
-}));
+const slides = (blok.slides || []).map((slide: any) => {
+  const rawImage = typeof slide.image === 'string' ? slide.image : (slide.image?.filename || null);
+  return {
+    title: slide.title || slide.Title || '',
+    subtitle: slide.subtitle || slide.Subtitle || '',
+    image: getOptimizedImageUrl(rawImage, { width: 1200 }),
+    ctaText: slide.ctaText || slide.cta_text || '',
+    ctaLink: slide.ctaLink || slide.cta_link || '',
+  };
+});
 
 const autoplaySpeed = blok.autoplaySpeed !== undefined ? blok.autoplaySpeed : blok.autoplay_speed;
 const showDots = blok.showDots !== undefined ? blok.showDots : (blok.show_dots !== undefined ? blok.show_dots : true);

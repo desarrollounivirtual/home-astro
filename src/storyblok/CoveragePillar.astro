@@ -1,12 +1,14 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
+import { getOptimizedImageUrl } from '../utils/images';
 
 const { blok } = Astro.props;
 
 const title = blok.title || '';
 const description = blok.description || '';
 const icon = blok.icon || 'map';
-const image = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+const rawImage = typeof blok.image === 'string' ? blok.image : (blok.image?.filename || null);
+const image = getOptimizedImageUrl(rawImage, { width: 180, height: 180 });
 const label = blok.label || '';
 const accent = blok.accent || 'blue';
 

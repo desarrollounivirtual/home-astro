@@ -1,5 +1,6 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
+import { getOptimizedImageUrl } from '../utils/images';
 
 const { blok } = Astro.props;
 
@@ -15,7 +16,7 @@ const placeholder = blok.placeholder || 'Escribe tu mensaje aquí...';
 // Avatar con fallback a la mascota oficial
 let avatarUrl = '/images/univirtual_astronaut_mascot.png';
 if (blok.agentAvatar && blok.agentAvatar.filename) {
-  avatarUrl = blok.agentAvatar.filename;
+  avatarUrl = getOptimizedImageUrl(blok.agentAvatar.filename, { width: 80, height: 80 });
 }
 ---
 
