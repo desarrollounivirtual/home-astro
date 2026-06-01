@@ -16,10 +16,12 @@ try {
 } catch (error) {
   console.log("Aviso: No se pudo cargar 'home' desde Storyblok.");
 }
+
+const currentYear = new Date().getFullYear();
 ---
 
 <BaseLayout 
-  title="Aulas Univirtuales | Validación de Bachillerato en 10 Meses"
+  title={`Matrículas Abiertas ${currentYear} - Validación de Bachillerato en 10 Meses`}
   description="Completa tu bachillerato académico de forma 100% virtual en solo 10 meses. Licencia oficial de Itagüí, plataforma 24/7 y ceremonia física en Medellín."
 >
   <!-- Sticky Header Navigation -->

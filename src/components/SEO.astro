@@ -7,11 +7,13 @@ interface Props {
   schemaType?: 'WebSite' | 'EducationalOrganization' | 'Course';
 }
 
+const currentYear = new Date().getFullYear();
+
 const {
-  title = "Validación de Bachillerato en 10 Meses | Aulas Univirtuales",
+  title = `Matrículas Abiertas ${currentYear} - Validación de Bachillerato en 10 Meses`,
   description = "Completa tu bachillerato académico de forma 100% virtual en solo 10 meses. Licencia oficial, plataforma 24/7 y ceremonia física de graduación en Medellín.",
   canonicalURL = Astro.url.href,
-  ogImage = "/images/og-image.jpg",
+  ogImage = "https://a.storyblok.com/f/292777462476225/1342x562/88b692034d/graduandos-univirtuales.jpg/m/600x0/filters:format(webp):quality(75)",
   schemaType = "EducationalOrganization"
 } = Astro.props;
 
