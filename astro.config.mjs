@@ -5,11 +5,14 @@ import { storyblok } from '@storyblok/astro';
 import { loadEnv } from 'vite';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 
+import cloudflare from "@astrojs/cloudflare";
+
 const env = loadEnv('', process.cwd(), 'STORYBLOK');
 
 export default defineConfig({
-  output: 'static', // Compilación estática pura para máximo rendimiento y hosting gratuito
+  output: "hybrid",
   site: 'https://aulasunivirtuales.com',
+
   integrations: [
     tailwind({
       applyBaseStyles: false, // Los estilos base se controlan en global.css
@@ -49,7 +52,9 @@ export default defineConfig({
       }
     })
   ],
+
   compressHTML: true,
+
   vite: {
     plugins: [basicSsl()],
     server: {
@@ -58,5 +63,7 @@ export default defineConfig({
     build: {
       cssMinify: true
     }
-  }
+  },
+
+  adapter: cloudflare()
 });
